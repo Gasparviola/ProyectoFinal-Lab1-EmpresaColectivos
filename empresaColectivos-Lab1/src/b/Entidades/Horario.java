@@ -1,5 +1,5 @@
 
-package Entidades;
+package b.Entidades;
 
 import java.time.LocalTime;
 
@@ -69,5 +69,11 @@ public class Horario {
     public void setEstado(boolean Estado) {
         this.Estado = Estado;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+    
     
 }

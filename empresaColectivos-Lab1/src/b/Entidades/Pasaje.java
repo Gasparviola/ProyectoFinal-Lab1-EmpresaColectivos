@@ -1,5 +1,5 @@
 
-package Entidades;
+package b.Entidades;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -100,6 +100,11 @@ public class Pasaje {
 
     public void setPrecio(double Precio) {
         this.Precio = Precio;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString(); 
     }
     
     

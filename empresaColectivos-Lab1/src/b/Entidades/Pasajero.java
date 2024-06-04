@@ -1,5 +1,5 @@
 
-package Entidades;
+package b.Entidades;
 
 public class Pasajero {
     
@@ -86,6 +86,11 @@ public class Pasajero {
 
     public void setEstado(boolean Estado) {
         this.Estado = Estado;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString(); 
     }
     
     
