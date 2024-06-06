@@ -15,18 +15,18 @@ public class Ruta {
     public Ruta() {
     }
 
-    public Ruta(int ID_Ruta, String Origen, String Destino, LocalTime Duración_Estimada, boolean Estado) {
+    public Ruta(int ID_Ruta, String Origen, String Destino, LocalTime Duracion_Estimada, boolean Estado) {
         this.ID_Ruta = ID_Ruta;
         this.Origen = Origen;
         this.Destino = Destino;
-        this.Duracion_Estimada = Duración_Estimada;
+        this.Duracion_Estimada = Duracion_Estimada;
         this.Estado = Estado;
     }
 
-    public Ruta(String Origen, String Destino, LocalTime Duración_Estimada, boolean Estado) {
+    public Ruta(String Origen, String Destino, LocalTime Duracion_Estimada, boolean Estado) {
         this.Origen = Origen;
         this.Destino = Destino;
-        this.Duracion_Estimada = Duración_Estimada;
+        this.Duracion_Estimada = Duracion_Estimada;
         this.Estado = Estado;
     }
 
@@ -54,11 +54,11 @@ public class Ruta {
         this.Destino = Destino;
     }
 
-    public LocalTime getDuración_Estimada() {
+    public LocalTime getDuracion_Estimada() {
         return Duracion_Estimada;
     }
 
-    public void setDuración_Estimada(LocalTime Duración_Estimada) {
+    public void setDuracion_Estimada(LocalTime Duración_Estimada) {
         this.Duracion_Estimada = Duración_Estimada;
     }
 

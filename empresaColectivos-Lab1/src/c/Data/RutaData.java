@@ -26,12 +26,12 @@ public class RutaData {
     public void añadirRuta(Ruta ruta) {
         
         try {
-            String sql = "INSERT INTO Ruta(ID_Ruta, Origen, Destino, Duración_Estimada, Estado) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO Ruta(ID_Ruta, Origen, Destino, Duracion_Estimada, Estado) VALUES (?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, ruta.getID_Ruta());
             ps.setString(2, ruta.getOrigen());
             ps.setString(3, ruta.getDestino());
-            ps.setTime(4, Time.valueOf(ruta.getDuración_Estimada()));
+            ps.setTime(4, Time.valueOf(ruta.getDuracion_Estimada()));
             ps.setBoolean(5, ruta.isEstado()); 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -59,7 +59,7 @@ public class RutaData {
                 Rutas.setID_Ruta(rs.getInt(" ID_Ruta"));
                 Rutas.setOrigen(rs.getString("Origen"));
                 Rutas.setDestino(rs.getString("Destino"));
-                Rutas.setDuración_Estimada(rs.getTime("Duración_Estimada").toLocalTime());
+                Rutas.setDuracion_Estimada(rs.getTime("Duracion_Estimada").toLocalTime());
                 Rutas.setEstado(rs.getBoolean("Estado"));
                 rutas.add(Rutas);               
             }
@@ -75,7 +75,7 @@ public class RutaData {
         //Buscar rutas por origen             
         public Ruta buscarRutaPorOrigen(String origen) {
         Ruta rutas = null;
-        String sql = "SELECT ID_Ruta, Origen, Destino, Duración_Estimada, Estado FROM Ruta WHERE Origen = ? AND Estado = 1";
+        String sql = "SELECT ID_Ruta, Origen, Destino, Duracion_Estimada, Estado FROM Ruta WHERE Origen = ? AND Estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -87,7 +87,7 @@ public class RutaData {
                 rutas.setID_Ruta(rs.getInt(" ID_Ruta"));
                 rutas.setOrigen(rs.getString("Origen"));
                 rutas.setDestino(rs.getString("Destino"));
-                rutas.setDuración_Estimada(rs.getTime("Duración_Estimada").toLocalTime());
+                rutas.setDuracion_Estimada(rs.getTime("Duracion_Estimada").toLocalTime());
                 rutas.setEstado(rs.getBoolean("Estado"));
                 
             } else {
@@ -104,7 +104,7 @@ public class RutaData {
        //Buscar rutas por Destino     
        public Ruta buscarRutaPorDestino(String destino) {
         Ruta rutas = null;
-        String sql = "SELECT ID_Ruta, Origen, Destino, Duración_Estimada, Estado FROM Ruta WHERE Destino = ? AND Estado = 1";
+        String sql = "SELECT ID_Ruta, Origen, Destino, Duracion_Estimada, Estado FROM Ruta WHERE Destino = ? AND Estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -116,7 +116,7 @@ public class RutaData {
                 rutas.setID_Ruta(rs.getInt(" ID_Ruta"));
                 rutas.setOrigen(rs.getString("Origen"));
                 rutas.setDestino(rs.getString("Destino"));
-                rutas.setDuración_Estimada(rs.getTime("Duración_Estimada").toLocalTime());
+                rutas.setDuracion_Estimada(rs.getTime("Duracion_Estimada").toLocalTime());
                 rutas.setEstado(rs.getBoolean("Estado"));              
 
             } else {
@@ -131,7 +131,7 @@ public class RutaData {
        
        public Ruta buscarRutaPorId(int ID_Ruta) {         
         Ruta rutas = null;
-        String sql = "SELECT ID_Ruta, Origen, Destino, Duración_Estimada, Estado FROM Ruta WHERE ID_Ruta = ? AND Estado = 1";
+        String sql = "SELECT ID_Ruta, Origen, Destino, Duracion_Estimada, Estado FROM Ruta WHERE ID_Ruta = ? AND Estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -143,7 +143,7 @@ public class RutaData {
                 rutas.setID_Ruta(rs.getInt(" ID_Ruta"));
                 rutas.setOrigen(rs.getString("Origen"));
                 rutas.setDestino(rs.getString("Destino"));
-                rutas.setDuración_Estimada(rs.getTime("Duración_Estimada").toLocalTime());
+                rutas.setDuracion_Estimada(rs.getTime("Duracion_Estimada").toLocalTime());
                 rutas.setEstado(rs.getBoolean("Estado"));              
                 
             } else {
