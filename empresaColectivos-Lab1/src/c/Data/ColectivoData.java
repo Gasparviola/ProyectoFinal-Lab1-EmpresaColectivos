@@ -76,7 +76,7 @@ public class ColectivoData {
         Colectivo colectivo = null;
         try {
             // Preparar sentencia SQL
-            String sql = "SELECT * FROM alumno WHERE ID_Colectivo;";
+            String sql = "SELECT * FROM colectivo WHERE ID_Colectivo;";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -160,7 +160,7 @@ public class ColectivoData {
 
         try {
             // Preparar la estructura de la sentencia SQL
-            String sql = "SELECT * FROM alumno WHERE dni=?";
+            String sql = "SELECT * FROM colectivo WHERE Matricula=?";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -201,7 +201,7 @@ public class ColectivoData {
 
         try {
             // Preparar sentencia SQL
-            String sql = "SELECT * FROM alumno;";
+            String sql = "SELECT * FROM colectivo;";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
