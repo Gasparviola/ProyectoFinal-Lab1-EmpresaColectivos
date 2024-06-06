@@ -201,7 +201,7 @@ public class ColectivoData {
 
         try {
             // Preparar sentencia SQL
-            String sql = "SELECT * FROM alumno;";
+            String sql = "SELECT * FROM colectivo;";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);

@@ -42,6 +42,10 @@ public class vistaprueba extends javax.swing.JFrame {
         jMenuBar6 = new javax.swing.JMenuBar();
         jMenu12 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuBar7 = new javax.swing.JMenuBar();
+        jMenu16 = new javax.swing.JMenu();
+        jMenu17 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -52,6 +56,9 @@ public class vistaprueba extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu15 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu18 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu19 = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -85,17 +92,25 @@ public class vistaprueba extends javax.swing.JFrame {
         jMenu13.setText("Edit");
         jMenuBar6.add(jMenu13);
 
+        jMenuItem5.setText("jMenuItem5");
+
+        jMenu16.setText("File");
+        jMenuBar7.add(jMenu16);
+
+        jMenu17.setText("Edit");
+        jMenuBar7.add(jMenu17);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 623, Short.MAX_VALUE)
+            .addGap(0, 569, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGap(0, 318, Short.MAX_VALUE)
         );
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -123,10 +138,20 @@ public class vistaprueba extends javax.swing.JFrame {
 
         jMenu15.setText("Pasajes");
 
-        jMenuItem4.setText("Gestion de Pasajes");
+        jMenuItem4.setText("Gestion De Ventas");
         jMenu15.add(jMenuItem4);
 
         jMenuBar1.add(jMenu15);
+
+        jMenu18.setText("Colectivo");
+
+        jMenuItem6.setText("Gestion de Colectivo");
+        jMenu18.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu18);
+
+        jMenu19.setText("Salir");
+        jMenuBar1.add(jMenu19);
 
         setJMenuBar(jMenuBar1);
 
@@ -135,13 +160,14 @@ public class vistaprueba extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -191,6 +217,10 @@ public class vistaprueba extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu15;
+    private javax.swing.JMenu jMenu16;
+    private javax.swing.JMenu jMenu17;
+    private javax.swing.JMenu jMenu18;
+    private javax.swing.JMenu jMenu19;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -205,9 +235,12 @@ public class vistaprueba extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuBar jMenuBar5;
     private javax.swing.JMenuBar jMenuBar6;
+    private javax.swing.JMenuBar jMenuBar7;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }
