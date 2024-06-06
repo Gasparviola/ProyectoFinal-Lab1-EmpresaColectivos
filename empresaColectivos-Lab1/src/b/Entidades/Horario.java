@@ -70,9 +70,13 @@ public class Horario {
         this.Estado = Estado;
     }
 
+    public String debugToString() {
+        return "Horario{" + "ID_Horario=" + ID_Horario + ", ID_Ruta=" + ruta.getDestino() + ", Hora_Salida=" + Hora_Salida + ", Hora_Llegada=" + Hora_Llegada + ", Estado=" + Estado + '}';
+    }
+
     @Override
     public String toString() {
-        return super.toString();
+        return ID_Horario + " (Hora_Salida=" + Hora_Salida + ", Hora_Llegada=" + Hora_Llegada + ", Destino=" + ruta.getDestino() + ")";
     }
     
     

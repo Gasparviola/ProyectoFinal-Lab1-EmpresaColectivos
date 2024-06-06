@@ -102,9 +102,13 @@ public class Pasaje {
         this.Precio = Precio;
     }
 
+    public String debugToString() {
+        return "Pasaje{" + "ID_Pasaje=" + ID_Pasaje + ", ID_Pasajero=" + pasajero.getID_Pasajero() + ", ID_Colectivo=" + colectivo.getID_Colectivo() + ", ID_Ruta=" + ruta.getID_Ruta() + ", Fecha_Viaje=" + Fecha_Viaje + ", Hora_Viaje=" + Hora_Viaje + ", Asiento=" + Asiento + ", Precio=" + Precio + '}';
+    }
+
     @Override
     public String toString() {
-        return super.toString(); 
+        return ID_Pasaje + " (NombrePasjero=" + pasajero.getNombre()+ " " + pasajero.getApellido() + ", Hora_Viaje=" + Hora_Viaje + ", Asiento=" + Asiento + ", IdColectivo=" + colectivo.getID_Colectivo()+ ")";
     }
     
     

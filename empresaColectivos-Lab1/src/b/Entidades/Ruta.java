@@ -9,7 +9,7 @@ public class Ruta {
     private int ID_Ruta;
     private String Origen;
     private String Destino;
-    private LocalTime Duración_Estimada;
+    private LocalTime Duracion_Estimada;
     private boolean Estado;
 
     public Ruta() {
@@ -19,14 +19,14 @@ public class Ruta {
         this.ID_Ruta = ID_Ruta;
         this.Origen = Origen;
         this.Destino = Destino;
-        this.Duración_Estimada = Duración_Estimada;
+        this.Duracion_Estimada = Duración_Estimada;
         this.Estado = Estado;
     }
 
     public Ruta(String Origen, String Destino, LocalTime Duración_Estimada, boolean Estado) {
         this.Origen = Origen;
         this.Destino = Destino;
-        this.Duración_Estimada = Duración_Estimada;
+        this.Duracion_Estimada = Duración_Estimada;
         this.Estado = Estado;
     }
 
@@ -55,11 +55,11 @@ public class Ruta {
     }
 
     public LocalTime getDuración_Estimada() {
-        return Duración_Estimada;
+        return Duracion_Estimada;
     }
 
     public void setDuración_Estimada(LocalTime Duración_Estimada) {
-        this.Duración_Estimada = Duración_Estimada;
+        this.Duracion_Estimada = Duración_Estimada;
     }
 
     public boolean isEstado() {
@@ -70,9 +70,13 @@ public class Ruta {
         this.Estado = Estado;
     }
 
+    public String debugToString() {
+        return "Ruta{" + "ID_Ruta=" + ID_Ruta + ", Origen=" + Origen + ", Destino=" + Destino + ", Duracion_Estimada=" + Duracion_Estimada + ", Estado=" + Estado + '}';
+    }
+
     @Override
     public String toString() {
-        return super.toString();
+        return ID_Ruta + " (Origen=" + Origen + ", Destino=" + Destino + ", Duracion_Estimada=" + Duracion_Estimada + ")";
     }
     
     

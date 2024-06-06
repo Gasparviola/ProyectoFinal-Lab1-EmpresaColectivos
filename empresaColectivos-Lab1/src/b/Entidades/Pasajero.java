@@ -88,9 +88,13 @@ public class Pasajero {
         this.Estado = Estado;
     }
 
+    public String debugToString() {
+        return "Pasajero{" + "ID_Pasajero=" + ID_Pasajero  + ", Nombre=" + Nombre + ", Apellido=" + Apellido + ", DNI=" + DNI + ", Correo=" + Correo + ", Telefono=" + Telefono + ", Estado=" + Estado + '}';
+    }
+
     @Override
     public String toString() {
-        return super.toString(); 
+        return ID_Pasajero + " (Nombre=" + Nombre + ", DNI=" + DNI + ", Telefono=" + Telefono + ")";
     }
     
     

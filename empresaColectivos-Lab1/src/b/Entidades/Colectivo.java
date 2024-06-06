@@ -79,9 +79,13 @@ public class Colectivo {
         this.Estado = Estado;
     }
 
+    public String debugToString() {
+        return "Colectivo{" + "ID_Colectivo=" + ID_Colectivo + ", Matricula=" + Matricula + ", Marca=" + Marca + ", Modelo=" + Modelo + ", Capacidad=" + Capacidad + '}';
+    }
+
     @Override
     public String toString() {
-        return super.toString();
+        return ID_Colectivo + " (Matricula=" + Matricula + ", Modelo=" + Modelo + ", Marca=" + Marca + ")";
     }
     
     
