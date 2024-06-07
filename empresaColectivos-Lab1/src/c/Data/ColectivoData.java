@@ -76,7 +76,7 @@ public class ColectivoData {
         Colectivo colectivo = null;
         try {
             // Preparar sentencia SQL
-            String sql = "SELECT * FROM alumno WHERE ID_Colectivo;";
+            String sql = "SELECT * FROM colectivo WHERE ID_Colectivo;";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);

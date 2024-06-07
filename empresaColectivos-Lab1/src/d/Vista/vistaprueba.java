@@ -52,6 +52,8 @@ public class vistaprueba extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu15 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu16 = new javax.swing.JMenu();
+        jMenu17 = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -126,6 +128,12 @@ public class vistaprueba extends javax.swing.JFrame {
         jMenuItem4.setText("Gestion de Pasajes");
         jMenu15.add(jMenuItem4);
 
+        jMenu16.setText("Pasajes Disponibles");
+        jMenu15.add(jMenu16);
+
+        jMenu17.setText("jMenu17");
+        jMenu15.add(jMenu17);
+
         jMenuBar1.add(jMenu15);
 
         setJMenuBar(jMenuBar1);
@@ -191,6 +199,8 @@ public class vistaprueba extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu15;
+    private javax.swing.JMenu jMenu16;
+    private javax.swing.JMenu jMenu17;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
