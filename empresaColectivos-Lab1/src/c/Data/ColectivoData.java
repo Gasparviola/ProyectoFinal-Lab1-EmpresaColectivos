@@ -275,7 +275,7 @@ public class ColectivoData {
 
         try {
             // Preparar la estructura de la sentencia SQL
-            String sql = "UPDATE colectivo SET ID_Colectivo=?, Matrícula=?, Marca=?, Modelo=?, Capacidad=?, Estado=? WHERE ID_Colectivo";
+            String sql = "UPDATE colectivo SET ID_Colectivo=?, Matrícula=?, Marca=?, Modelo=?, Capacidad=?, Estado=? WHERE ID_Colectivo=?";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
