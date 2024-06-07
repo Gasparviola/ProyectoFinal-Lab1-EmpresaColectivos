@@ -161,4 +161,82 @@ public class PasajerosData {
     }
      
     
+      public boolean modificarPasajero(Pasajero pasajero) {
+        boolean result = true;
+
+        try {
+            // Preparar la estructura de la sentencia SQL
+            String sql = "UPDATE Pasajero SET Nombre=?, Apellido=?, DNI=?, Correo=?, Telefono=?, Estado=? WHERE ID_Pasajero=?";
+
+            // Prepared Statement
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, pasajero.getNombre());
+            ps.setString(2, pasajero.getApellido());
+            ps.setString(3, pasajero.getDNI());
+            ps.setString(4, pasajero.getCorreo());
+            ps.setString(5, pasajero.getTelefono());
+            ps.setBoolean(6, pasajero.isEstado());
+            ps.setInt(7, pasajero.getID_Pasajero());
+
+            // Ejecutar sentencia SQL
+            int filas = ps.executeUpdate();
+
+            // Comunicar resultado por consola
+            if (filas > 0) { 
+                System.out.println("Pasajero modificado");
+            } else { 
+                result = false;
+                System.out.println("No se pudo modificar el pasajero indicado");
+            }
+
+            // Cerrar el preparedStatement
+            ps.close();
+
+        } catch (SQLException e) {
+            result = false;
+            System.out.println("[Error " + e.getErrorCode() + "]");
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+    
+    
+
+    public boolean eliminarPasajero(int idPasajero) {
+        boolean result = true;
+
+        try {
+            // Preparar la estructura de la sentencia SQL
+            String sql = "UPDATE Pasajero SET Estado=false WHERE ID_Pasajero=?";
+
+            // Prepared Statement
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idPasajero);
+
+            // Ejecutar la sentencia SQL
+            int filas = ps.executeUpdate();
+
+            // Comunicar resultado por consola
+            if (filas > 0) { 
+                System.out.println("Pasajero dado de baja");
+            } else { 
+                result = false;
+                System.out.println("No se pudo dar de baja al Pasajero");
+            }
+
+            // Cerrar el preparedStatement
+            ps.close();
+
+        } catch (SQLException e) {
+            result = false;
+            System.out.println("[Error " + e.getErrorCode() + "]");
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+     
+     
+     
 }

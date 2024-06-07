@@ -41,7 +41,7 @@ public class RutaData {
         }
     }
     
-        public List<Ruta> listarRutas() {
+       public List<Ruta> listarRutas() {
 
         List<Ruta> rutas = new ArrayList<>();
         try {
@@ -69,7 +69,7 @@ public class RutaData {
 
     
         //Buscar rutas por origen             
-        public Ruta buscarRutaPorOrigen(String origen) {
+       public Ruta buscarRutaPorOrigen(String origen) {
         Ruta rutas = null;
         String sql = "SELECT ID_Ruta, Origen, Destino, Duracion_Estimada, Estado FROM Ruta WHERE Origen = ? AND Estado = 1";
         PreparedStatement ps = null;
@@ -153,4 +153,6 @@ public class RutaData {
     } 
         
     
+       
+       
 }
