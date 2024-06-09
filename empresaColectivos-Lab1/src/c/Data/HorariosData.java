@@ -4,6 +4,7 @@ import b.Entidades.Conexion;
 import b.Entidades.Horario;
 import b.Entidades.Ruta;
 import java.sql.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -89,13 +90,13 @@ public class HorariosData {
     }
         
     
-    public Horario buscarHorarioPorHoraLlegada(Time Hora_Llegada) {
+    public Horario buscarHorarioPorHoraLlegada(LocalTime Hora_Llegada) {
         Horario horarios = null;
         String sql = "SELECT  *   FROM Horario WHERE Hora_Llegada = ? AND Estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setTime(4, Hora_Llegada);
+            ps.setTime(4,Time.valueOf(Hora_Llegada));
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -117,13 +118,13 @@ public class HorariosData {
     }
     
     
-    public Horario buscarHorarioPorHoraSalida(Time Hora_Salida) {
+    public Horario buscarHorarioPorHoraSalida(LocalTime Hora_Salida) {
         Horario horarios = null;
         String sql = "SELECT  *   FROM Horario WHERE Hora_Salida = ? AND Estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setTime(3, Hora_Salida);
+            ps.setTime(3, Time.valueOf(Hora_Salida));
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
