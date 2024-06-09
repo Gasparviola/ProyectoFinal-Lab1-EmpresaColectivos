@@ -2,13 +2,17 @@ package a.Transpuntanosl;
 
 import b.Entidades.Colectivo;
 import b.Entidades.Horario;
+import b.Entidades.Pasaje;
 import b.Entidades.Pasajero;
 import b.Entidades.Ruta;
 import c.Data.ColectivoData;
 import c.Data.HorariosData;
+import c.Data.PasajeData;
 import c.Data.PasajerosData;
 import c.Data.RutaData;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.List;
 
 public class Main {
@@ -209,6 +213,57 @@ public class Main {
         int horarioAEliminar = 2;
         horarios.eliminarHorario(horarioAEliminar);
         
-    //Pasaje
+        //Creando PasajeData
+        PasajeData pasajes = new PasajeData(horarios, pasajero,colectivo,ruta);
+        
+        
+        //Creando Pasajes 
+        Pasaje pasaje1 = new Pasaje(1,pasajero1,colectivo1,ruta1,LocalDate.of(2021, Month.MARCH, 12),LocalTime.of(10, 20), 20,200.5);
+        Pasaje pasaje2 = new Pasaje(2,pasajero2,colectivo2,ruta2,LocalDate.of(2012, Month.AUGUST, 11),LocalTime.of(15, 40), 22,253.1);
+        Pasaje pasaje3 = new Pasaje(3,pasajero3,colectivo3,ruta3,LocalDate.of(2024, Month.DECEMBER, 12),LocalTime.of(20, 12), 50,150.5);
+        Pasaje pasaj[] = new Pasaje[]{pasaje1, pasaje2, pasaje3};
+
+        //Guardando Pasaje 
+        System.out.println("Guardar Pasaje");
+        for (Pasaje pas : pasaj) {
+            pasajes.guardarPasaje(pas);
+        }
+        
+        
+         //Buscando pasaje por Id
+        int idPasajeEncontrado = 2;
+        Pasaje pasajeEncontrado = pasajes.buscarPasaje(idPasajeEncontrado);
+        if (pasajeEncontrado != null) {
+            System.out.println("El pasaje encontrado es: " + pasajeEncontrado);
+        } else {
+            System.out.println("El pasaje no se ha encontrado");
+        }
+        
+        
+          //Listar  todos los Pasajes
+        List<Pasaje> listaPasajes = pasajes.listarPasaje();
+        for (Pasaje elem : listaPasajes) {
+            System.out.println(elem);
+            System.out.println("");
+        }
+        
+        
+        //Listar  todos los Pasajes Activos
+        List<Pasaje> listaPasajesActivos = pasajes.listarPasajeActivos();
+        for (Pasaje elem : listaPasajesActivos) {
+            System.out.println(elem);
+            System.out.println("");
+        }
+        
+        //Modificando Pasaje
+        int pasajeAModificar = 1;
+        Pasaje pasajeModificado;
+        pasajeModificado = new Pasaje(pasajeAModificar,pasajero2,colectivo1,ruta3,LocalDate.of(2022, Month.JULY, 5),LocalTime.of(20, 30), 25,150.5);
+        pasajes.modificarPasaje(pasajeModificado);
+        
+         //Eliminar un Pasaje
+        int pasajeAEliminar = 3;
+        pasajes.eliminarPasaje(pasajeAEliminar);
+
     }
 }
