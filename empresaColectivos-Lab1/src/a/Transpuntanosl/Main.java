@@ -3,9 +3,12 @@ package a.Transpuntanosl;
 import b.Entidades.Colectivo;
 import b.Entidades.Horario;
 import b.Entidades.Pasajero;
+import b.Entidades.Ruta;
 import c.Data.ColectivoData;
 import c.Data.HorariosData;
 import c.Data.PasajerosData;
+import c.Data.RutaData;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Main {
@@ -94,6 +97,62 @@ public class Main {
         //Eliminar un Colectivo
         int colectivoAEliminar = 1;
         colectivo.eliminarColectivo(colectivoAEliminar);
+        
+        //creando RutaData
+        RutaData ruta = new RutaData();
+        
+        //creando Rutas
+        Ruta ruta1 = new Ruta(1, "San luis", "Mendoza", LocalTime.of(04, 00), true);
+        Ruta ruta2 = new Ruta(2, "Villa Mercedes", "Quines", LocalTime.of(03, 30), true);
+        Ruta ruta3 = new Ruta(3, "San luis", "Buenos Aires", LocalTime.of(10, 00), true);
+        Ruta rutas[]= new Ruta[]{ruta1, ruta2, ruta3};
+        
+        //Guardando Pasajeros 
+        System.out.println("Guardar ruta");
+        for (Ruta elem : rutas) {
+            ruta.añadirRuta(elem);
+        }
+        
+        
+        //Buscando ruta por id
+        int idRutaEncontrada = 2;
+        Ruta rutaEncontrada = ruta.buscarRutaPorId(idRutaEncontrada);
+        if (rutaEncontrada != null) {
+            System.out.println("La ruta encontrado es: " + rutaEncontrada);
+        } else {
+            System.out.println("La ruta no se ha encontrado");
+        }
+        
+        
+        //Listar  Rutas
+        List<Ruta> listaRuta = ruta.listarRutas();
+        for (Ruta elem : listaRuta) {
+            System.out.println(elem);
+            System.out.println("");
+        }
+        
+        
+        //Modificando Ruta
+        int rutaAModificar = 1;
+        Ruta rutaModificada;
+        rutaModificada = new Ruta(rutaAModificar, "San luis", "Cordoba", LocalTime.of(06, 00), true);
+        ruta.modificaRuta(rutaModificada);
+        
+         //Eliminar una Ruta
+        int rutaAEliminar = 2;
+        ruta.eliminarRuta(rutaAEliminar);
+        
+        
+        
+         //Creando HoraiosData    
+        HorariosData horarios = new HorariosData(ruta);
+        
+        Horario horario = new Horario(1, ruta3, LocalTime.of(06, 00), LocalTime.of(09, 30), true);
+        
+        
+        
+        
+        
         
     }
 
