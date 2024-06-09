@@ -141,6 +141,12 @@ public class vistaprueba extends javax.swing.JFrame {
         jMenuItem4.setText("Gestion De Ventas");
         jMenu15.add(jMenuItem4);
 
+        jMenu16.setText("Pasajes Disponibles");
+        jMenu15.add(jMenu16);
+
+        jMenu17.setText("jMenu17");
+        jMenu15.add(jMenu17);
+
         jMenuBar1.add(jMenu15);
 
         jMenu18.setText("Colectivo");
@@ -219,8 +225,6 @@ public class vistaprueba extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu15;
     private javax.swing.JMenu jMenu16;
     private javax.swing.JMenu jMenu17;
-    private javax.swing.JMenu jMenu18;
-    private javax.swing.JMenu jMenu19;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
