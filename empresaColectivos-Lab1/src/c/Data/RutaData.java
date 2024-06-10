@@ -48,7 +48,7 @@ public class RutaData {
             while (rs.next()) {
                 Rutas = new Ruta();
 
-                Rutas.setID_Ruta(rs.getInt(" ID_Ruta"));
+                Rutas.setID_Ruta(rs.getInt("ID_Ruta"));
                 Rutas.setOrigen(rs.getString("Origen"));
                 Rutas.setDestino(rs.getString("Destino"));
                 Rutas.setDuracion_Estimada(rs.getTime("Duracion_Estimada").toLocalTime());
@@ -64,18 +64,18 @@ public class RutaData {
     }
 
     //Buscar rutas por origen             
-    public Ruta buscarRutaPorOrigen(String origen) {
+    public Ruta buscarRutaPorOrigen(String Origen) {
         Ruta rutas = null;
         String sql = "SELECT ID_Ruta, Origen, Destino, Duracion_Estimada, Estado FROM Ruta WHERE Origen = ? AND Estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(2, origen);
+            ps.setString(1, Origen);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 rutas = new Ruta();
-                rutas.setID_Ruta(rs.getInt(" ID_Ruta"));
+                rutas.setID_Ruta(rs.getInt("ID_Ruta"));
                 rutas.setOrigen(rs.getString("Origen"));
                 rutas.setDestino(rs.getString("Destino"));
                 rutas.setDuracion_Estimada(rs.getTime("Duracion_Estimada").toLocalTime());
@@ -98,12 +98,12 @@ public class RutaData {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(3, destino);
+            ps.setString(1, destino);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 rutas = new Ruta();
-                rutas.setID_Ruta(rs.getInt(" ID_Ruta"));
+                rutas.setID_Ruta(rs.getInt("ID_Ruta"));
                 rutas.setOrigen(rs.getString("Origen"));
                 rutas.setDestino(rs.getString("Destino"));
                 rutas.setDuracion_Estimada(rs.getTime("Duracion_Estimada").toLocalTime());
@@ -127,10 +127,8 @@ public class RutaData {
             ps = con.prepareStatement(sql);
             ps.setInt(1,ID_Ruta );
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
                 rutas = new Ruta();    
-                
                 rutas.setID_Ruta(rs.getInt("ID_Ruta"));
                 rutas.setOrigen(rs.getString("Origen"));
                 rutas.setDestino(rs.getString("Destino"));
@@ -150,65 +148,43 @@ public class RutaData {
     
     public boolean modificaRuta(Ruta ruta) {
         boolean result = true;
-
         try {
-            // Preparar la estructura de la sentencia SQL
             String sql = "UPDATE Ruta SET Origen=?,Destino=?,Duracion_Estimada=?,Estado=? WHERE ID_Ruta=?";
-
-            // Prepared Statement
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, ruta.getOrigen());
             ps.setString(2, ruta.getDestino());
             ps.setTime(3, Time.valueOf(ruta.getDuracion_Estimada()));
             ps.setBoolean(4, ruta.isEstado());
             ps.setInt(5, ruta.getID_Ruta());
-
-            // Ejecutar sentencia SQL
             int filas = ps.executeUpdate();
-
-            // Comunicar resultado por consola
             if (filas > 0) {
                 System.out.println("Ruta Modificada");
             } else {
                 result = false;
                 System.out.println("No se pudo modificar a la Ruta indicada");
             }
-
-            // Cerrar el preparedStatement
             ps.close();
-
         } catch (SQLException e) {
             result = false;
             System.out.println("[Error " + e.getErrorCode() + "]");
             e.printStackTrace();
         }
-
         return result;
     }
     
     public boolean eliminarRuta(int idRuta) {
         boolean result = true;
-
         try {
-            // Preparar la estructura de la sentencia SQL
             String sql = "UPDATE Ruta SET Estado=false WHERE ID_Ruta=?";
-
-            // Prepared Statement
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idRuta);
-
-            // Ejecutar la sentencia SQL
             int filas = ps.executeUpdate();
-
-            // Comunicar resultado por consola
             if (filas > 0) { 
                 System.out.println("Ruta dada de baja");
             } else { 
                 result = false;
                 System.out.println("No se pudo dar de baja a la Ruta");
             }
-
-            // Cerrar el preparedStatement
             ps.close();
 
         } catch (SQLException e) {

@@ -26,12 +26,16 @@ public class PasajeData {
     }
     
     public boolean guardarPasaje(Pasaje pasaje) {
-        if (pasaje.getID_Pasaje() == -1) {
-            System.out.println("[PasajeData.guardarSiniestro] Error: no se puede guardar. "
-                    + "Pasaje dado de baja o tiene ID_Pasaje definido. "
-                    + pasaje.debugToString());
-            return false;
+        if (pasaje == null || pasaje.getPasajero() == null || pasaje.getColectivo() == null || pasaje.getRuta() == null) {
+            System.out.println("[guardarPasaje] Error: El objeto Pasaje o sus propiedades están nulos.");
+            return false;  // Salir temprano si la condición se cumple
         }
+//        if (pasaje.getID_Pasaje() == -1) {
+//            System.out.println("[PasajeData.guardarSiniestro] Error: no se puede guardar. "
+//                    + "Pasaje dado de baja o tiene ID_Pasaje definido. "
+//                    + pasaje.debugToString());
+//            return false;
+//        }
 
         boolean resultado = false;
         try {
@@ -69,6 +73,7 @@ public class PasajeData {
     }
     
     public Pasaje buscarPasaje(int ID_Pasaje) {
+        
         Pasaje pasaje = null;
         try {    
             String sql = "SELECT * FROM Pasaje WHERE Pasaje.ID_Pasaje=?";
@@ -152,17 +157,10 @@ public class PasajeData {
     
     public List<Pasaje> listarPasaje() {
         List<Pasaje> listaPasaje = new ArrayList();
-
         try {
-         
             String sql = "SELECT * FROM Pasaje";
-
             PreparedStatement ps = connection.prepareStatement(sql);
-
-         
             ResultSet rs = ps.executeQuery();
-
-            
             Pasaje pasaje;
             while (rs.next()) {
                 pasaje = new Pasaje();
@@ -268,4 +266,3 @@ public class PasajeData {
     
     
 }
-

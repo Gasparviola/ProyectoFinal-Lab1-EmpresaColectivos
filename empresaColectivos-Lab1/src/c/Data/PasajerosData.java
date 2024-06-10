@@ -17,7 +17,6 @@ public class PasajerosData {
     }
     
     public void añadirPasajero(Pasajero pasajero) {
-        
         try {
             String sql = "INSERT INTO Pasajero(ID_Pasajero, Nombre, Apellido, DNI, Correo, Telefono, Estado) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -129,13 +128,12 @@ public class PasajerosData {
     
      public Pasajero buscarPasajeroPorDni(String dni) {
         Pasajero pasajeros = null;
-        String sql = "SELECT ID_Pasajero, Nombre, Apellido, DNI, Correo, Teléfono, Estado FROM Pasajero WHERE DNI = ? AND Estado = 1";
+        String sql = "SELECT * FROM Pasajero WHERE DNI = ? AND Estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(4,dni );
+            ps.setString(1,dni );
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
                 pasajeros = new Pasajero();        
                 pasajeros.setID_Pasajero(rs.getInt("ID_Pasajero"));
@@ -145,7 +143,6 @@ public class PasajerosData {
                 pasajeros.setCorreo(rs.getString("Correo"));
                 pasajeros.setTelefono(rs.getString("Telefono"));
                 pasajeros.setEstado(rs.getBoolean("Estado"));                              
-                
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el pasajero");
             }
@@ -159,12 +156,8 @@ public class PasajerosData {
     
       public boolean modificarPasajero(Pasajero pasajero) {
         boolean result = true;
-
         try {
-            // Preparar la estructura de la sentencia SQL
             String sql = "UPDATE Pasajero SET Nombre=?, Apellido=?, DNI=?, Correo=?, Telefono=?, Estado=? WHERE ID_Pasajero=?";
-
-            // Prepared Statement
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, pasajero.getNombre());
             ps.setString(2, pasajero.getApellido());
@@ -173,27 +166,19 @@ public class PasajerosData {
             ps.setString(5, pasajero.getTelefono());
             ps.setBoolean(6, pasajero.isEstado());
             ps.setInt(7, pasajero.getID_Pasajero());
-
-            // Ejecutar sentencia SQL
             int filas = ps.executeUpdate();
-
-            // Comunicar resultado por consola
             if (filas > 0) { 
                 System.out.println("Pasajero modificado");
             } else { 
                 result = false;
                 System.out.println("No se pudo modificar el pasajero indicado");
             }
-
-            // Cerrar el preparedStatement
             ps.close();
-
         } catch (SQLException e) {
             result = false;
             System.out.println("[Error " + e.getErrorCode() + "]");
             e.printStackTrace();
         }
-
         return result;
     }
     
@@ -201,38 +186,23 @@ public class PasajerosData {
 
     public boolean eliminarPasajero(int idPasajero) {
         boolean result = true;
-
         try {
-            // Preparar la estructura de la sentencia SQL
             String sql = "UPDATE Pasajero SET Estado=false WHERE ID_Pasajero=?";
-
-            // Prepared Statement
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idPasajero);
-
-            // Ejecutar la sentencia SQL
             int filas = ps.executeUpdate();
-
-            // Comunicar resultado por consola
             if (filas > 0) { 
                 System.out.println("Pasajero dado de baja");
             } else { 
                 result = false;
                 System.out.println("No se pudo dar de baja al Pasajero");
             }
-
-            // Cerrar el preparedStatement
             ps.close();
-
         } catch (SQLException e) {
             result = false;
             System.out.println("[Error " + e.getErrorCode() + "]");
             e.printStackTrace();
         }
-
         return result;
     }
-     
-     
-     
 }
