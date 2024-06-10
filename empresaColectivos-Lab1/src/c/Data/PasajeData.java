@@ -1,17 +1,16 @@
 package c.Data;
 
+import b.Entidades.Colectivo;
 import b.Entidades.Conexion;
 import b.Entidades.Pasaje;
+import b.Entidades.Pasajero;
+import b.Entidades.Ruta;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Nahue
- */
 public class PasajeData {
     
     private Connection connection;
@@ -19,7 +18,7 @@ public class PasajeData {
     private final ColectivoData colectivoData;
     private final RutaData rutaData;
 
-    public PasajeData(HorariosData horarioData, PasajerosData pasajeroData,ColectivoData colectivoData,RutaData rutaData) {
+    public PasajeData(PasajerosData pasajeroData,ColectivoData colectivoData,RutaData rutaData) {
         this.connection = Conexion.getConexion();
         this.colectivoData = colectivoData;
         this.pasajeroData= pasajeroData;
@@ -27,7 +26,7 @@ public class PasajeData {
     }
     
     public boolean guardarPasaje(Pasaje pasaje) {
-        if (pasaje.getID_Pasaje() != -1) {
+        if (pasaje.getID_Pasaje() == -1) {
             System.out.println("[PasajeData.guardarSiniestro] Error: no se puede guardar. "
                     + "Pasaje dado de baja o tiene ID_Pasaje definido. "
                     + pasaje.debugToString());
@@ -36,7 +35,7 @@ public class PasajeData {
 
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO Pasaje(Id_Pasajero, ID_Colectivo, ID_Ruta, Fecha_Viaje, Hora_Viaje, Asiento, Precio) "
+            String sql = "INSERT INTO Pasaje(ID_Pasajero, ID_Colectivo, ID_Ruta, Fecha_Viaje, Hora_Viaje, Asiento, Precio) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, pasaje.getPasajero().getID_Pasajero());
@@ -69,34 +68,35 @@ public class PasajeData {
         return resultado;
     }
     
-    public Pasaje buscarPasaje(int idPasaje) {
+    public Pasaje buscarPasaje(int ID_Pasaje) {
         Pasaje pasaje = null;
-        try {
-            // Preparar sentencia SQL
-            String sql = "SELECT * FROM pasaje WHERE ID_Pasaje;";
+        try {    
+            String sql = "SELECT * FROM Pasaje WHERE Pasaje.ID_Pasaje=?";
 
-            // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, idPasaje);
+            ps.setInt(1, ID_Pasaje);
 
-            // Ejecutar sentencia SQL
+
             ResultSet rs = ps.executeQuery();
 
-            /* Si se encontro al colectivo, crear nuevo objeto de tipo colectivo con los datos obtenidos 
-               y, en todo caso, comunicar el resultado por consola */
             if (rs.next()) {
                 pasaje = new Pasaje();
-                pasaje.setID_Pasaje(idPasaje);
-                pasaje.setFecha_Viaje(rs.getDate("fecha viaje").toLocalDate());
-                pasaje.setHora_Viaje(rs.getTime("hora viaje").toLocalTime());
+                pasaje.setID_Pasaje(rs.getInt("ID_Pasaje"));
+                Pasajero paje = pasajeroData.buscarPasajero(rs.getInt("ID_Pasajero"));
+                pasaje.setPasajero(paje);
+                Colectivo cole = colectivoData.buscarColectivo(rs.getInt("ID_Colectivo"));
+                pasaje.setColectivo(cole);              
+                Ruta rut = rutaData.buscarRutasPorID(rs.getInt("ID_Ruta"));
+                pasaje.setRuta(rut);
+                pasaje.setFecha_Viaje(rs.getDate("Fecha_Viaje").toLocalDate());
+                pasaje.setHora_Viaje(rs.getTime("Hora_Viaje").toLocalTime());
                 pasaje.setAsiento(rs.getInt("Asiento"));
                 pasaje.setPrecio(rs.getInt("Precio"));
-                System.out.println("Se encontro el Pasaje");
+                System.out.println("Encontrado: " + pasaje.debugToString());
             } else {
                 System.out.println("No se encontro el Pasaje");
             }
 
-            // Cerrar el preparedStatement
             ps.close();
 
         } catch (SQLException e) {
@@ -106,45 +106,7 @@ public class PasajeData {
 
         return pasaje;
     }
-    
-//    public Pasaje buscarPasajePorHoraDeViaje(Date Fecha_Viaje) {
-//        Pasaje pasaje = null;
-//        try {
-//            // Preparar sentencia SQL
-//            String sql = "SELECT * FROM pasaje WHERE ID_Pasaje;";
-//
-//            // Prepared Statement
-//            PreparedStatement ps = connection.prepareStatement(sql);
-//            ps.setDate(1, Fecha_Viaje);
-//
-//            // Ejecutar sentencia SQL
-//            ResultSet rs = ps.executeQuery();
-//
-//            /* Si se encontro al colectivo, crear nuevo objeto de tipo colectivo con los datos obtenidos 
-//               y, en todo caso, comunicar el resultado por consola */
-//            if (rs.next()) {
-//                pasaje = new Pasaje();
-//                pasaje.setFecha_Viaje(Fecha_Viaje);
-//                pasaje.setFecha_Viaje(rs.getDate("fecha viaje").toLocalDate());
-//                pasaje.setHora_Viaje(rs.getTime("hora viaje").toLocalTime());
-//                pasaje.setAsiento(rs.getInt("Asiento"));
-//                pasaje.setPrecio(rs.getInt("Precio"));
-//                System.out.println("Se encontro el colectivo");
-//            } else {
-//                System.out.println("No se encontro el colectivo");
-//            }
-//
-//            // Cerrar el preparedStatement
-//            ps.close();
-//
-//        } catch (SQLException e) {
-//            System.out.println("[Error " + e.getErrorCode() + "]");
-//            e.printStackTrace();
-//        }
-//
-//        return pasaje;
-//    }
-    
+       
     
     
     public boolean modificarPasaje(Pasaje pasaje) {
@@ -152,7 +114,7 @@ public class PasajeData {
 
         try {
             // Preparar la estructura de la sentencia SQL
-            String sql = "UPDATE Pasaje SET ID_Pasajero=?, ID_Colectivo=?, ID_Ruta=?, Fecha_Viaje=?, Hora_Viaje=?, Asiento=?, Precio=? WHERE ID_Pasaje";
+            String sql = "UPDATE Pasaje SET ID_Pasajero=?, ID_Colectivo=?, ID_Ruta=?, Fecha_Viaje=?, Hora_Viaje=?, Asiento=?, Precio=? WHERE ID_Pasaje=?";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -161,7 +123,9 @@ public class PasajeData {
             ps.setInt(3, pasaje.getRuta().getID_Ruta());
             ps.setDate(4, Date.valueOf(pasaje.getFecha_Viaje()));
             ps.setTime(5, Time.valueOf(pasaje.getHora_Viaje()));
-            ps.setDouble(6, pasaje.getPrecio());
+            ps.setInt(6,pasaje.getAsiento());
+            ps.setDouble(7, pasaje.getPrecio());
+            ps.setInt(8, pasaje.getID_Pasaje());
 
             // Ejecutar sentencia SQL
             int filas = ps.executeUpdate();
@@ -190,31 +154,32 @@ public class PasajeData {
         List<Pasaje> listaPasaje = new ArrayList();
 
         try {
-            // Preparar sentencia SQL
-            String sql = "SELECT * FROM Pasaje;";
+         
+            String sql = "SELECT * FROM Pasaje";
 
-            // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
 
-            // Ejecutar sentencia SQL
+         
             ResultSet rs = ps.executeQuery();
 
-            // Si se encontro uno o mas alumnos, crear objetos de tipo Alumno con los datos obtenidos y añadirlos a 'alumnos'
+            
             Pasaje pasaje;
             while (rs.next()) {
                 pasaje = new Pasaje();
-                pasaje.setID_Pasaje(rs.getInt("ID_Colectivo"));
-                pasaje.setPasajero(pasajeroData.buscarPasajero(rs.getInt("Id_Pasajero")));
-                pasaje.setColectivo(colectivoData.buscarColectivo(rs.getInt("Id_Colectivo")));
-                pasaje.setRuta(rutaData.buscarRutaPorId(rs.getInt("Id_Colectivo")));
-                pasaje.setFecha_Viaje(rs.getDate("Fecha viaje").toLocalDate());
-                pasaje.setHora_Viaje(rs.getTime("Estado").toLocalTime());
-                pasaje.setAsiento(rs.getInt("asiento"));
-                pasaje.setPrecio(rs.getDouble("precio"));
+                pasaje.setID_Pasaje(rs.getInt("ID_Pasaje"));
+                Pasajero paje = pasajeroData.buscarPasajero(rs.getInt("ID_Pasajero"));
+                pasaje.setPasajero(paje);
+                Colectivo cole = colectivoData.buscarColectivo(rs.getInt("ID_Colectivo"));
+                pasaje.setColectivo(cole);
+                Ruta rut = rutaData.buscarRutasPorID(rs.getInt("ID_Ruta"));
+                pasaje.setRuta(rut);               
+                pasaje.setFecha_Viaje(rs.getDate("Fecha_Viaje").toLocalDate());
+                pasaje.setHora_Viaje(rs.getTime("Hora_Viaje").toLocalTime());
+                pasaje.setAsiento(rs.getInt("Asiento"));
+                pasaje.setPrecio(rs.getDouble("Precio"));
                 listaPasaje.add(pasaje);
             }                        
 
-            // Cerrar el preparedStatement
             ps.close();
 
         } catch (SQLException e) {
@@ -230,7 +195,7 @@ public class PasajeData {
 
         try {
             // Preparar sentencia SQL
-            String sql = "SELECT * FROM Pasaje;";
+            String sql = "SELECT * FROM Pasaje";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -242,14 +207,17 @@ public class PasajeData {
             Pasaje pasaje;
             while (rs.next()) {
                 pasaje = new Pasaje();
-                pasaje.setID_Pasaje(rs.getInt("ID_Colectivo"));
-                pasaje.setPasajero(pasajeroData.buscarPasajero(rs.getInt("Id_Pasajero")));
-                pasaje.setColectivo(colectivoData.buscarColectivo(rs.getInt("Id_Colectivo")));
-                pasaje.setRuta(rutaData.buscarRutaPorId(rs.getInt("Id_Colectivo")));
-                pasaje.setFecha_Viaje(rs.getDate("Fecha viaje").toLocalDate());
-                pasaje.setHora_Viaje(rs.getTime("Estado").toLocalTime());
-                pasaje.setAsiento(rs.getInt("asiento"));
-                pasaje.setPrecio(rs.getDouble("precio"));
+                pasaje.setID_Pasaje(rs.getInt("ID_Pasaje"));
+                Pasajero paje = pasajeroData.buscarPasajero(rs.getInt("ID_Pasajero"));
+                pasaje.setPasajero(paje);
+                Colectivo cole = colectivoData.buscarColectivo(rs.getInt("ID_Colectivo"));
+                pasaje.setColectivo(cole);
+                Ruta rut = rutaData.buscarRutasPorID(rs.getInt("ID_Ruta"));
+                pasaje.setRuta(rut);               
+                pasaje.setFecha_Viaje(rs.getDate("Fecha_Viaje").toLocalDate());
+                pasaje.setHora_Viaje(rs.getTime("Hora_Viaje").toLocalTime());
+                pasaje.setAsiento(rs.getInt("Asiento"));
+                pasaje.setPrecio(rs.getDouble("Precio"));
                 listaPasaje.add(pasaje);
             }                        
 
@@ -269,7 +237,7 @@ public class PasajeData {
 
         try {
             // Preparar la estructura de la sentencia SQL
-            String sql = "UPDATE Pasaje SET Estado=false WHERE idPasaje=?";
+            String sql = "DELETE FROM Pasaje WHERE ID_Pasaje=?";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -300,3 +268,4 @@ public class PasajeData {
     
     
 }
+

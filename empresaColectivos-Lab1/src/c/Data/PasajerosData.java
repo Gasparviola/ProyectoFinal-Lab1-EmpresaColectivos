@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author El Notaloko 2.1
- */
 public class PasajerosData {
     
     private Connection con = null;
@@ -73,7 +69,7 @@ public class PasajerosData {
     
     public Pasajero buscarPasajero(int ID_Pasajero) {
         Pasajero pasajeros = null;
-        String sql = "SELECT ID_Pasajero, Nombre, Apellido, DNI, Correo, Teléfono, Estado FROM Pasajero WHERE ID_Pasajero = ? AND Estado = 1";
+        String sql = "SELECT ID_Pasajero, Nombre, Apellido, DNI, Correo, Telefono, Estado FROM Pasajero WHERE ID_Pasajero = ? AND Estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);

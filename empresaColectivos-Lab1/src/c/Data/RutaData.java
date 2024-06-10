@@ -1,18 +1,12 @@
 package c.Data;
 
-import b.Entidades.Colectivo;
 import b.Entidades.Conexion;
 import b.Entidades.Ruta;
 import java.sql.*;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author El Notaloko 2.1
- */
 public class RutaData {
 
     private Connection con = null;
@@ -124,47 +118,50 @@ public class RutaData {
         }
         return rutas;
     }
-
-    public Ruta buscarRutaPorId(int ID_Ruta) {
+    
+    public Ruta buscarRutasPorID(int ID_Ruta) {
         Ruta rutas = null;
         String sql = "SELECT ID_Ruta, Origen, Destino, Duracion_Estimada, Estado FROM Ruta WHERE ID_Ruta = ? AND Estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, ID_Ruta);
+            ps.setInt(1,ID_Ruta );
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                rutas = new Ruta();
-                rutas.setID_Ruta(rs.getInt(" ID_Ruta"));
+                rutas = new Ruta();    
+                
+                rutas.setID_Ruta(rs.getInt("ID_Ruta"));
                 rutas.setOrigen(rs.getString("Origen"));
                 rutas.setDestino(rs.getString("Destino"));
                 rutas.setDuracion_Estimada(rs.getTime("Duracion_Estimada").toLocalTime());
-                rutas.setEstado(rs.getBoolean("Estado"));
-
+                rutas.setEstado(rs.getBoolean("Estado"));                           
+                
             } else {
-                JOptionPane.showMessageDialog(null, "No existe la ruta");
+                JOptionPane.showMessageDialog(null, "No existe el pasajero");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ruta " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pasajero " + ex.getMessage());
         }
         return rutas;
     }
-
+    
+    
     public boolean modificaRuta(Ruta ruta) {
         boolean result = true;
 
         try {
             // Preparar la estructura de la sentencia SQL
-            String sql = "UPDATE ruta SET ID_Ruta=?,Origen=?,Destino=?,Duración_Estimada=?,Estado=? WHERE ID_Ruta=?";
+            String sql = "UPDATE Ruta SET Origen=?,Destino=?,Duracion_Estimada=?,Estado=? WHERE ID_Ruta=?";
 
             // Prepared Statement
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, ruta.getOrigen());
             ps.setString(2, ruta.getDestino());
-            ps.setTime(4, Time.valueOf(ruta.getDuracion_Estimada()));
+            ps.setTime(3, Time.valueOf(ruta.getDuracion_Estimada()));
             ps.setBoolean(4, ruta.isEstado());
+            ps.setInt(5, ruta.getID_Ruta());
 
             // Ejecutar sentencia SQL
             int filas = ps.executeUpdate();
@@ -194,7 +191,7 @@ public class RutaData {
 
         try {
             // Preparar la estructura de la sentencia SQL
-            String sql = "UPDATE ruta SET Estado=false WHERE idRuta=?";
+            String sql = "UPDATE Ruta SET Estado=false WHERE ID_Ruta=?";
 
             // Prepared Statement
             PreparedStatement ps = con.prepareStatement(sql);
