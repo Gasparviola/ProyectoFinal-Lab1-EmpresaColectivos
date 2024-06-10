@@ -5,6 +5,7 @@ import b.Entidades.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,69 +19,43 @@ public class ColectivoData {
         this.connection = Conexion.getConexion();
     }
 
-    public boolean guardarColectivo(Colectivo colectivo) {
-        boolean result = true;
-
+    public void añadirColectivo(Colectivo colectivo) {
+        
         try {
-            // preparar la estructura de la sentencia SQL
-            String sql;
-            if (colectivo.getID_Colectivo() == -1) {
-                sql = "INSERT INTO colectivo(Matrícula, Marca, Modelo, Capacidad, Estado) VALUES(?,?,?,?,?)";
-
-            } else {
-                sql = "INSERT INTO colectivo(ID_Colectivo, Matrícula, Marca, Modelo, Capacidad, Estado) VALUES(?,?,?,?,?,?)";
-            }
-
-            //prepared Statement
-            PreparedStatement ps = connection.prepareStatement(sql);
+            String sql = "INSERT INTO Colectivo(ID_Colectivo, Matricula, Marca, Modelo, Capacidad, Estado) VALUES(?,?,?,?,?,?)";
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1,colectivo.getID_Colectivo());
             ps.setString(2, colectivo.getMatricula());
             ps.setString(3, colectivo.getMarca());
             ps.setString(4, colectivo.getModelo());
             ps.setInt(5, colectivo.getCapacidad());
-            ps.setBoolean(6, colectivo.isEstado());
-
-            //si ID_colectiv es igual a -1, entonces se asigna automaticamente
-            if (colectivo.getID_Colectivo() == -1) {
-                ps.setInt(1, colectivo.getID_Colectivo());
+            ps.setBoolean(6, colectivo.isEstado()); 
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {               
+                colectivo.setID_Colectivo(rs.getInt("ID_Colectivo"));
+                JOptionPane.showMessageDialog(null, "Colectivo añadido con exito.");
             }
-
-            //ejecutar la sentencia sql
-            int filas = ps.executeUpdate();
-
-            // comunicar resultado por consola
-            if (filas > 0) {
-                System.out.println("Colectivo agregado");
-            } else {
-                result = false;
-                System.out.println("No se pudo agregar Colectivo");
-            }
-
-            // cerrar el preparedStatement
             ps.close();
-
-        } catch (SQLException e) {
-            result = false;
-            int errorCode = e.getErrorCode();
-            if (errorCode == 1062) {  //colectivo repetido
-                System.out.println("[Error " + errorCode + "] (Colectivo repetido)");
-        } else {
-                System.out.println("[Error " + errorCode + "]");
-            }
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Colectivo" + ex.getMessage());
         }
-
-        return result;
     }
     
-    public Colectivo buscarColectivo(int idColectivo) {
+    
+    
+    
+
+    
+    public Colectivo buscarColectivo(int ID_Colectivo) {
         Colectivo colectivo = null;
         try {
             // Preparar sentencia SQL
-            String sql = "SELECT * FROM colectivo WHERE ID_Colectivo;";
-
+            String sql = "SELECT * FROM Colectivo WHERE ID_Colectivo = ? AND Estado = 1";
+//SELECT ID_Colectivo, Nombre, Apellido, DNI, Correo, Telefono, Estado FROM Pasajero WHERE ID_Pasajero = ? AND Estado = 1
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, idColectivo);
+            ps.setInt(1, ID_Colectivo);
 
             // Ejecutar sentencia SQL
             ResultSet rs = ps.executeQuery();
@@ -89,14 +64,14 @@ public class ColectivoData {
                y, en todo caso, comunicar el resultado por consola */
             if (rs.next()) {
                 colectivo = new Colectivo();
-                colectivo.setID_Colectivo(idColectivo);
+                colectivo.setID_Colectivo(ID_Colectivo);
                 colectivo.setMatricula(rs.getString("Matricula"));
                 colectivo.setMarca(rs.getString("Marca"));
                 colectivo.setModelo(rs.getString("Modelo"));
                 colectivo.setCapacidad(rs.getInt("Capacidad"));
                 colectivo.setEstado(rs.getBoolean("Estado"));
 
-                System.out.println("Se encontro el colectivo");
+                
             } else {
                 System.out.println("No se encontro el colectivo");
             }
@@ -201,7 +176,7 @@ public class ColectivoData {
 
         try {
             // Preparar sentencia SQL
-            String sql = "SELECT * FROM colectivo;";
+            String sql = "SELECT * FROM colectivo";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -275,7 +250,7 @@ public class ColectivoData {
 
         try {
             // Preparar la estructura de la sentencia SQL
-            String sql = "UPDATE colectivo SET ID_Colectivo=?, Matrícula=?, Marca=?, Modelo=?, Capacidad=?, Estado=? WHERE ID_Colectivo=?";
+            String sql = "UPDATE Colectivo SET  Matricula=?, Marca=?, Modelo=?, Capacidad=?, Estado=? WHERE ID_Colectivo=?";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -314,7 +289,7 @@ public class ColectivoData {
 
         try {
             // Preparar la estructura de la sentencia SQL
-            String sql = "UPDATE colectivo SET Estado=false WHERE idColectivo=?";
+            String sql = "UPDATE colectivo SET Estado=false WHERE ID_Colectivo=?";
 
             // Prepared Statement
             PreparedStatement ps = connection.prepareStatement(sql);

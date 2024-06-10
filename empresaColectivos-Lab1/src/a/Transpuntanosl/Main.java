@@ -19,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
         
-    //PasajeroPrueba
+    //PasajeroPrueba (Anda todo ok)
         
         //Creando PasajeroData        
         PasajerosData pasajero = new PasajerosData();
@@ -59,10 +59,10 @@ public class Main {
         pasajero.modificarPasajero(pasajeroModificado);
 
         //Eliminar un pasajero 
-        int pasajeroAEliminar = 1;
+        int pasajeroAEliminar = 2;
         pasajero.eliminarPasajero(pasajeroAEliminar);
     
-    //Colectivo Pruebas
+    //Colectivo Pruebas (Anda todo ok)
     
         //Creando ColectivoData        
         ColectivoData colectivo = new ColectivoData();
@@ -76,14 +76,14 @@ public class Main {
         //Guardando Colectivos
         System.out.println("Guardar Colectivo");
         for (Colectivo cole : colectivos) {
-            colectivo.guardarColectivo(cole);
+            colectivo.añadirColectivo(cole);
         }
         
         //Buscando colectivo por matricula 
-        int idColectivoEncontrado = 1;
+        int idColectivoEncontrado = 2;
         Colectivo colectivoEncontrado = colectivo.buscarColectivo(idColectivoEncontrado);
         if (colectivoEncontrado != null) {
-            System.out.println("El colectivo encontrado es: " + idColectivoEncontrado);
+            System.out.println("El colectivo encontrado es: " + colectivoEncontrado);
         } else {
             System.out.println("El colectivo no se ha encontrado");
         }
@@ -103,10 +103,10 @@ public class Main {
         
         
         //Eliminar un Colectivo
-        int colectivoAEliminar = 1;
+        int colectivoAEliminar = 2;
         colectivo.eliminarColectivo(colectivoAEliminar);
         
-    //Rutas pruebas
+    //Rutas pruebas (Anda todo ok)
     
         //creando RutaData
         RutaData ruta = new RutaData();
@@ -124,8 +124,8 @@ public class Main {
         }
         
         //Buscando ruta por id
-        int idRutaEncontrada = 2;
-        Ruta rutaEncontrada = ruta.buscarRutaPorId(idRutaEncontrada);
+        int idRutaEncontrada = 1;
+        Ruta rutaEncontrada = ruta.buscarRutasPorID(idRutaEncontrada);
         if (rutaEncontrada != null) {
             System.out.println("La ruta encontrado es: " + rutaEncontrada);
         } else {
@@ -149,19 +149,20 @@ public class Main {
         int rutaAEliminar = 2;
         ruta.eliminarRuta(rutaAEliminar);
         
-    //Horarios Pruebas
+    //Horarios Pruebas (Anda todo ok)
     
-        //Creando HoraiosData    
+        //Creando HorariosData    
         HorariosData horarios = new HorariosData(ruta);
-        Ruta idruta1 = ruta.buscarRutaPorId(1);
-        Ruta idruta2 = ruta.buscarRutaPorId(2);
-        Ruta idruta3 = ruta.buscarRutaPorId(3);
+
+        Ruta idruta1 = ruta.buscarRutasPorID(1);
+//        Ruta idruta2 = ruta.buscarRutasPorID(2);
+        Ruta idruta3 = ruta.buscarRutasPorID(3);
         
-        //creando Horarios
+        //Creando Horarios
         Horario horario1 = new Horario(1, idruta1, LocalTime.of(6, 10), LocalTime.of(13, 00), true);
-        Horario horario2 = new Horario(2, idruta2, LocalTime.of(5, 30), LocalTime.of(12, 00), true);
-        Horario horario3 = new Horario(3, idruta3, LocalTime.of(7, 50), LocalTime.of(16, 20), true);
-        Horario horario[]= new Horario[]{horario1, horario2, horario3};
+//        Horario horario2 = new Horario(3, idruta2, LocalTime.of(5, 30), LocalTime.of(12, 00), true);
+        Horario horario3 = new Horario(2, idruta3, LocalTime.of(7, 50), LocalTime.of(16, 20), true);
+        Horario horario[]= new Horario[]{horario1,horario3};
         
         //Guardando Horario
         System.out.println("Guardar Horario");
@@ -169,17 +170,21 @@ public class Main {
             horarios.añadirHorario(elem);
         }
         
+        System.out.println("");
+        
         //Buscando horario por id
-        int idHorarioEncontrado = 2;
-        Horario horarioEncontrada =horarios.buscarHorarioSegunEstado(idHorarioEncontrado, true);
-        if (horarioEncontrada != null) {
-            System.out.println("El horario encontrado es: " + horarioEncontrada);
+        int idHorarioEncon = 1;
+        Horario horarioEncontrado =horarios.buscarHorario(idHorarioEncon);
+        if (horarioEncontrado != null) {
+            System.out.println( horarioEncontrado);
         } else {
             System.out.println("el horario no se ha encontrado");
         }
         
+        System.out.println("");
+        
         //Buscando horario por horaDeLlegada
-        LocalTime horaEncontrada = LocalTime.of(2, 30);
+        LocalTime horaEncontrada = LocalTime.of(14, 00);
         Horario horaEnconLlegada =horarios.buscarHorarioPorHoraLlegada(horaEncontrada);
         if (horaEnconLlegada != null) {
             System.out.println("El horario encontrado es: " + horaEnconLlegada);
@@ -187,8 +192,11 @@ public class Main {
             System.out.println("el horario no se ha encontrado");
         }
         
+        System.out.println("");
+        
+        
         //Buscando horario por horaDeSalida
-        LocalTime horaEncontradaSalida = LocalTime.of(2, 30);
+        LocalTime horaEncontradaSalida = LocalTime.of(7, 30);
         Horario horaEnconSalida =horarios.buscarHorarioPorHoraSalida(horaEncontradaSalida);
         if (horaEnconSalida != null) {
             System.out.println("El horario encontrado es: " + horaEnconSalida);
@@ -196,12 +204,17 @@ public class Main {
             System.out.println("el horario no se ha encontrado");
         }
         
+        System.out.println("");
+        
         //ListarHorario
+        System.out.println("Listando Horarios");
         List<Horario> listaHorario = horarios.listarHorarios();
         for (Horario elem : listaHorario) {
             System.out.println(elem);
             System.out.println("");
         }
+        
+        System.out.println("");
         
         //Modificar Horario
         int HorarioAModificar = 1;
@@ -213,15 +226,17 @@ public class Main {
         int horarioAEliminar = 2;
         horarios.eliminarHorario(horarioAEliminar);
         
+        
+        
         //Creando PasajeData
-        PasajeData pasajes = new PasajeData(horarios, pasajero,colectivo,ruta);
+        PasajeData pasajes = new PasajeData(pasajero,colectivo,ruta);
         
         
         //Creando Pasajes 
         Pasaje pasaje1 = new Pasaje(1,pasajero1,colectivo1,ruta1,LocalDate.of(2021, Month.MARCH, 12),LocalTime.of(10, 20), 20,200.5);
-        Pasaje pasaje2 = new Pasaje(2,pasajero2,colectivo2,ruta2,LocalDate.of(2012, Month.AUGUST, 11),LocalTime.of(15, 40), 22,253.1);
-        Pasaje pasaje3 = new Pasaje(3,pasajero3,colectivo3,ruta3,LocalDate.of(2024, Month.DECEMBER, 12),LocalTime.of(20, 12), 50,150.5);
-        Pasaje pasaj[] = new Pasaje[]{pasaje1, pasaje2, pasaje3};
+//        Pasaje pasaje2 = new Pasaje(2,pasajero2,colectivo2,ruta2,LocalDate.of(2012, Month.AUGUST, 11),LocalTime.of(15, 40), 22,253.1);
+        Pasaje pasaje3 = new Pasaje(2,pasajero3,colectivo3,ruta3,LocalDate.of(2024, Month.DECEMBER, 12),LocalTime.of(20, 12), 50,150.5);
+        Pasaje pasaj[] = new Pasaje[]{pasaje1, pasaje3};
 
         //Guardando Pasaje 
         System.out.println("Guardar Pasaje");
@@ -230,6 +245,7 @@ public class Main {
         }
         
         
+        System.out.println("Buscando Pasaje");
          //Buscando pasaje por Id
         int idPasajeEncontrado = 2;
         Pasaje pasajeEncontrado = pasajes.buscarPasaje(idPasajeEncontrado);
@@ -239,7 +255,7 @@ public class Main {
             System.out.println("El pasaje no se ha encontrado");
         }
         
-        
+        System.out.println("Listando Pasajes");
           //Listar  todos los Pasajes
         List<Pasaje> listaPasajes = pasajes.listarPasaje();
         for (Pasaje elem : listaPasajes) {
@@ -248,6 +264,7 @@ public class Main {
         }
         
         
+        System.out.println("Listando Pasajes Activos");
         //Listar  todos los Pasajes Activos
         List<Pasaje> listaPasajesActivos = pasajes.listarPasajeActivos();
         for (Pasaje elem : listaPasajesActivos) {
@@ -255,15 +272,18 @@ public class Main {
             System.out.println("");
         }
         
+        System.out.println("Modificando Pasaje");
         //Modificando Pasaje
         int pasajeAModificar = 1;
         Pasaje pasajeModificado;
         pasajeModificado = new Pasaje(pasajeAModificar,pasajero2,colectivo1,ruta3,LocalDate.of(2022, Month.JULY, 5),LocalTime.of(20, 30), 25,150.5);
         pasajes.modificarPasaje(pasajeModificado);
         
+        System.out.println("Eliminando Pasaje");
          //Eliminar un Pasaje
-        int pasajeAEliminar = 3;
+        int pasajeAEliminar = 2;
         pasajes.eliminarPasaje(pasajeAEliminar);
 
     }
 }
+
