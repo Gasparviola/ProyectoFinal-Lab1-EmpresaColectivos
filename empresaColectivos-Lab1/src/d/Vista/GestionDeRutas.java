@@ -6,6 +6,9 @@ package d.Vista;
 
 import b.Entidades.Ruta;
 import c.Data.RutaData;
+import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -89,8 +92,18 @@ public class GestionDeRutas extends javax.swing.JInternalFrame {
         });
 
         Registrarbtn.setText("Registrar");
+        Registrarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarbtnActionPerformed(evt);
+            }
+        });
 
         Eliminarbtn.setText("Eliminar");
+        Eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarbtnActionPerformed(evt);
+            }
+        });
 
         Modificarbtn.setText("Modificar");
 
@@ -114,26 +127,6 @@ public class GestionDeRutas extends javax.swing.JInternalFrame {
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel3)
-                                                .addComponent(jLabel2))
-                                            .addGap(6, 6, 6))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Estado1)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtDuracion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                        .addComponent(txtDestino, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Buscarbtn))))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(Limpiarbtn)
                                 .addGap(33, 33, 33)
                                 .addComponent(Registrarbtn)
@@ -142,7 +135,34 @@ public class GestionDeRutas extends javax.swing.JInternalFrame {
                                 .addGap(30, 30, 30)
                                 .addComponent(Eliminarbtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Salirbtn)))))
+                                .addComponent(Salirbtn))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(74, 74, 74))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(3, 3, 3)
+                                                .addComponent(jLabel2)
+                                                .addGap(23, 23, 23))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Estado1)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(Buscarbtn))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -156,14 +176,15 @@ public class GestionDeRutas extends javax.swing.JInternalFrame {
                         .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Buscarbtn)
                         .addComponent(jLabel2)))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(Estado1))
@@ -213,6 +234,82 @@ public class GestionDeRutas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
     }//GEN-LAST:event_LimpiarbtnActionPerformed
+
+    private void RegistrarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarbtnActionPerformed
+        // TODO add your handling code here:
+        
+           String origen =  txtOrigen.getText();
+           String destino =  txtDestino.getText();
+            String duracion = txtDuracion.getText();          
+            boolean estado = Estado1.isSelected();        
+            System.out.println(estado);
+       
+       if(origen.isBlank() || destino.isBlank() || duracion.isBlank()){           
+           JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos" );
+           return;
+       }
+       
+       
+       LocalTime durac = LocalTime.parse(duracion);
+       
+       Ruta rut = rutaData.buscarRutaPorOrigen(origen);
+       
+       boolean resultado;
+       if(rut == null){
+           rut = new Ruta(origen,destino,durac,estado);
+           rutaData.añadirRuta(rut);           
+           resultado=true;
+       }else{
+           rut.setOrigen(origen);
+           rut.setDestino(destino);
+           rut.setDuracion_Estimada(durac);
+           rut.setEstado(estado);
+           rutaData.modificaRuta(rut);
+           resultado=true;
+       }
+       
+       //imprimir resultado
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "Ruta guardada o modificada");
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo guardar la ruta");
+        }
+        
+        
+    }//GEN-LAST:event_RegistrarbtnActionPerformed
+
+    private void EliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarbtnActionPerformed
+        // TODO add your handling code here:
+        
+        //Validar matricula
+        String origen;      
+            
+        origen = txtOrigen.getText();        
+        
+        //buscar colectivo
+        Ruta rut = rutaData.buscarRutaPorOrigen(origen);
+        if(rut==null){
+            JOptionPane.showMessageDialog(null, "No se encontro la ruta vinculado al origen");
+            return;
+        }else{
+            if(rut.isEstado()==false){
+                JOptionPane.showMessageDialog(null, "La ruta esta dada de baja");
+                return;
+            }
+        }
+        
+        // Eliminar rutas y limpiar campos (excepto origen)
+        if (rutaData.eliminarRuta(rut.getID_Ruta())){           
+            txtDestino.setText("");
+            txtDuracion.setText("");
+            Estado1.setSelected(false);
+            JOptionPane.showMessageDialog(this, "Ruta dada de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Por alguna razon no se pudo eliminar
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja la ruta.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_EliminarbtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
