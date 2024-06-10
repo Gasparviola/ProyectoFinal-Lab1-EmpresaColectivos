@@ -1,14 +1,33 @@
 
 package d.Vista;
 
+import b.Entidades.Pasajero;
+import c.Data.PasajerosData;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
+
 
 public class GestionPasajero extends javax.swing.JInternalFrame {
 
 
-    public GestionPasajero() {
+    PasajerosData pasajeroData;
+    
+    public GestionPasajero( PasajerosData pasajeroData) {
         initComponents();
+        this.pasajeroData = pasajeroData;
     }
 
+     private void limpiar(){  
+            textDNI.setText("");
+            txtApellido.setText("");
+            txtNombre.setText("");         
+            txtTelefono.setText("");
+            txtCorreo.setText("");
+            Estado1.setSelected(false);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,15 +76,35 @@ public class GestionPasajero extends javax.swing.JInternalFrame {
 
         Limpiarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Limpiarbtn.setText("Limpiar");
+        Limpiarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarbtnActionPerformed(evt);
+            }
+        });
 
         Registrarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Registrarbtn.setText("Registrar");
+        Registrarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarbtnActionPerformed(evt);
+            }
+        });
 
         Eliminarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Eliminarbtn.setText("Eliminar");
+        Eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarbtnActionPerformed(evt);
+            }
+        });
 
         Salirbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Salirbtn.setText("Salir");
+        Salirbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirbtnActionPerformed(evt);
+            }
+        });
 
         Titulo.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
         Titulo.setText("Pasajero");
@@ -75,10 +114,9 @@ public class GestionPasajero extends javax.swing.JInternalFrame {
 
         Buscarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Buscarbtn.setText("Buscar");
-
-        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+        Buscarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoActionPerformed(evt);
+                BuscarbtnActionPerformed(evt);
             }
         });
 
@@ -96,53 +134,50 @@ public class GestionPasajero extends javax.swing.JInternalFrame {
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Limpiarbtn)
-                        .addGap(35, 35, 35)
-                        .addComponent(Registrarbtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(Modificarbtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(Salirbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(172, 172, 172))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(92, 92, 92))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(Eliminarbtn))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(Estado)
-                                                    .addComponent(Correo)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(12, 12, 12)
-                                                .addComponent(Telefono))
-                                            .addComponent(Nombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(Apellido)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtTelefono)
-                                            .addComponent(txtNombre)
-                                            .addComponent(txtApellido)
-                                            .addComponent(textDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(43, 43, 43)
-                                        .addComponent(Buscarbtn))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Limpiarbtn)
+                                .addGap(35, 35, 35)
+                                .addComponent(Registrarbtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(Modificarbtn))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(153, 153, 153)
-                                .addComponent(Estado1)
-                                .addGap(89, 89, 89)))
-                        .addGap(77, 77, 77))))
+                                .addComponent(Estado1)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Estado)
+                                            .addComponent(Correo)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(Telefono))
+                                    .addComponent(Nombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Apellido)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTelefono)
+                                    .addComponent(txtNombre)
+                                    .addComponent(txtApellido)
+                                    .addComponent(textDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Eliminarbtn)
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Salirbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Buscarbtn))))
+                .addGap(66, 66, 66))
             .addGroup(layout.createSequentialGroup()
                 .addGap(201, 201, 201)
                 .addComponent(Titulo)
@@ -190,9 +225,118 @@ public class GestionPasajero extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+    private void BuscarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarbtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoActionPerformed
+        
+        //Validar DNI
+        String dni;
+        dni =  textDNI.getText();
+        
+        //Buscando Pasajero por DNI
+        Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(dni);
+        if(pasaj == null){
+            textDNI.setText("");
+            txtApellido.setText("");
+            txtNombre.setText("");         
+            txtTelefono.setText("");
+            txtCorreo.setText("");
+            Estado1.setSelected(false);
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un DNI" );
+        }else{
+            textDNI.setText(pasaj.getDNI());
+            txtApellido.setText(pasaj.getApellido());
+            txtNombre.setText(pasaj.getNombre());         
+            txtTelefono.setText(pasaj.getTelefono());
+            txtCorreo.setText(pasaj.getCorreo());
+            Estado1.setSelected(pasaj.isEstado());
+        }           
+    }//GEN-LAST:event_BuscarbtnActionPerformed
+
+    private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_LimpiarbtnActionPerformed
+
+    private void RegistrarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarbtnActionPerformed
+        // TODO add your handling code here:
+        
+           String dni = textDNI.getText();
+           String apellido  = txtApellido.getText();
+           String nombre = txtNombre.getText();         
+           String telefono = txtTelefono.getText();
+           String correo = txtCorreo.getText();
+           boolean estado = Estado1.isSelected();
+            System.out.println(estado);
+       
+       if(dni.isBlank() || apellido.isBlank() || nombre.isBlank() || telefono.isBlank() || correo.isBlank()){           
+           JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos" );
+           return;
+       }
+       
+       Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(dni);
+       
+       boolean resultado;
+       if(pasaj == null){
+           pasaj = new Pasajero(nombre,dni,correo,telefono,estado);
+           pasajeroData.añadirPasajero(pasaj);    
+           resultado=true;
+       }else{
+           pasaj.setDNI(dni);
+           pasaj.setApellido(apellido);
+           pasaj.setNombre(nombre);
+           pasaj.setTelefono(telefono);
+           pasaj.setCorreo(correo);
+           pasaj.setEstado(estado);
+           pasajeroData.modificarPasajero(pasaj);
+           resultado=true;
+       }
+       
+       //imprimir resultado
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "Pasajero guardado o modificado");
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo guardar al pasajero");
+        }
+        
+    }//GEN-LAST:event_RegistrarbtnActionPerformed
+
+    private void SalirbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirbtnActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+    }//GEN-LAST:event_SalirbtnActionPerformed
+
+    private void EliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarbtnActionPerformed
+        // TODO add your handling code here:
+        //Validar matricula
+        String dni;      
+            
+        dni = textDNI.getText();        
+        
+        //buscar colectivo
+        Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(dni);
+        if(pasaj==null){
+            JOptionPane.showMessageDialog(null, "No se encontro el pasajero vinculado al Dni");
+            return;
+        }else{
+            if(pasaj.isEstado()==false){
+                JOptionPane.showMessageDialog(null, "El pasajero esta dado de baja");
+                return;
+            }
+        }
+        
+        // Eliminar pasajeros y limpiar campos (excepto dni)
+        if (pasajeroData.eliminarPasajero(pasaj.getID_Pasajero())){           
+            txtApellido.setText("");
+            txtNombre.setText("");         
+            txtTelefono.setText("");
+            txtCorreo.setText("");
+            Estado1.setSelected(false);
+            JOptionPane.showMessageDialog(this, "Pasajero dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Por alguna razon no se pudo eliminar
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al pasajero.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_EliminarbtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

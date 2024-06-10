@@ -4,19 +4,34 @@
  */
 package d.Vista;
 
+import b.Entidades.Ruta;
+import c.Data.RutaData;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
  */
 public class GestionDeRutas extends javax.swing.JInternalFrame {
 
+    RutaData rutaData;
+    
     /**
      * Creates new form GestionDeRutas
      */
-    public GestionDeRutas() {
+    public GestionDeRutas(RutaData rutaData) {
         initComponents();
+        this.rutaData = rutaData;
     }
 
+     private void limpiar(){
+            txtOrigen.setText("");
+            txtDestino.setText("");
+            txtDuracion.setText("");          
+            Estado1.setSelected(false);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,8 +75,18 @@ public class GestionDeRutas extends javax.swing.JInternalFrame {
         jLabel5.setText("Estado:");
 
         Limpiarbtn.setText("Limpiar");
+        Limpiarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarbtnActionPerformed(evt);
+            }
+        });
 
         Buscarbtn.setText("Buscar");
+        Buscarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarbtnActionPerformed(evt);
+            }
+        });
 
         Registrarbtn.setText("Registrar");
 
@@ -70,6 +95,11 @@ public class GestionDeRutas extends javax.swing.JInternalFrame {
         Modificarbtn.setText("Modificar");
 
         Salirbtn.setText("Salir");
+        Salirbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,7 +156,6 @@ public class GestionDeRutas extends javax.swing.JInternalFrame {
                         .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Buscarbtn)
                         .addComponent(jLabel2)))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -135,7 +164,7 @@ public class GestionDeRutas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(Estado1))
                 .addGap(30, 30, 30)
@@ -150,6 +179,40 @@ public class GestionDeRutas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BuscarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarbtnActionPerformed
+        // TODO add your handling code here:
+        
+        //Validar Matricula
+        String origen;      
+            
+        origen = txtOrigen.getText();
+                                               
+        Ruta rut = rutaData.buscarRutaPorOrigen(origen);
+        if(rut == null){          
+            txtOrigen.setText("");
+            txtDestino.setText("");
+            txtDuracion.setText("");          
+            Estado1.setSelected(false);
+            JOptionPane.showMessageDialog(null, "Ruta no encontrada");
+        }else{
+            txtOrigen.setText(rut.getOrigen());
+            txtDestino.setText(rut.getDestino());
+            txtDuracion.setText(rut.getDuracion_Estimada().toString());                
+            Estado1.setSelected(rut.isEstado());           
+        }
+        
+    }//GEN-LAST:event_BuscarbtnActionPerformed
+
+    private void SalirbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirbtnActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+    }//GEN-LAST:event_SalirbtnActionPerformed
+
+    private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_LimpiarbtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

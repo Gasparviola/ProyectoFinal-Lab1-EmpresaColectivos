@@ -4,19 +4,35 @@
  */
 package d.Vista;
 
+import b.Entidades.Colectivo;
+import c.Data.ColectivoData;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
  */
 public class GestionColectivo extends javax.swing.JInternalFrame {
 
+    ColectivoData coleData;
     /**
      * Creates new form GestionColectivo
      */
-    public GestionColectivo() {
+    public GestionColectivo(ColectivoData coleData) {
         initComponents();
+        this.coleData = coleData;
     }
 
+    private void limpiar(){
+            txtMatricula.setText("");
+            txtMarca.setText("");
+            txtModelo.setText("");
+            txtCapacidad.setText("");
+            Estado1.setSelected(false);
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +57,8 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
         Modificarbtn = new javax.swing.JButton();
         Eliminarbtn = new javax.swing.JButton();
         Salirbtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtMarca = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -67,21 +85,49 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
 
         Buscarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Buscarbtn.setText("Buscar");
+        Buscarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarbtnActionPerformed(evt);
+            }
+        });
 
         Limpiarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Limpiarbtn.setText("Limpiar");
+        Limpiarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarbtnActionPerformed(evt);
+            }
+        });
 
         Registrarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Registrarbtn.setText("Registrar");
+        Registrarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarbtnActionPerformed(evt);
+            }
+        });
 
         Modificarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Modificarbtn.setText("Modificar");
 
         Eliminarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Eliminarbtn.setText("Eliminar");
+        Eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarbtnActionPerformed(evt);
+            }
+        });
 
         Salirbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Salirbtn.setText("Salir");
+        Salirbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirbtnActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel2.setText("Marca:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,54 +136,63 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
+                        .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(titleMatricula)
-                                        .addGap(38, 38, 38))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(35, 35, 35)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtMatricula)
-                                    .addComponent(txtModelo)
-                                    .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Estado1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(Buscarbtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(Limpiarbtn)
-                                .addGap(23, 23, 23)
-                                .addComponent(Registrarbtn)
-                                .addGap(25, 25, 25)
-                                .addComponent(Modificarbtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(Eliminarbtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(Salirbtn))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(jLabel1)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                                    .addComponent(Estado1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                                    .addComponent(txtCapacidad))
+                                .addGap(14, 14, 14))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(titleMatricula)
+                                    .addComponent(jLabel2))
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtMatricula)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Buscarbtn))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(Limpiarbtn)
+                        .addGap(23, 23, 23)
+                        .addComponent(Registrarbtn)
+                        .addGap(25, 25, 25)
+                        .addComponent(Modificarbtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(Eliminarbtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(Salirbtn)))
+                .addGap(49, 49, 49))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(173, 173, 173)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titleMatricula)
                     .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Buscarbtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -149,18 +204,133 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Estado1)
                     .addComponent(jLabel5))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Limpiarbtn)
                     .addComponent(Registrarbtn)
                     .addComponent(Modificarbtn)
                     .addComponent(Eliminarbtn)
                     .addComponent(Salirbtn))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BuscarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarbtnActionPerformed
+        // TODO add your handling code here:
+//        
+         //Validar Matricula
+        String matricula;      
+            
+        matricula = txtMatricula.getText();
+                                               
+        Colectivo cole = coleData.buscarColectivoPorMatricula(matricula);
+        if(cole == null){
+            txtMatricula.setText("");
+            txtMarca.setText("");
+            txtModelo.setText("");
+            txtCapacidad.setText("");
+            Estado1.setSelected(false);
+            JOptionPane.showMessageDialog(null, "Colectivo no encontrado" );
+        }else{
+            txtMatricula.setText(cole.getMatricula());
+            txtMarca.setText(cole.getMarca());
+            txtModelo.setText(cole.getModelo());
+            txtCapacidad.setText(Integer.toString(cole.getCapacidad()));
+            Estado1.setSelected(cole.isEstado());           
+        }
+
+    }//GEN-LAST:event_BuscarbtnActionPerformed
+
+    private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_LimpiarbtnActionPerformed
+
+    private void RegistrarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarbtnActionPerformed
+        // TODO add your handling code here:
+
+        String matricula =   txtMatricula.getText();
+        String marca = txtMarca.getText();
+        String modelo = txtModelo.getText();
+        String capacidad = txtCapacidad.getText();
+        boolean estado = Estado1.isSelected();
+       System.out.println(estado);
+       
+       if(matricula.isBlank() || marca.isBlank() || modelo.isBlank() || capacidad.isBlank()){           
+           JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos" );
+           return;
+       }
+       
+       int capac = Integer.parseInt(capacidad);
+
+       
+       Colectivo cole = coleData.buscarColectivoPorMatricula(matricula);
+       
+       boolean resultado;
+       if(cole == null){
+           cole = new Colectivo(matricula,marca,modelo,capac,estado);
+           coleData.añadirColectivo(cole);           
+           resultado=true;
+       }else{
+           cole.setMatricula(matricula);
+           cole.setMarca(marca);
+           cole.setModelo(modelo);
+           cole.setCapacidad(capac);
+           cole.setEstado(estado);
+           coleData.modificarColectivo(cole);
+           resultado=true;
+       }
+       
+       //imprimir resultado
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "Colectivo guardado o modificado");
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo guardar el colectivo");
+        }
+    }//GEN-LAST:event_RegistrarbtnActionPerformed
+
+    private void SalirbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirbtnActionPerformed
+        // TODO add your handling code here:
+        this.hide();
+    }//GEN-LAST:event_SalirbtnActionPerformed
+
+    private void EliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarbtnActionPerformed
+        // TODO add your handling code here:
+        
+        //Validar matricula
+        String matricula;      
+            
+        matricula = txtMatricula.getText();        
+        
+        //buscar colectivo
+        Colectivo cole = coleData.buscarColectivoPorMatricula(matricula);
+        if(cole==null){
+            JOptionPane.showMessageDialog(null, "No se encontro el colectivo vinculado a la matricula");
+            return;
+        }else{
+            if(cole.isEstado()==false){
+                JOptionPane.showMessageDialog(null, "El colectivo esta dado de baja");
+                return;
+            }
+        }
+        
+        // Eliminar colectivos y limpiar campos (excepto matricula)
+        if (coleData.eliminarColectivo(cole.getID_Colectivo())){           
+            txtMarca.setText("");
+            txtModelo.setText("");
+            txtCapacidad.setText("");
+            Estado1.setSelected(false);
+            JOptionPane.showMessageDialog(this, "Colectivo dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Por alguna razon no se pudo eliminar
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        
+    }//GEN-LAST:event_EliminarbtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -172,11 +342,13 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
     private javax.swing.JButton Registrarbtn;
     private javax.swing.JButton Salirbtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel titleMatricula;
     private javax.swing.JTextField txtCapacidad;
+    private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables
