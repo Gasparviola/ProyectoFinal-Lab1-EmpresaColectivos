@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package d.Vista;
+
+import c.Data.HorariosData;
+import c.Data.RutaData;
 
 /**
  *
@@ -10,11 +9,12 @@ package d.Vista;
  */
 public class GestionDeHorarios extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form GestionDeHorarios
-     */
-    public GestionDeHorarios() {
+    private RutaData rutaData;
+    private HorariosData horarioData;
+    public GestionDeHorarios(RutaData rutaData,HorariosData horarioData) {
         initComponents();
+        this.rutaData = rutaData;
+        this.horarioData = horarioData;
     }
 
     /**
@@ -70,7 +70,7 @@ public class GestionDeHorarios extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(jLabel1)
@@ -99,7 +99,7 @@ public class GestionDeHorarios extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         pack();
