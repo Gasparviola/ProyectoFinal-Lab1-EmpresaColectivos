@@ -17,6 +17,7 @@ import javax.swing.JInternalFrame;
 public class Inicio_transpuntano extends javax.swing.JFrame {
 
     JInternalFrame interFrame = null;
+    FormularioColectivo formularioColectivo;
     GestionColectivo gestionColectivo;
     GestionPasajero gestionPasajero;
     GestionDeRutas gestionDeRutas;
@@ -37,9 +38,13 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         this.horarioData = new HorariosData(rutaData);
         this.pasajeData = new PasajeData(pasajeroData,colectivoData,rutaData);
         
-        //Colectivo
+        //Gestion Colectivo
         gestionColectivo = new GestionColectivo(colectivoData);
         Escritorio.add(gestionColectivo);
+        
+        //Formulario Colectivo
+        formularioColectivo = new FormularioColectivo(colectivoData);
+        Escritorio.add(formularioColectivo);
         
         //Pasajero
         gestionPasajero = new GestionPasajero(pasajeroData);
@@ -65,7 +70,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
 
         interFrame = iFrame;
         interFrame.setVisible(true);
-        interFrame.setLocation(0, 0);
+        interFrame.setLocation(100, 100);
         interFrame.moveToFront();
         try {
             interFrame.setSelected(true);
@@ -87,15 +92,20 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMGestionColectivo = new javax.swing.JMenuItem();
+        jMformularioColectivo = new javax.swing.JMenuItem();
+        jMFormularioColectivo = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMGestionPasajero = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMGestionRuta = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMGestionHorario = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMGestionVenta = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,13 +122,21 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
 
         jMenu1.setText("Colectivo");
 
-        jMGestionColectivo.setText("GestionColectivo");
-        jMGestionColectivo.addActionListener(new java.awt.event.ActionListener() {
+        jMformularioColectivo.setText("Formulario Colectivo");
+        jMformularioColectivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMGestionColectivoActionPerformed(evt);
+                jMformularioColectivoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMGestionColectivo);
+        jMenu1.add(jMformularioColectivo);
+
+        jMFormularioColectivo.setText("Gestion Colectivo");
+        jMFormularioColectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMFormularioColectivoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMFormularioColectivo);
 
         jMenuBar1.add(jMenu1);
 
@@ -132,6 +150,9 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         });
         jMenu2.add(jMGestionPasajero);
 
+        jMenuItem2.setText("jMenuItem2");
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Ruta");
@@ -143,6 +164,9 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMGestionRuta);
+
+        jMenuItem3.setText("jMenuItem3");
+        jMenu3.add(jMenuItem3);
 
         jMenuBar1.add(jMenu3);
 
@@ -156,6 +180,9 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         });
         jMenu4.add(jMGestionHorario);
 
+        jMenuItem4.setText("jMenuItem4");
+        jMenu4.add(jMenuItem4);
+
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Pasaje");
@@ -167,6 +194,9 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMGestionVenta);
+
+        jMenuItem5.setText("jMenuItem5");
+        jMenu5.add(jMenuItem5);
 
         jMenuBar1.add(jMenu5);
 
@@ -186,10 +216,10 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMGestionColectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionColectivoActionPerformed
+    private void jMFormularioColectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMFormularioColectivoActionPerformed
         // TODO add your handling code here:
         focusIFrame(gestionColectivo);
-    }//GEN-LAST:event_jMGestionColectivoActionPerformed
+    }//GEN-LAST:event_jMFormularioColectivoActionPerformed
 
     private void jMGestionPasajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionPasajeroActionPerformed
         // TODO add your handling code here:
@@ -210,6 +240,11 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         // TODO add your handling code here:
         focusIFrame(gestionVentas);
     }//GEN-LAST:event_jMGestionVentaActionPerformed
+
+    private void jMformularioColectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMformularioColectivoActionPerformed
+        // TODO add your handling code here:
+        focusIFrame(formularioColectivo);
+    }//GEN-LAST:event_jMformularioColectivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,7 +283,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
-    private javax.swing.JMenuItem jMGestionColectivo;
+    private javax.swing.JMenuItem jMFormularioColectivo;
     private javax.swing.JMenuItem jMGestionHorario;
     private javax.swing.JMenuItem jMGestionPasajero;
     private javax.swing.JMenuItem jMGestionRuta;
@@ -259,5 +294,10 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMformularioColectivo;
     // End of variables declaration//GEN-END:variables
 }
