@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package d.Vista;
 
 import b.Entidades.Colectivo;
@@ -14,7 +10,8 @@ import javax.swing.JOptionPane;
  */
 public class GestionColectivo extends javax.swing.JInternalFrame {
 
-    ColectivoData coleData;
+    private ColectivoData coleData;
+    
     /**
      * Creates new form GestionColectivo
      */
@@ -54,7 +51,6 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
         Buscarbtn = new javax.swing.JButton();
         Limpiarbtn = new javax.swing.JButton();
         Registrarbtn = new javax.swing.JButton();
-        Modificarbtn = new javax.swing.JButton();
         Eliminarbtn = new javax.swing.JButton();
         Salirbtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -107,9 +103,6 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
             }
         });
 
-        Modificarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        Modificarbtn.setText("Modificar");
-
         Eliminarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Eliminarbtn.setText("Eliminar");
         Eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -134,84 +127,89 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addComponent(jLabel5)
+                        .addGap(41, 41, 41)
+                        .addComponent(Estado1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(35, 35, 35)
+                        .addComponent(txtCapacidad)
+                        .addGap(117, 117, 117))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Estado1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                                    .addComponent(txtCapacidad))
-                                .addGap(14, 14, 14))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(titleMatricula)
-                                    .addComponent(jLabel2))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtMatricula)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Buscarbtn))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(Limpiarbtn)
-                        .addGap(23, 23, 23)
-                        .addComponent(Registrarbtn)
-                        .addGap(25, 25, 25)
-                        .addComponent(Modificarbtn)
+                            .addComponent(titleMatricula)
+                            .addComponent(jLabel2))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMatricula)
+                            .addComponent(txtMarca))
                         .addGap(18, 18, 18)
-                        .addComponent(Eliminarbtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(Salirbtn)))
-                .addGap(49, 49, 49))
+                        .addComponent(Buscarbtn)
+                        .addGap(49, 49, 49))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(173, 173, 173)
+                .addGap(197, 197, 197)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 218, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel3)
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Limpiarbtn)
+                        .addGap(13, 13, 13)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(txtModelo)
+                        .addGap(117, 117, 117))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(Registrarbtn)
+                        .addGap(28, 28, 28)
+                        .addComponent(Eliminarbtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Salirbtn)
+                        .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(12, 12, 12)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titleMatricula)
                     .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Buscarbtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Estado1)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Limpiarbtn)
                     .addComponent(Registrarbtn)
-                    .addComponent(Modificarbtn)
                     .addComponent(Eliminarbtn)
                     .addComponent(Salirbtn))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -338,7 +336,6 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
     private javax.swing.JButton Eliminarbtn;
     private javax.swing.JCheckBox Estado1;
     private javax.swing.JButton Limpiarbtn;
-    private javax.swing.JButton Modificarbtn;
     private javax.swing.JButton Registrarbtn;
     private javax.swing.JButton Salirbtn;
     private javax.swing.JLabel jLabel1;

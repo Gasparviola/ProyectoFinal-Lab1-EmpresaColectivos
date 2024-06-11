@@ -1,17 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package d.Vista;
 
-import b.Entidades.Pasaje;
-import b.Entidades.Pasajero;
 import c.Data.ColectivoData;
-import c.Data.HorariosData;
 import c.Data.PasajeData;
 import c.Data.PasajerosData;
 import c.Data.RutaData;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,16 +18,16 @@ public class GestionDeVentas extends javax.swing.JInternalFrame {
     HorariosData horariodata;
     PasajeData pasajedata;
 
-    /**
-     * Creates new form GestionDeVentas
-     */
-    public GestionDeVentas(PasajerosData pasajerodata,HorariosData horariodata,ColectivoData colectivodata,RutaData rutadata,PasajeData pasajedata) {
+    private ColectivoData colectivoData;
+    private PasajerosData pasajeroData;
+    private RutaData rutaData;
+    private PasajeData pasajeData;
+    public GestionDeVentas(PasajerosData pasajeroData,ColectivoData colectivoData,RutaData rutaData,PasajeData pasajeData) {
         initComponents();
-        this.pasajerodata = pasajerodata;
-        this.horariodata = horariodata;
-        this.colectivodata = colectivodata;
-        this.rutadata = rutadata;
-        this.pasajedata = pasajedata;
+        this.pasajeroData = pasajeroData;
+        this.colectivoData = colectivoData;
+        this.rutaData = rutaData;
+        this.pasajeData = pasajeData;
     }
 
     /**
