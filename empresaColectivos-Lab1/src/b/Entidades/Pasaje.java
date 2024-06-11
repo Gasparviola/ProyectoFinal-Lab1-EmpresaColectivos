@@ -108,7 +108,15 @@ public class Pasaje {
 
     @Override
     public String toString() {
-        return "ID_Pasaje= " + ID_Pasaje + " Nombre Pasajero=" + pasajero.getNombre()+ " " + pasajero.getApellido() + ", Hora_Viaje=" + Hora_Viaje + ", Asiento=" + Asiento + ", IdColectivo=" + colectivo.getID_Colectivo()+ ")";
+        if(pasajero != null && colectivo != null){           
+          return "ID_Pasaje= " + ID_Pasaje + " Nombre Pasajero=" + pasajero.getNombre()+ " " + pasajero.getApellido() + ", Hora_Viaje=" + Hora_Viaje + ", Asiento=" + Asiento + ", IdColectivo=" + colectivo.getID_Colectivo()+ ")";
+        }else if(pasajero == null && colectivo != null ){           
+          return "ID_Pasaje= " + ID_Pasaje + " Nombre Pasajero= Eliminado o Dado de baja" +  ", Hora_Viaje=" + Hora_Viaje + ", Asiento=" + Asiento + ", IdColectivo=" + colectivo.getID_Colectivo()+ ")";
+        }else if(pasajero != null && colectivo == null ){           
+          return "ID_Pasaje= " + ID_Pasaje + " Nombre Pasajero=" + pasajero.getNombre()+ " " + pasajero.getApellido() + ", Hora_Viaje=" + Hora_Viaje + ", Asiento=" + Asiento + ", IdColectivo= Eliminado o dado de Baja"+ ")";
+        }else{         
+          return "ID_Pasaje= " + ID_Pasaje + ", Hora_Viaje=" + Hora_Viaje + ", Asiento=" + Asiento +")";
+        }       
     }
     
     
