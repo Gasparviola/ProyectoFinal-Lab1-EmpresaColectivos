@@ -7,12 +7,12 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 
 
-public class GestionPasajero extends javax.swing.JInternalFrame {
+public class FormularioPasajeros extends javax.swing.JInternalFrame {
 
 
     PasajerosData pasajeroData;
     
-    public GestionPasajero( PasajerosData pasajeroData) {
+    public FormularioPasajeros( PasajerosData pasajeroData) {
         initComponents();
         this.pasajeroData = pasajeroData;
     }
@@ -59,7 +59,8 @@ public class GestionPasajero extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Pasajero");
+        setResizable(true);
+        setTitle("FormularioPasajeros");
 
         DNI.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         DNI.setText("DNI:");
@@ -140,14 +141,6 @@ public class GestionPasajero extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Telefono)
-                                    .addComponent(Correo))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCorreo)
-                                    .addComponent(txtTelefono)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(Apellido)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtApellido))
@@ -163,13 +156,18 @@ public class GestionPasajero extends javax.swing.JInternalFrame {
                                 .addComponent(txtNombre))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Telefono)
+                                    .addComponent(Correo)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(121, 121, 121)
-                                        .addComponent(Estado1))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(Estado)
-                                        .addGap(101, 101, 101)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(2, 2, 2)
+                                        .addComponent(Estado)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Estado1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtCorreo)
+                                    .addComponent(txtTelefono))))
                         .addGap(112, 112, 112))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Limpiarbtn)
