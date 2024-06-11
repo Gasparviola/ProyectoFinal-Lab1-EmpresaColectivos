@@ -23,6 +23,7 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
     private void limpiar(){
             jComboColectivo.setSelectedItem(-1);
             jTcapacidad.setText("");
+            jTmarca.setText("");
             jTmodelo.setText("");
             jTmatricula.setText("");
             jCestado.setSelected(false);
@@ -213,7 +214,7 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
 
     private void jComboColectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboColectivoActionPerformed
         // TODO add your handling code here:
-        setColectivo(false);
+        setColectivo(true);
         Colectivo colectivoSeleccionado = (Colectivo) jComboColectivo.getSelectedItem();
         if (colectivoSeleccionado != null) {
             jTmatricula.setText(colectivoSeleccionado.getMatricula());
@@ -223,8 +224,8 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
             jCestado.setSelected(colectivoSeleccionado.isEstado());
         } else {
             limpiar();
-            jBeditar.setEnabled(false);
-            jBeliminar.setEnabled(false);
+            jBeditar.setEnabled(true);
+            jBeliminar.setEnabled(true);
             if (jComboColectivo.getItemCount() == 0) {
                 jComboColectivo.setEnabled(false);
             } else {
@@ -265,7 +266,7 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
     private void jBeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeditarActionPerformed
         // TODO add your handling code here:
 
-        String matricula =   jTmatricula.getText();
+        String matricula = jTmatricula.getText();
         String marca = jTmarca.getText();
         String modelo = jTmarca.getText();
         int capacidad = Integer.parseInt(jTcapacidad.getText());
