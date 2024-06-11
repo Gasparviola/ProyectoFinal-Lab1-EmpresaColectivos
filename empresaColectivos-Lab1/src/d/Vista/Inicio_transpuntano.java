@@ -20,7 +20,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
     GestionColectivo gestionColectivo;
     GestionPasajero gestionPasajero;
     GestionDeRutas gestionDeRutas;
-    GestionDeHorarios gestionHorarios;
+    GestionHorarios gestionHorarios;
     GestionDeVentas gestionVentas;
     
     ColectivoData colectivoData;
@@ -50,7 +50,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         Escritorio.add(gestionDeRutas);
         
         //Horario
-        gestionHorarios = new GestionDeHorarios(rutaData,horarioData);
+        gestionHorarios = new GestionHorarios(rutaData,horarioData);
         Escritorio.add(gestionHorarios);
         
         //Pasaje

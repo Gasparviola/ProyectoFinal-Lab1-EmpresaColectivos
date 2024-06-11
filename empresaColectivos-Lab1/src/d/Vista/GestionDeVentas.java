@@ -1,10 +1,13 @@
 
 package d.Vista;
 
+import b.Entidades.Pasajero;
 import c.Data.ColectivoData;
+import c.Data.HorariosData;
 import c.Data.PasajeData;
 import c.Data.PasajerosData;
 import c.Data.RutaData;
+import javax.swing.JOptionPane;
 
 /**
  *
