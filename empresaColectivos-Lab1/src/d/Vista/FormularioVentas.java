@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author Usuario
  */
-public class GestionDeVentas extends javax.swing.JInternalFrame {
+public class FormularioVentas extends javax.swing.JInternalFrame {
     
     PasajerosData pasajerodata;
     RutaData rutadata;
@@ -25,7 +25,7 @@ public class GestionDeVentas extends javax.swing.JInternalFrame {
     private PasajerosData pasajeroData;
     private RutaData rutaData;
     private PasajeData pasajeData;
-    public GestionDeVentas(PasajerosData pasajeroData,ColectivoData colectivoData,RutaData rutaData,PasajeData pasajeData) {
+    public FormularioVentas(PasajerosData pasajeroData,ColectivoData colectivoData,RutaData rutaData,PasajeData pasajeData) {
         initComponents();
         this.pasajeroData = pasajeroData;
         this.colectivoData = colectivoData;

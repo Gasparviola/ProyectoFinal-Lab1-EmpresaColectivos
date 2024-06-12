@@ -20,17 +20,18 @@ public class HorariosData {
         this.rd = rd;
     }
     //Los usuarios deben poder añadir horarios a las rutas, especificando la hora de salida y llegada.
-    public void añadirHorario(Horario horario) {
+    public boolean añadirHorario(Horario horario) {
+        boolean resultado=false;
         if (horario == null || horario.getRuta() == null) {
             System.out.println("[añadirHorario] Error: El objeto Horario o su Ruta está nulo.");
-            return; 
+            return false; 
         }
     
         if (horario.getRuta().getID_Ruta() == 0) {
             System.out.println("[añadirHorario] Error: no se puede guardar. "
                 + "Horario tiene ruta dada de baja o no tiene ID_Ruta definido. "
                 + horario.debugToString());
-                return;  
+                return false;  
         }
         try {
             String sql = "INSERT INTO Horario(ID_Horario, ID_Ruta, Hora_Salida, Hora_Llegada, Estado) VALUES (?,?,?,?,?)";
@@ -44,12 +45,14 @@ public class HorariosData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 horario.setID_Horario(rs.getInt("ID_Horario"));
+                resultado = true;
                 JOptionPane.showMessageDialog(null, "Horario añadido con exito.");
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Horario" + ex.getMessage());
         }
+        return resultado;
     }
     
     //Los usuarios deben poder visualizar los horarios disponibles para una ruta específica.

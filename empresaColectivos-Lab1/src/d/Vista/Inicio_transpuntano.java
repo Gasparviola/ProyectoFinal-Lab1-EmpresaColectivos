@@ -5,9 +5,12 @@ import c.Data.HorariosData;
 import c.Data.PasajeData;
 import c.Data.PasajerosData;
 import c.Data.RutaData;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 
 /**
@@ -25,7 +28,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
     FormularioRutas formularioRutas;
     GestionHorarios gestionHorarios;
     FormularioHorarios formularioHorarios;
-    GestionDeVentas gestionVentas;
+    FormularioVentas gestionVentas;
     
     
     ColectivoData colectivoData;
@@ -75,7 +78,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         Escritorio.add(formularioHorarios);
         
         //Gestion Pasaje
-        gestionVentas = new GestionDeVentas(pasajeroData,colectivoData,rutaData,pasajeData);
+        gestionVentas = new FormularioVentas(pasajeroData,colectivoData,rutaData,pasajeData);
         Escritorio.add(gestionVentas);
         
         //Formulario Pasaje
@@ -108,7 +111,13 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Escritorio = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagen/Boquita2.jpg"));
+        Image image = icon.getImage();
+        Escritorio = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMformularioColectivo = new javax.swing.JMenuItem();

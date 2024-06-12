@@ -203,8 +203,7 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BuscarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarbtnActionPerformed
-        // TODO add your handling code here:
-//        
+        // TODO add your handling code here:       
          //Validar Matricula
         String matricula;      
             
