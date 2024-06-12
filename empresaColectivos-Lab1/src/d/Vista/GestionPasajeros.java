@@ -4,7 +4,11 @@
  */
 package d.Vista;
 
+import b.Entidades.Pasaje;
+import b.Entidades.Pasajero;
 import c.Data.PasajerosData;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,6 +35,17 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
             txtCorreo.setText("");
             Estado1.setSelected(false);
     }
+    
+    private void setPasajero(boolean iPasaj) {
+        txtDNI.setEnabled(iPasaj);
+        txtApellido.setEnabled(iPasaj);
+        txtNombre.setEnabled(iPasaj);
+        txtTelefono.setEnabled(iPasaj);
+        txtCorreo.setEditable(iPasaj);
+        Estado1.setEnabled(iPasaj);
+    }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,11 +81,34 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("GestionPasajeros");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         Titulo.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
         Titulo.setText("Gestion Pasajeros");
 
         jLabel1.setText("Pasajero:");
+
+        PasajerosComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasajerosComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("DNI:");
 
@@ -85,8 +123,18 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
         jLabel7.setText("Estado:");
 
         Editarbtn.setText("Editar");
+        Editarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarbtnActionPerformed(evt);
+            }
+        });
 
         Eliminarbtn.setText("Eliminar");
+        Eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarbtnActionPerformed(evt);
+            }
+        });
 
         Salirbtn.setText("Salir");
         Salirbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -120,31 +168,28 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(Limpiarbtn)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel3))
+                        .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(87, 87, 87)
+                                .addComponent(Limpiarbtn)
+                                .addGap(33, 33, 33)
                                 .addComponent(Eliminarbtn)
-                                .addGap(73, 73, 73)
+                                .addGap(43, 43, 43)
                                 .addComponent(Editarbtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-                                .addComponent(Salirbtn)
-                                .addGap(13, 13, 13))
-                            .addComponent(txtApellido)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Salirbtn))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Estado1)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtApellido)
+                            .addComponent(txtDNI)
                             .addComponent(txtNombre)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtDNI))))
+                            .addComponent(txtTelefono)
+                            .addComponent(txtCorreo))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(194, Short.MAX_VALUE)
                 .addComponent(Titulo)
                 .addGap(184, 184, 184))
         );
@@ -178,15 +223,15 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Estado1)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Editarbtn)
-                    .addComponent(Eliminarbtn)
                     .addComponent(Salirbtn)
-                    .addComponent(Limpiarbtn))
+                    .addComponent(Limpiarbtn)
+                    .addComponent(Eliminarbtn))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -203,13 +248,116 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_LimpiarbtnActionPerformed
 
+    private void PasajerosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasajerosComboBoxActionPerformed
+        // TODO add your handling code here:
+        
+        setPasajero(true);
+        Pasajero pasajeroSeleccionado = (Pasajero) PasajerosComboBox.getSelectedItem();
+        if (pasajeroSeleccionado != null) {
+            txtDNI.setText(pasajeroSeleccionado.getDNI());
+            txtApellido.setText(pasajeroSeleccionado.getApellido());
+            txtNombre.setText(pasajeroSeleccionado.getNombre());
+            txtTelefono.setText(pasajeroSeleccionado.getTelefono());
+            txtCorreo.setText(pasajeroSeleccionado.getCorreo());
+            Estado1.setSelected(pasajeroSeleccionado.isEstado());
+        } else {
+            limpiar();
+            Editarbtn.setEnabled(true);
+            Editarbtn.setEnabled(true);
+            if (PasajerosComboBox.getItemCount() == 0) {
+                PasajerosComboBox.setEnabled(false);
+            } else {
+                PasajerosComboBox.setEnabled(true);
+            }
+        }
+        
+    }//GEN-LAST:event_PasajerosComboBoxActionPerformed
+
+    private void EliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarbtnActionPerformed
+        // TODO add your handling code here:
+        
+        // TODO add your handling code here:
+        //Validar Pasajero
+        String DNI;
+        DNI = txtDNI.getText();
+        //buscar Pasajero
+        Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(DNI);
+        if(pasaj==null){
+            JOptionPane.showMessageDialog(null, "No se encontro el pasajero vinculado al colectivo");
+            return;
+        }else{
+            if(pasaj.isEstado()==false){
+                JOptionPane.showMessageDialog(null, "El pasajero esta dado de baja");
+                return;
+            }
+        }
+        // Eliminar pasajeros y limpiar campos (excepto DNI)
+        if (pasajeroData.eliminarPasajero(pasaj.getID_Pasajero())){
+            txtDNI.setText("");
+            txtApellido.setText("");
+            txtNombre.setText("");
+            txtTelefono.setText("");
+            Estado1.setSelected(false);
+            JOptionPane.showMessageDialog(this, "Pasajero dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Por alguna razon no se pudo eliminar
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al pasajero.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_EliminarbtnActionPerformed
+
+    private void EditarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarbtnActionPerformed
+        // TODO add your handling code here:
+        
+        String DNI = txtDNI.getText();
+        String apellido = txtApellido.getText();
+        String nombre = txtNombre.getText();
+        String telefono = txtTelefono.getText();
+        String correo = txtCorreo.getText();
+        boolean estado = Estado1.isSelected();
+        System.out.println(estado);
+
+        Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(DNI);
+        boolean resultado;
+        if(pasaj != null){
+           pasaj.setDNI(DNI);
+           pasaj.setApellido(apellido);
+           pasaj.setNombre(nombre);
+           pasaj.setTelefono(telefono);
+           pasaj.setEstado(estado);
+           pasajeroData.modificarPasajero(pasaj);
+           resultado=true;
+        }else{
+           System.out.println("No existe el pasajero");
+           resultado=false;
+        }
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "pasajero modificado.");
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo modificar el pasajero");
+        }
+        
+    }//GEN-LAST:event_EditarbtnActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        
+        PasajerosComboBox.removeAllItems();
+        List<Pasajero> listaPasajero = pasajeroData.listarPasajeros();
+        for (Pasajero pasaj : listaPasajero) {
+            PasajerosComboBox.addItem(pasaj);
+        }
+        PasajerosComboBox.setSelectedIndex(-1);
+        
+    }//GEN-LAST:event_formInternalFrameActivated
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Editarbtn;
     private javax.swing.JButton Eliminarbtn;
     private javax.swing.JCheckBox Estado1;
     private javax.swing.JButton Limpiarbtn;
-    private javax.swing.JComboBox<String> PasajerosComboBox;
+    private javax.swing.JComboBox<Pasajero> PasajerosComboBox;
     private javax.swing.JButton Salirbtn;
     private javax.swing.JLabel Titulo;
     private javax.swing.JLabel jLabel1;

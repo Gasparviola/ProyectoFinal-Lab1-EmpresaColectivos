@@ -44,7 +44,7 @@ public class PasajerosData {
 
         List<Pasajero> pasajeros = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Pasajero WHERE estado = 1 ";
+            String sql = "SELECT * FROM Pasajero";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             Pasajero Pasajeros;
@@ -72,7 +72,7 @@ public class PasajerosData {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1,ID_Pasajero );
+            ps.setInt(1,ID_Pasajero);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -128,7 +128,7 @@ public class PasajerosData {
     
      public Pasajero buscarPasajeroPorDni(String dni) {
         Pasajero pasajeros = null;
-        String sql = "SELECT * FROM Pasajero WHERE DNI = ? AND Estado = 1";
+        String sql = "SELECT * FROM Pasajero WHERE DNI = ?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);

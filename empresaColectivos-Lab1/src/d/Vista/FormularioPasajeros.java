@@ -6,27 +6,24 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
 
-
 public class FormularioPasajeros extends javax.swing.JInternalFrame {
 
-
     PasajerosData pasajeroData;
-    
-    public FormularioPasajeros( PasajerosData pasajeroData) {
+
+    public FormularioPasajeros(PasajerosData pasajeroData) {
         initComponents();
         this.pasajeroData = pasajeroData;
     }
 
-     private void limpiar(){  
-            textDNI.setText("");
-            txtApellido.setText("");
-            txtNombre.setText("");         
-            txtTelefono.setText("");
-            txtCorreo.setText("");
-            Estado1.setSelected(false);
+    private void limpiar() {
+        textDNI.setText("");
+        txtApellido.setText("");
+        txtNombre.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+        Estado1.setSelected(false);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,10 +43,8 @@ public class FormularioPasajeros extends javax.swing.JInternalFrame {
         Estado1 = new javax.swing.JCheckBox();
         Limpiarbtn = new javax.swing.JButton();
         Registrarbtn = new javax.swing.JButton();
-        Eliminarbtn = new javax.swing.JButton();
         Salirbtn = new javax.swing.JButton();
         Titulo = new javax.swing.JLabel();
-        Modificarbtn = new javax.swing.JButton();
         Buscarbtn = new javax.swing.JButton();
         txtTelefono = new javax.swing.JTextField();
         Telefono = new javax.swing.JLabel();
@@ -90,14 +85,6 @@ public class FormularioPasajeros extends javax.swing.JInternalFrame {
             }
         });
 
-        Eliminarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        Eliminarbtn.setText("Eliminar");
-        Eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarbtnActionPerformed(evt);
-            }
-        });
-
         Salirbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Salirbtn.setText("Salir");
         Salirbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -108,9 +95,6 @@ public class FormularioPasajeros extends javax.swing.JInternalFrame {
 
         Titulo.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
         Titulo.setText("Pasajero");
-
-        Modificarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        Modificarbtn.setText("Modificar");
 
         Buscarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Buscarbtn.setText("Buscar");
@@ -133,53 +117,46 @@ public class FormularioPasajeros extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(221, 221, 221)
                 .addComponent(Titulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Apellido)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtApellido))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(textDNI)
-                                .addGap(8, 8, 8)
-                                .addComponent(Buscarbtn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Nombre)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNombre))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Telefono)
-                                    .addComponent(Correo)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addComponent(Estado)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Estado1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(txtCorreo)
-                                    .addComponent(txtTelefono))))
-                        .addGap(112, 112, 112))
+                        .addComponent(Apellido)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtApellido))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Limpiarbtn)
-                        .addGap(38, 38, 38)
-                        .addComponent(Registrarbtn)
-                        .addGap(27, 27, 27)
-                        .addComponent(Modificarbtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addComponent(Eliminarbtn)
-                        .addGap(42, 42, 42)
-                        .addComponent(Salirbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71))))
+                        .addComponent(DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(textDNI)
+                        .addGap(8, 8, 8)
+                        .addComponent(Buscarbtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Nombre)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombre))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Telefono)
+                            .addComponent(Correo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(Estado)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCorreo)
+                            .addComponent(txtTelefono)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Estado1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Limpiarbtn)
+                                        .addGap(72, 72, 72)
+                                        .addComponent(Registrarbtn)
+                                        .addGap(77, 77, 77)
+                                        .addComponent(Salirbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(112, 112, 112))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,8 +191,6 @@ public class FormularioPasajeros extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Limpiarbtn)
                     .addComponent(Registrarbtn)
-                    .addComponent(Modificarbtn)
-                    .addComponent(Eliminarbtn)
                     .addComponent(Salirbtn))
                 .addGap(32, 32, 32))
         );
@@ -225,29 +200,29 @@ public class FormularioPasajeros extends javax.swing.JInternalFrame {
 
     private void BuscarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarbtnActionPerformed
         // TODO add your handling code here:
-        
+
         //Validar DNI
         String dni;
-        dni =  textDNI.getText();
-        
+        dni = textDNI.getText();
+
         //Buscando Pasajero por DNI
         Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(dni);
-        if(pasaj == null){
+        if (pasaj == null) {
             textDNI.setText("");
             txtApellido.setText("");
-            txtNombre.setText("");         
+            txtNombre.setText("");
             txtTelefono.setText("");
             txtCorreo.setText("");
             Estado1.setSelected(false);
-            JOptionPane.showMessageDialog(null, "Por favor ingrese un DNI" );
-        }else{
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un DNI");
+        } else {
             textDNI.setText(pasaj.getDNI());
             txtApellido.setText(pasaj.getApellido());
-            txtNombre.setText(pasaj.getNombre());         
+            txtNombre.setText(pasaj.getNombre());
             txtTelefono.setText(pasaj.getTelefono());
             txtCorreo.setText(pasaj.getCorreo());
             Estado1.setSelected(pasaj.isEstado());
-        }           
+        }
     }//GEN-LAST:event_BuscarbtnActionPerformed
 
     private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
@@ -257,45 +232,45 @@ public class FormularioPasajeros extends javax.swing.JInternalFrame {
 
     private void RegistrarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarbtnActionPerformed
         // TODO add your handling code here:
-        
-           String dni = textDNI.getText();
-           String apellido  = txtApellido.getText();
-           String nombre = txtNombre.getText();         
-           String telefono = txtTelefono.getText();
-           String correo = txtCorreo.getText();
-           boolean estado = Estado1.isSelected();
-            System.out.println(estado);
-       
-       if(dni.isBlank() || apellido.isBlank() || nombre.isBlank() || telefono.isBlank() || correo.isBlank()){           
-           JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos" );
-           return;
-       }
-       
-       Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(dni);
-       
-       boolean resultado;
-       if(pasaj == null){
-           pasaj = new Pasajero(nombre,dni,correo,telefono,estado);
-           pasajeroData.añadirPasajero(pasaj);    
-           resultado=true;
-       }else{
-           pasaj.setDNI(dni);
-           pasaj.setApellido(apellido);
-           pasaj.setNombre(nombre);
-           pasaj.setTelefono(telefono);
-           pasaj.setCorreo(correo);
-           pasaj.setEstado(estado);
-           pasajeroData.modificarPasajero(pasaj);
-           resultado=true;
-       }
-       
-       //imprimir resultado
+
+        String dni = textDNI.getText();
+        String apellido = txtApellido.getText();
+        String nombre = txtNombre.getText();
+        String telefono = txtTelefono.getText();
+        String correo = txtCorreo.getText();
+        boolean estado = Estado1.isSelected();
+        System.out.println(estado);
+
+        if (dni.isBlank() || apellido.isBlank() || nombre.isBlank() || telefono.isBlank() || correo.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos");
+            return;
+        }
+
+        Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(dni);
+
+        boolean resultado;
+        if (pasaj == null) {
+            pasaj = new Pasajero(nombre, apellido, dni, correo, telefono, estado);
+            pasajeroData.añadirPasajero(pasaj);
+            resultado = true;
+        } else {
+            pasaj.setDNI(dni);
+            pasaj.setNombre(nombre);
+            pasaj.setApellido(apellido);
+            pasaj.setTelefono(telefono);
+            pasaj.setCorreo(correo);
+            pasaj.setEstado(estado);
+            pasajeroData.modificarPasajero(pasaj);
+            resultado = true;
+        }
+
+        //imprimir resultado
         if (resultado) {
             JOptionPane.showMessageDialog(this, "Pasajero guardado o modificado");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "No se pudo guardar al pasajero");
         }
-        
+
     }//GEN-LAST:event_RegistrarbtnActionPerformed
 
     private void SalirbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirbtnActionPerformed
@@ -303,50 +278,15 @@ public class FormularioPasajeros extends javax.swing.JInternalFrame {
         this.hide();
     }//GEN-LAST:event_SalirbtnActionPerformed
 
-    private void EliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarbtnActionPerformed
-        // TODO add your handling code here:
-        //Validar matricula
-        String dni;      
-            
-        dni = textDNI.getText();        
-        
-        //buscar colectivo
-        Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(dni);
-        if(pasaj==null){
-            JOptionPane.showMessageDialog(null, "No se encontro el pasajero vinculado al Dni");
-            return;
-        }else{
-            if(pasaj.isEstado()==false){
-                JOptionPane.showMessageDialog(null, "El pasajero esta dado de baja");
-                return;
-            }
-        }
-        
-        // Eliminar pasajeros y limpiar campos (excepto dni)
-        if (pasajeroData.eliminarPasajero(pasaj.getID_Pasajero())){           
-            txtApellido.setText("");
-            txtNombre.setText("");         
-            txtTelefono.setText("");
-            txtCorreo.setText("");
-            Estado1.setSelected(false);
-            JOptionPane.showMessageDialog(this, "Pasajero dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            // Por alguna razon no se pudo eliminar
-            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al pasajero.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_EliminarbtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Apellido;
     private javax.swing.JButton Buscarbtn;
     private javax.swing.JLabel Correo;
     private javax.swing.JLabel DNI;
-    private javax.swing.JButton Eliminarbtn;
     private javax.swing.JLabel Estado;
     private javax.swing.JCheckBox Estado1;
     private javax.swing.JButton Limpiarbtn;
-    private javax.swing.JButton Modificarbtn;
     private javax.swing.JLabel Nombre;
     private javax.swing.JButton Registrarbtn;
     private javax.swing.JButton Salirbtn;

@@ -41,7 +41,7 @@ public class RutaData {
 
         List<Ruta> rutas = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Ruta WHERE estado = 1 ";
+            String sql = "SELECT * FROM Ruta";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             Ruta Rutas;
@@ -66,7 +66,7 @@ public class RutaData {
     //Buscar rutas por origen             
     public Ruta buscarRutaPorOrigen(String Origen) {
         Ruta rutas = null;
-        String sql = "SELECT ID_Ruta, Origen, Destino, Duracion_Estimada, Estado FROM Ruta WHERE Origen = ? AND Estado = 1";
+        String sql = "SELECT ID_Ruta, Origen, Destino, Duracion_Estimada, Estado FROM Ruta WHERE Origen = ?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);

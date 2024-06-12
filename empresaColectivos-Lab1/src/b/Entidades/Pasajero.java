@@ -24,8 +24,9 @@ public class Pasajero {
         this.Estado = Estado;
     }
 
-    public Pasajero(String Nombre, String DNI, String Correo, String Telefono, boolean Estado) {
+    public Pasajero(String Nombre, String Apellido, String DNI, String Correo, String Telefono, boolean Estado) {
         this.Nombre = Nombre;
+        this.Apellido = Apellido;
         this.DNI = DNI;
         this.Correo = Correo;
         this.Telefono = Telefono;

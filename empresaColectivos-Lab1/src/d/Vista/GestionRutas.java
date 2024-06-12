@@ -4,7 +4,12 @@
  */
 package d.Vista;
 
+import b.Entidades.Pasajero;
+import b.Entidades.Ruta;
 import c.Data.RutaData;
+import java.time.LocalTime;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +32,13 @@ public class GestionRutas extends javax.swing.JInternalFrame {
             txtDestino.setText("");
             txtDuracion.setText("");          
             Estado1.setSelected(false);
+    }
+     
+     private void setPasajero(boolean iRut) {
+        txtOrigen.setEnabled(iRut);
+        txtDestino.setEnabled(iRut);
+        txtDuracion.setEnabled(iRut);
+        Estado1.setEnabled(iRut);
     }
     
     
@@ -60,6 +72,23 @@ public class GestionRutas extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("GestionRutas");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
         jLabel1.setText("Gestion Rutas");
@@ -72,11 +101,27 @@ public class GestionRutas extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Duracion:");
 
+        RutaComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RutaComboBoxActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Estado:");
 
         Editarbtn.setText("Editar");
+        Editarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarbtnActionPerformed(evt);
+            }
+        });
 
         Eliminarbtn.setText("Eliminar");
+        Eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarbtnActionPerformed(evt);
+            }
+        });
 
         Salirbtn.setText("Salir");
         Salirbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -181,13 +226,107 @@ public class GestionRutas extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_LimpiarbtnActionPerformed
 
+    private void RutaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RutaComboBoxActionPerformed
+        // TODO add your handling code here:
+        
+        setPasajero(true);
+        Ruta rutaSeleccionada = (Ruta) RutaComboBox.getSelectedItem();
+        if (rutaSeleccionada != null) {
+            txtOrigen.setText(rutaSeleccionada.getDestino());
+            txtDestino.setText(rutaSeleccionada.getDestino());
+            txtDuracion.setText(rutaSeleccionada.getDuracion_Estimada().toString());
+            Estado1.setSelected(rutaSeleccionada.isEstado());
+        } else {
+            limpiar();
+            Editarbtn.setEnabled(true);
+            Editarbtn.setEnabled(true);
+            if (RutaComboBox.getItemCount() == 0) {
+                RutaComboBox.setEnabled(false);
+            } else {
+                RutaComboBox.setEnabled(true);
+            }
+        }
+        
+    }//GEN-LAST:event_RutaComboBoxActionPerformed
+
+    private void EditarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarbtnActionPerformed
+        // TODO add your handling code here:
+        
+        String origen = txtOrigen.getText();
+        String destino = txtDestino.getText();
+        LocalTime duracion = LocalTime.parse(txtDuracion.getText());
+        boolean estado = Estado1.isSelected();
+        System.out.println(estado);
+
+        Ruta ruta = rutaData.buscarRutaPorOrigen(origen);
+        boolean resultado;
+        if(ruta != null){
+           ruta.setOrigen(origen);
+           ruta.setDestino(destino);
+           ruta.setDuracion_Estimada(duracion);
+           ruta.setEstado(estado);
+           rutaData.modificaRuta(ruta);
+           resultado=true;
+        }else{
+           System.out.println("No existe la Ruta");
+           resultado=false;
+        }
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "Ruta modificado.");
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo modificar la Ruta");
+        }
+        
+    }//GEN-LAST:event_EditarbtnActionPerformed
+
+    private void EliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarbtnActionPerformed
+        // TODO add your handling code here:
+        
+        String origen;
+        origen = txtOrigen.getText();
+        //buscar Ruta
+        Ruta ruta = rutaData.buscarRutaPorOrigen(origen);
+        if(ruta==null){
+            JOptionPane.showMessageDialog(null, "No se encontro la ruta vinculado al colectivo");
+            return;
+        }else{
+            if(ruta.isEstado()==false){
+                JOptionPane.showMessageDialog(null, "La ruta esta dada de baja");
+                return;
+            }
+        }
+        // Eliminar rutas y limpiar campos (excepto origen)
+        if (rutaData.eliminarRuta(ruta.getID_Ruta())){
+            txtOrigen.setText("");
+            txtDestino.setText("");
+            txtDuracion.setText("");
+            Estado1.setSelected(false);
+            JOptionPane.showMessageDialog(this, "Ruta dada de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Por alguna razon no se pudo eliminar
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja a la Ruta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_EliminarbtnActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        
+         RutaComboBox.removeAllItems();
+        List<Ruta> listaRut = rutaData.listarRutas();
+        for (Ruta rut : listaRut) {
+            RutaComboBox.addItem(rut);
+        }
+        RutaComboBox.setSelectedIndex(-1);
+    }//GEN-LAST:event_formInternalFrameActivated
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Editarbtn;
     private javax.swing.JButton Eliminarbtn;
     private javax.swing.JCheckBox Estado1;
     private javax.swing.JButton Limpiarbtn;
-    private javax.swing.JComboBox<String> RutaComboBox;
+    private javax.swing.JComboBox<Ruta> RutaComboBox;
     private javax.swing.JButton Salirbtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -11,6 +11,9 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameActivated"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -42,38 +45,34 @@
                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                              <Component id="Limpiarbtn" min="-2" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="Limpiarbtn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="Eliminarbtn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                               <Component id="Editarbtn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="133" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="Salirbtn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtApellido" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="Estado1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="txtTelefono" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtNombre" max="32767" attributes="0"/>
-                          <Component id="txtCorreo" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtDNI" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtApellido" max="32767" attributes="0"/>
+                          <Component id="txtDNI" max="32767" attributes="0"/>
+                          <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTelefono" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtCorreo" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="194" max="32767" attributes="0"/>
               <Component id="Titulo" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
           </Group>
@@ -115,16 +114,16 @@
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="Estado1" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="Estado1" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Editarbtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Eliminarbtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Salirbtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Limpiarbtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Limpiarbtn" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Eliminarbtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
@@ -151,8 +150,11 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PasajerosComboBoxActionPerformed"/>
+      </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Pasajero&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -199,11 +201,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Editar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditarbtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Eliminarbtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarbtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Salirbtn">
       <Properties>
