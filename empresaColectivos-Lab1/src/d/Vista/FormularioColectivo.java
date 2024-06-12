@@ -235,7 +235,7 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
     private void RegistrarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarbtnActionPerformed
         // TODO add your handling code here:
 
-        String matricula =   txtMatricula.getText();
+        String matricula = txtMatricula.getText();
         String marca = txtMarca.getText();
         String modelo = txtModelo.getText();
         String capacidad = txtCapacidad.getText();

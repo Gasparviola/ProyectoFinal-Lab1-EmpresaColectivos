@@ -295,7 +295,6 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
         int horario;        
         horario = Integer.parseInt(jTIDhorario.getText());                                      
         Horario hora = horaData.buscarHorario(horario);
-        Ruta ruta = (Ruta) jCrutaAsignar.getSelectedItem();
         if(hora == null){
             jTIDhorario.setText("");
             jCrutaAsignar.setSelectedItem(false);

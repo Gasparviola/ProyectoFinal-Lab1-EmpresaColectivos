@@ -28,7 +28,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
     FormularioRutas formularioRutas;
     GestionHorarios gestionHorarios;
     FormularioHorarios formularioHorarios;
-    FormularioVentas gestionVentas;
+    FormularioVentas formularioVentas;
     
     
     ColectivoData colectivoData;
@@ -77,12 +77,12 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         formularioHorarios = new FormularioHorarios(rutaData,horarioData);
         Escritorio.add(formularioHorarios);
         
-        //Gestion Pasaje
-        gestionVentas = new FormularioVentas(pasajeroData,colectivoData,rutaData,pasajeData);
-        Escritorio.add(gestionVentas);
-        
         //Formulario Pasaje
+        formularioVentas = new FormularioVentas(pasajeroData,colectivoData,rutaData,pasajeData);
+        Escritorio.add(formularioVentas);
         
+        //Gesrtion Pasaje
+//        gestionVentas
     }
     private void focusIFrame(JInternalFrame iFrame) {
 
@@ -132,8 +132,8 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         jMFormuHorarios = new javax.swing.JMenuItem();
         jMGestionHorario = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMGestionVenta = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMGestionVenta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -230,16 +230,21 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
 
         jMenu5.setText("Pasaje");
 
-        jMGestionVenta.setText("GestionVenta");
+        jMenuItem5.setText("Formulario Venta");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem5);
+
+        jMGestionVenta.setText("Gestion Venta");
         jMGestionVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMGestionVentaActionPerformed(evt);
             }
         });
         jMenu5.add(jMGestionVenta);
-
-        jMenuItem5.setText("jMenuItem5");
-        jMenu5.add(jMenuItem5);
 
         jMenuBar1.add(jMenu5);
 
@@ -281,7 +286,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
 
     private void jMGestionVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionVentaActionPerformed
         // TODO add your handling code here:
-        focusIFrame(gestionVentas);
+        
     }//GEN-LAST:event_jMGestionVentaActionPerformed
 
     private void jMformularioColectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMformularioColectivoActionPerformed
@@ -303,6 +308,11 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         // TODO add your handling code here:
         focusIFrame(formularioHorarios);
     }//GEN-LAST:event_jMFormuHorariosActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        focusIFrame(formularioVentas);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -30,10 +30,12 @@ public class Pasaje {
         this.Precio = Precio;
     }
 
-    public Pasaje(Pasajero pasajero, Ruta ruta, LocalTime Hora_Viaje, int Asiento, double Precio) {
+    public Pasaje(Pasajero pasajero, Ruta ruta,Colectivo colectivo, LocalTime Hora_Viaje,LocalDate Fecha_Viaje, int Asiento, double Precio) {
         this.pasajero = pasajero;
         this.ruta = ruta;
+        this.colectivo = colectivo;
         this.Hora_Viaje = Hora_Viaje;
+        this.Fecha_Viaje = Fecha_Viaje;
         this.Asiento = Asiento;
         this.Precio = Precio;
     }
