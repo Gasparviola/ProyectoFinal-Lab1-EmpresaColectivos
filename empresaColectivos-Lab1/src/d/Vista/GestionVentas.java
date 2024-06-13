@@ -61,7 +61,6 @@ public class GestionVentas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -81,6 +80,7 @@ public class GestionVentas extends javax.swing.JInternalFrame {
         txtAsiento = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setIconifiable(true);
         setMaximizable(true);
@@ -102,8 +102,6 @@ public class GestionVentas extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
-
-        jLabel1.setText("Venta");
 
         jLabel2.setText("Pasaje:");
 
@@ -137,6 +135,9 @@ public class GestionVentas extends javax.swing.JInternalFrame {
         jLabel8.setText("Asiento:");
 
         jLabel9.setText("Precio:");
+
+        jLabel10.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
+        jLabel10.setText("Gestion Ventas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,17 +176,17 @@ public class GestionVentas extends javax.swing.JInternalFrame {
                             .addComponent(txtRuta)
                             .addComponent(txtHoraViaje))))
                 .addGap(34, 34, 34))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(170, 170, 170))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jcPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -307,7 +308,7 @@ public class GestionVentas extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
