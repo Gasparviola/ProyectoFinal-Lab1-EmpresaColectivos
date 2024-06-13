@@ -258,7 +258,7 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
     private void GuardarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarBTNActionPerformed
         // TODO add your handling code here:
         String Id_horario = jTIDhorario.getText();
-        String rutaAsignar =jCrutaAsignar.getSelectedItem().toString();
+        String rutaAsignar =jCmodificarRuta.getSelectedItem().toString();
         String horaLlegada = txtHoraLlegada.getText();
         String horaSalida = txtHoraSalida.getText();
         boolean estado = Estado1.isSelected();
@@ -320,11 +320,7 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
         horario = Integer.parseInt(jTIDhorario.getText());                                      
         Horario hora = horaData.buscarHorario(horario);
         if(hora == null){
-            jTIDhorario.setText("");
-            jCmodificarRuta.setSelectedItem(false);
-            txtHoraLlegada.setText("");
-            txtHoraSalida.setText("");
-            Estado1.setSelected(false);
+            limpiar();
             JOptionPane.showMessageDialog(null, "Horario no encontrado" );
         }else{
             jTIDhorario.setText(Integer.toString(hora.getID_Horario()));

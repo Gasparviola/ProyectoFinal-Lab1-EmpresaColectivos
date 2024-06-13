@@ -39,6 +39,15 @@ public class Pasaje {
         this.Asiento = Asiento;
         this.Precio = Precio;
     }
+    
+    public Pasaje(Ruta ruta,Colectivo colectivo, LocalTime Hora_Viaje,LocalDate Fecha_Viaje, int Asiento, double Precio) {       
+        this.ruta = ruta;
+        this.colectivo = colectivo;
+        this.Hora_Viaje = Hora_Viaje;
+        this.Fecha_Viaje = Fecha_Viaje;
+        this.Asiento = Asiento;
+        this.Precio = Precio;
+    }
 
     public int getID_Pasaje() {
         return ID_Pasaje;

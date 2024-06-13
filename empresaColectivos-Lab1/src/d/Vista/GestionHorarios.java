@@ -280,19 +280,19 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
                 Editarbtn.setEnabled(false);
                 setHorario(true);
             }else{
-                JOptionPane.showMessageDialog(this, "No se pudo modificar el colectivo");
+                JOptionPane.showMessageDialog(this, "No se pudo modificar el horario");
             }
     }//GEN-LAST:event_LimpiarbtnActionPerformed
 
     private void EditarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarbtnActionPerformed
         Horario horarioSeleccionada = (Horario) HorarioComboBox.getSelectedItem();
         if (horarioSeleccionada == null) {
-            JOptionPane.showMessageDialog(this, "Seleccione primero una brigada a editar.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Seleccione primero un horario a editar.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         String horaSalida = txtHoraSalida.getText().trim();
-        String horaLlegada = txtHoraSalida.getText().trim();
+        String horaLlegada = txtHoraLlegada.getText().trim();
         Ruta ruta = (Ruta)ComboBoxRuta.getSelectedItem();
         boolean estado = Estado1.isSelected();
 

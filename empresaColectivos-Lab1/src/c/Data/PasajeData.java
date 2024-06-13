@@ -39,20 +39,21 @@ public class PasajeData {
 
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO Pasaje(ID_Pasajero, ID_Colectivo, ID_Ruta, Fecha_Viaje, Hora_Viaje, Asiento, Precio) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Pasaje(ID_Pasaje,ID_Pasajero, ID_Colectivo, ID_Ruta, Fecha_Viaje, Hora_Viaje, Asiento, Precio) "
+                    + "VALUES (?,?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, pasaje.getPasajero().getID_Pasajero());
-            ps.setInt(2, pasaje.getColectivo().getID_Colectivo());
-            ps.setInt(3, pasaje.getRuta().getID_Ruta());
-            ps.setDate(4, Date.valueOf(pasaje.getFecha_Viaje()) );
-            ps.setTime(5, Time.valueOf(pasaje.getHora_Viaje()) );
-            ps.setInt(6, pasaje.getAsiento());
-            ps.setDouble(7, pasaje.getPrecio());
+            ps.setInt(1, pasaje.getID_Pasaje());
+            ps.setInt(2, pasaje.getPasajero().getID_Pasajero());
+            ps.setInt(3, pasaje.getColectivo().getID_Colectivo());
+            ps.setInt(4, pasaje.getRuta().getID_Ruta());
+            ps.setDate(5, Date.valueOf(pasaje.getFecha_Viaje()) );
+            ps.setTime(6, Time.valueOf(pasaje.getHora_Viaje()) );
+            ps.setInt(7, pasaje.getAsiento());
+            ps.setDouble(8, pasaje.getPrecio());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                pasaje.setID_Pasaje(rs.getInt(1));
+                pasaje.setID_Pasaje(rs.getInt("ID_Pasaje"));
                 resultado = true;
                 System.out.println("[PasajeData.guardarPasaje] "
                         + "Agregado: " + pasaje.toString());
@@ -97,7 +98,7 @@ public class PasajeData {
                 pasaje.setHora_Viaje(rs.getTime("Hora_Viaje").toLocalTime());
                 pasaje.setAsiento(rs.getInt("Asiento"));
                 pasaje.setPrecio(rs.getInt("Precio"));
-                System.out.println("Encontrado: " + pasaje.debugToString());
+                System.out.println("Encontrado: " + pasaje.toString());
             } else {
                 System.out.println("No se encontro el Pasaje");
             }
