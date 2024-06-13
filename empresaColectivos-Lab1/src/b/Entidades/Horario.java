@@ -75,8 +75,12 @@ public class Horario {
     }
 
     @Override
-    public String toString() {
-        return "ID_Horario " + ID_Horario + " - Hora_Salida=" + Hora_Salida + " - Hora_Llegada=" + Hora_Llegada + " - ID_Ruta" + ruta.getID_Ruta();
+    public String toString() {     
+        if(ruta == null){
+            return "ID_Horario " + ID_Horario + " - Hora_Salida=" + Hora_Salida + " - Hora_Llegada=" + Hora_Llegada;
+        }else{
+         return "ID_Horario " + ID_Horario + " - Hora_Salida=" + Hora_Salida + " - Hora_Llegada=" + Hora_Llegada + " - ID_Ruta" + ruta.getID_Ruta();
+        }
     }
     
     
