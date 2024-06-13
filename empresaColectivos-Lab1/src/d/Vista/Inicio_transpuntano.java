@@ -28,6 +28,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
     FormularioRutas formularioRutas;
     GestionHorarios gestionHorarios;
     FormularioHorarios formularioHorarios;
+    GestionVentas gestionVentas;
     FormularioVentas formularioVentas;
     
     
@@ -82,7 +83,8 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         Escritorio.add(formularioVentas);
         
         //Gesrtion Pasaje
-//        gestionVentas
+        gestionVentas = new GestionVentas(colectivoData,pasajeroData,rutaData,pasajeData);
+        Escritorio.add(gestionVentas);
     }
     private void focusIFrame(JInternalFrame iFrame) {
 
@@ -92,7 +94,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
 
         interFrame = iFrame;
         interFrame.setVisible(true);
-        interFrame.setLocation(100, 100);
+        interFrame.setLocation(0, 0);
         interFrame.moveToFront();
         try {
             interFrame.setSelected(true);
@@ -141,7 +143,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 754, Short.MAX_VALUE)
+            .addGap(0, 777, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +288,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
 
     private void jMGestionVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionVentaActionPerformed
         // TODO add your handling code here:
-        
+        focusIFrame(gestionVentas);
     }//GEN-LAST:event_jMGestionVentaActionPerformed
 
     private void jMformularioColectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMformularioColectivoActionPerformed
