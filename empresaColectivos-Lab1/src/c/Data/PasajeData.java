@@ -55,16 +55,16 @@ public class PasajeData {
                 pasaje.setID_Pasaje(rs.getInt(1));
                 resultado = true;
                 System.out.println("[PasajeData.guardarPasaje] "
-                        + "Agregado: " + pasaje.debugToString());
+                        + "Agregado: " + pasaje.toString());
             } else {
                 System.out.println("[PasajeData.guardarPasaje] "
-                        + "No se pudo agregar: " + pasaje.debugToString());
+                        + "No se pudo agregar: " + pasaje.toString());
             }
             ps.close();
         } catch (SQLException e) {
             if (e.getErrorCode() == 1062) { // Informar datos repetidos
                 System.out.println("[PasajeData.guardarPasaje] "
-                        + "Error: entrada duplicada para " + pasaje.debugToString());
+                        + "Error: entrada duplicada para " + pasaje.toString());
             } else {
                 e.printStackTrace();
             }

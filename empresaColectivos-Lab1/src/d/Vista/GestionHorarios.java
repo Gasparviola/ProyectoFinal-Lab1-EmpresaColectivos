@@ -249,36 +249,8 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
         HorarioComboBox.setSelectedIndex(-1); 
     }//GEN-LAST:event_formInternalFrameActivated
 
-    private void EditarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarbtnActionPerformed
-        // TODO add your handling code here:
-        Horario horario = (Horario)HorarioComboBox.getSelectedItem();
-        Ruta ruta = (Ruta)RutaAsigComboBox.getSelectedItem();
-        boolean estado = Estado1.isSelected();
-        System.out.println(estado);
-        
-        Horario hora = horaData.buscarHorario(horario.getID_Horario());
-        boolean resultado;
-        if(hora != null){
-           hora.setRuta(ruta);
-           hora.setHora_Llegada(horario.getHora_Llegada());
-           hora.setHora_Salida(horario.getHora_Salida());
-           hora.setEstado(estado);
-           horaData.modificarHorario(horario);
-           resultado=true;
-        }else{
-           System.out.println("No existe el colectivo");
-           resultado=false;
-        }
-        if (resultado) {
-            JOptionPane.showMessageDialog(this, "Horario modificado.");
-        }else{
-            JOptionPane.showMessageDialog(this, "No se pudo modificar el horario");
-        }
-        
-    }//GEN-LAST:event_EditarbtnActionPerformed
-
-    private void RutaAsigComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RutaAsigComboBoxActionPerformed
-        // TODO add your handling code here:
+    private void HorarioComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HorarioComboBoxActionPerformed
+        setHorario(false);
         Horario horarioSeleccionado = (Horario) HorarioComboBox.getSelectedItem();
         if (horarioSeleccionado != null) {
 //            ComboBoxRuta.setSelectedItem(horarioSeleccionado.getRuta());

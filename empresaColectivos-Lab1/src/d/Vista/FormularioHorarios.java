@@ -315,15 +315,9 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
     private void BuscarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarBTNActionPerformed
         // TODO add your handling code here:
         //Validar ID_Horario
-        int horario;     
-         try{
-           horario = Integer.parseInt(jTIDhorario.getText());           
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Codigo de Horario Incorrecto" );
-            return;
-        }
-        
-                                          
+        setrutEnabled(false);
+        int horario;        
+        horario = Integer.parseInt(jTIDhorario.getText());                                      
         Horario hora = horaData.buscarHorario(horario);
         if(hora == null){
             jTIDhorario.setText("");
@@ -334,7 +328,8 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Horario no encontrado" );
         }else{
             jTIDhorario.setText(Integer.toString(hora.getID_Horario()));
-            jCrutaAsignar.setSelectedItem(hora.debugToString());//no selecciona el combobox
+            jTRutaAsignada.setText(hora.getRuta().toString());
+            jCmodificarRuta.setSelectedItem(hora.getRuta());//no selecciona el combobox
             txtHoraLlegada.setText(hora.getHora_Llegada().toString());
             txtHoraSalida.setText(hora.getHora_Salida().toString());
             Estado1.setSelected(hora.isEstado());   

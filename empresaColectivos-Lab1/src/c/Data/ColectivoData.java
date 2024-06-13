@@ -45,7 +45,7 @@ public class ColectivoData {
     public Colectivo buscarColectivo(int ID_Colectivo) {
         Colectivo colectivo = null;
         try {
-            String sql = "SELECT * FROM Colectivo WHERE ID_Colectivo = ? AND Estado = 1";
+            String sql = "SELECT * FROM Colectivo WHERE ID_Colectivo = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, ID_Colectivo);
             ResultSet rs = ps.executeQuery();
