@@ -4,20 +4,22 @@ import b.Entidades.Horario;
 import b.Entidades.Ruta;
 import c.Data.HorariosData;
 import c.Data.RutaData;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author El Notaloko 2.1
+ * @author Grupo-3
  */
 public class GestionHorarios extends javax.swing.JInternalFrame {
 
     RutaData rutaData;
     HorariosData horaData;
-    
+
     /**
-     * Creates new form GestionHorarios
+     * Creates new form GestionBrigada
      */
     public GestionHorarios(RutaData rutaData, HorariosData horaData) {
         initComponents();
@@ -25,13 +27,31 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
         this.horaData = horaData;
     }
 
-    private void limpiar(){
-            
-            txtHoraSalida.setText("");
-            txtHoraLlegada.setText("");          
-            Estado1.setSelected(false);
+    private void limpiar() {
+        jTRuta.setText("");
+        HorarioComboBox.setSelectedIndex(-1);
+        ComboBoxRuta.setSelectedIndex(-1);
+        txtHoraSalida.setText("");
+        txtHoraLlegada.setText("");          
+        Estado1.setSelected(false);
     }
-    
+
+    private void setHorario(boolean flag) {
+        HorarioComboBox.setEnabled(flag);
+        ComboBoxRuta.setEnabled(flag);
+        txtHoraSalida.setEnabled(flag);  // No hay un ineditable
+        txtHoraLlegada.setEnabled(flag); // No hay un ineditable
+        Editarbtn.setEnabled(flag);
+    }
+
+    private void sethorEnabled(boolean flag) {
+        txtHoraSalida.setEnabled(flag);
+        txtHoraLlegada.setEnabled(flag);
+        //especialidadCB.setEnabled(flag);
+        //cuartelCB.setEnabled(flag);
+        //disponibleChB.setEnabled(flag);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,27 +61,27 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        brigadaLabel = new javax.swing.JLabel();
         HorarioComboBox = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txtHoraSalida = new javax.swing.JTextField();
+        nombreLabel = new javax.swing.JLabel();
         txtHoraLlegada = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        especialidadLabel = new javax.swing.JLabel();
+        cuartelLabel = new javax.swing.JLabel();
+        ComboBoxRuta = new javax.swing.JComboBox<>();
+        disponibleLabel = new javax.swing.JLabel();
         Estado1 = new javax.swing.JCheckBox();
         Limpiarbtn = new javax.swing.JButton();
         Editarbtn = new javax.swing.JButton();
         Eliminarbtn = new javax.swing.JButton();
         Salirbtn = new javax.swing.JButton();
-        RutaAsigComboBox = new javax.swing.JComboBox<>();
-        jTrutaAsig = new javax.swing.JTextField();
+        txtHoraSalida = new javax.swing.JTextField();
+        jTRuta = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
-        setTitle("GestionHorarios");
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        setTitle("Gestion Horario");
+        setToolTipText("");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameActivated(evt);
@@ -80,10 +100,7 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
-        jLabel1.setText("Gestion Horarios");
-
-        jLabel2.setText("Horarios:");
+        brigadaLabel.setText("Horarios:");
 
         HorarioComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,29 +108,29 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setText("Ruta Asignada:");
+        nombreLabel.setText("Horario Salida:");
 
-        jLabel4.setText("Horario Salida:");
+        especialidadLabel.setText("Hora Llegada:");
 
-        jLabel5.setText("Horario Llegada:");
+        cuartelLabel.setText("Ruta asignada:");
 
-        jLabel6.setText("Estado:");
+        disponibleLabel.setText("Estado");
 
-        Limpiarbtn.setText("Limpiar");
+        Limpiarbtn.setText("Editar");
         Limpiarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LimpiarbtnActionPerformed(evt);
             }
         });
 
-        Editarbtn.setText("Editar");
+        Editarbtn.setText("Guardar");
         Editarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EditarbtnActionPerformed(evt);
             }
         });
 
-        Eliminarbtn.setText("Eliminar");
+        Eliminarbtn.setText("Dar de Baja");
         Eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarbtnActionPerformed(evt);
@@ -127,198 +144,180 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
             }
         });
 
-        RutaAsigComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RutaAsigComboBoxActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Modificar ruta:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(164, 164, 164))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(brigadaLabel)
+                                        .addComponent(cuartelLabel))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTRuta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(HorarioComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(72, 72, 72)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtHoraSalida)
+                                        .addComponent(txtHoraLlegada)
+                                        .addComponent(ComboBoxRuta, 0, 323, Short.MAX_VALUE)))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(disponibleLabel)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(Limpiarbtn)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(Editarbtn)))
+                            .addGap(26, 26, 26)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(Eliminarbtn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Salirbtn))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(Estado1)
+                                    .addGap(0, 0, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtHoraSalida)
-                            .addComponent(HorarioComboBox, 0, 411, Short.MAX_VALUE)
-                            .addComponent(jTrutaAsig))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(Limpiarbtn)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Editarbtn)
-                                .addGap(28, 28, 28)
-                                .addComponent(Eliminarbtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Salirbtn)
-                                .addGap(38, 38, 38))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Estado1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(RutaAsigComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(70, Short.MAX_VALUE))))))
+                            .addComponent(nombreLabel)
+                            .addComponent(especialidadLabel))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(HorarioComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brigadaLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(HorarioComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(cuartelLabel)
+                    .addComponent(jTRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTrutaAsig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboBoxRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(Estado1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(RutaAsigComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)))
+                    .addComponent(nombreLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtHoraSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(especialidadLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtHoraLlegada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(disponibleLabel)
+                    .addComponent(Estado1))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Limpiarbtn)
                     .addComponent(Editarbtn)
                     .addComponent(Eliminarbtn)
                     .addComponent(Salirbtn))
-                .addGap(21, 21, 21))
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SalirbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirbtnActionPerformed
-        // TODO add your handling code here:
-        this.hide();
-    }//GEN-LAST:event_SalirbtnActionPerformed
-
-    private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
-            // TODO add your handling code here:
-            limpiar();
-    }//GEN-LAST:event_LimpiarbtnActionPerformed
-
-    private void HorarioComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HorarioComboBoxActionPerformed
-        // TODO add your handling code here:
-//        setColectivo(true);
-        Horario horarioSeleccionado = (Horario) HorarioComboBox.getSelectedItem();
-        if (horarioSeleccionado != null) {
-            RutaAsigComboBox.setSelectedItem(horarioSeleccionado.getRuta());
-            txtHoraLlegada.setText(horarioSeleccionado.getHora_Llegada().toString());
-            txtHoraSalida.setText(horarioSeleccionado.getHora_Salida().toString());           
-            Estado1.setSelected(horarioSeleccionado.isEstado());
-        } else {
-            limpiar();
-            Editarbtn.setEnabled(true);
-            Eliminarbtn.setEnabled(true);
-            if (HorarioComboBox.getItemCount() == 0) {
-                HorarioComboBox.setEnabled(false);
-            } else {
-                HorarioComboBox.setEnabled(true);
-            }
-        }   
-    }//GEN-LAST:event_HorarioComboBoxActionPerformed
-
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
-        // TODO add your handling code here:
         HorarioComboBox.removeAllItems();
+        ComboBoxRuta.removeAllItems();
+        
         List<Horario> horarios = horaData.listarHorarios();
         for (Horario hora : horarios) {
             HorarioComboBox.addItem(hora);
         }
-        HorarioComboBox.setSelectedIndex(-1);
-        RutaAsigComboBox.removeAllItems();
         List<Ruta> rutas = rutaData.listarRutas();
         for (Ruta ruta : rutas) {
-            RutaAsigComboBox.addItem(ruta);
+            ComboBoxRuta.addItem(ruta);
         }
-        RutaAsigComboBox.setSelectedIndex(-1);
+        HorarioComboBox.setSelectedIndex(-1); 
     }//GEN-LAST:event_formInternalFrameActivated
 
-    private void EditarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarbtnActionPerformed
-        // TODO add your handling code here:
-        Horario horario = (Horario)HorarioComboBox.getSelectedItem();
-        Ruta ruta = (Ruta)RutaAsigComboBox.getSelectedItem();
-        boolean estado = Estado1.isSelected();
-        System.out.println(estado);
-        
-        Horario hora = horaData.buscarHorario(horario.getID_Horario());
-        boolean resultado;
-        if(hora != null){
-           hora.setRuta(ruta);
-           hora.setHora_Llegada(horario.getHora_Llegada());
-           hora.setHora_Salida(horario.getHora_Salida());
-           hora.setEstado(estado);
-           horaData.modificarHorario(horario);
-           resultado=true;
-        }else{
-           System.out.println("No existe el colectivo");
-           resultado=false;
-        }
-        if (resultado) {
-            JOptionPane.showMessageDialog(this, "Colectivo modificado.");
-        }else{
-            JOptionPane.showMessageDialog(this, "No se pudo modificar el colectivo");
-        }
-        
-    }//GEN-LAST:event_EditarbtnActionPerformed
-
-    private void RutaAsigComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RutaAsigComboBoxActionPerformed
-        // TODO add your handling code here:
+    private void HorarioComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HorarioComboBoxActionPerformed
+        setHorario(false);
         Horario horarioSeleccionado = (Horario) HorarioComboBox.getSelectedItem();
-        if (horarioSeleccionado != null) {            
+        if (horarioSeleccionado != null) {
+//            ComboBoxRuta.setSelectedItem(horarioSeleccionado.getRuta());
+            jTRuta.setText(horarioSeleccionado.getRuta().toString());
             txtHoraLlegada.setText(horarioSeleccionado.getHora_Llegada().toString());
             txtHoraSalida.setText(horarioSeleccionado.getHora_Salida().toString());           
             Estado1.setSelected(horarioSeleccionado.isEstado());
-        } else {
-            limpiar();
             Editarbtn.setEnabled(true);
             Eliminarbtn.setEnabled(true);
+            sethorEnabled(true);
+        } else {
+            limpiar();
+            Editarbtn.setEnabled(false);
+            Eliminarbtn.setEnabled(false);
+            sethorEnabled(false);
             if (HorarioComboBox.getItemCount() == 0) {
                 HorarioComboBox.setEnabled(false);
             } else {
                 HorarioComboBox.setEnabled(true);
             }
-        }  
-    }//GEN-LAST:event_RutaAsigComboBoxActionPerformed
+        }
+    }//GEN-LAST:event_HorarioComboBoxActionPerformed
+
+    private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
+        Horario horarioSeleccionado = (Horario) HorarioComboBox.getSelectedItem();
+            if (horarioSeleccionado !=null) {
+                Editarbtn.setEnabled(false);
+                setHorario(true);
+            }else{
+                JOptionPane.showMessageDialog(this, "No se pudo modificar el colectivo");
+            }
+    }//GEN-LAST:event_LimpiarbtnActionPerformed
+
+    private void EditarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarbtnActionPerformed
+        Horario horarioSeleccionada = (Horario) HorarioComboBox.getSelectedItem();
+        if (horarioSeleccionada == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione primero una brigada a editar.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String horaSalida = txtHoraSalida.getText().trim();
+        String horaLlegada = txtHoraSalida.getText().trim();
+        Ruta ruta = (Ruta)ComboBoxRuta.getSelectedItem();
+        boolean estado = Estado1.isSelected();
+
+        if (horaSalida.isBlank() || horaLlegada == null || ruta == null) {
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        LocalTime horSalida = LocalTime.parse(horaSalida);
+        LocalTime horLlegada = LocalTime.parse(horaLlegada);
+
+        Horario horario = new Horario(ruta, horSalida, horLlegada, estado);
+        horario.setID_Horario(horarioSeleccionada.getID_Horario());
+        if (horaData.modificarHorario(horario)) {
+            horarioSeleccionada.setRuta(ruta);
+            horarioSeleccionada.setHora_Salida(horSalida);
+            horarioSeleccionada.setHora_Llegada(horLlegada);
+            horarioSeleccionada.setEstado(estado);
+            JOptionPane.showMessageDialog(this, "Horario modificada.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo guardar la edición.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_EditarbtnActionPerformed
 
     private void EliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarbtnActionPerformed
-        // TODO add your handling code here:       
         //buscar colectivo
         Horario horarioSeleccionado = (Horario) HorarioComboBox.getSelectedItem();   
         if(horarioSeleccionado==null){
@@ -333,7 +332,7 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
         // Eliminar colectivos y limpiar campos (excepto matricula)
         if (horaData.eliminarHorario(horarioSeleccionado.getID_Horario())){           
             HorarioComboBox.setSelectedIndex(-1);
-            RutaAsigComboBox.setSelectedIndex(-1);
+            ComboBoxRuta.setSelectedIndex(-1);
             txtHoraLlegada.setText("");
             txtHoraSalida.setText("");
             Estado1.setSelected(false);
@@ -344,22 +343,26 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
         } 
     }//GEN-LAST:event_EliminarbtnActionPerformed
 
+    private void SalirbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirbtnActionPerformed
+        this.hide();
+    }//GEN-LAST:event_SalirbtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Ruta> ComboBoxRuta;
     private javax.swing.JButton Editarbtn;
     private javax.swing.JButton Eliminarbtn;
     private javax.swing.JCheckBox Estado1;
     private javax.swing.JComboBox<Horario> HorarioComboBox;
     private javax.swing.JButton Limpiarbtn;
-    private javax.swing.JComboBox<Ruta> RutaAsigComboBox;
     private javax.swing.JButton Salirbtn;
+    private javax.swing.JLabel brigadaLabel;
+    private javax.swing.JLabel cuartelLabel;
+    private javax.swing.JLabel disponibleLabel;
+    private javax.swing.JLabel especialidadLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTrutaAsig;
+    private javax.swing.JTextField jTRuta;
+    private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField txtHoraLlegada;
     private javax.swing.JTextField txtHoraSalida;
     // End of variables declaration//GEN-END:variables
