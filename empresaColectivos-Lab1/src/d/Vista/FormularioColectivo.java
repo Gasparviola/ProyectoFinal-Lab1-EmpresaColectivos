@@ -188,7 +188,7 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Estado1)
                             .addComponent(jLabel5))
-                        .addContainerGap(111, Short.MAX_VALUE))
+                        .addContainerGap(87, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -245,10 +245,13 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
            JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos" );
            return;
        }
-       
-       int capac = Integer.parseInt(capacidad);
-
-       
+       int capac;
+       try{
+           capac= Integer.parseInt(capacidad);
+       }catch(NumberFormatException e){
+           JOptionPane.showMessageDialog(null, "Erro: Ingrese un numero por favor.");
+           return;
+       }
        Colectivo cole = coleData.buscarColectivoPorMatricula(matricula);
        
        boolean resultado;

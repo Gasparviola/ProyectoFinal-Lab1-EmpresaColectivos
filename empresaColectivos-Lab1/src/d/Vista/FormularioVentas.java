@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -257,10 +258,6 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
                             .addComponent(jTHoraViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(23, 23, 23))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(228, 228, 228))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -290,12 +287,17 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
                             .addComponent(jTNroPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(61, 61, 61)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(235, 235, 235))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -391,18 +393,43 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
            JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos" );
            return;
        }
-
-       LocalDate fechViaje = FechaViaje.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
        
+       LocalDate fechViaje;
+       try{
+                fechViaje =  FechaViaje.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            }catch(DateTimeParseException e){
+                JOptionPane.showMessageDialog(null, "Error: El formato de Hora debe ser aaaa-mm-dd");
+                return;
+        }
        
-       int nroPasajes = Integer.parseInt(nroPasaje);
+       int nroPasajes;
+       try{
+                nroPasajes = Integer.parseInt(nroPasaje);
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Error: El formato de Hora debe ser aaaa-mm-dd");
+                return;
+        }
        Pasaje pasaje = pasajeData.buscarPasaje(nroPasajes);
        Pasajero pasajero = pasajeroData.buscarPasajeroPorDni(Dni);
        Ruta ruta = (Ruta) ConboRuta.getSelectedItem();
        Colectivo colectivo = (Colectivo) jCColectivo.getSelectedItem();      
-       LocalTime horViaje = LocalTime.parse(HoraViaje);
-       int Asien = Integer.parseInt(Asiento);
-       double Prec = Double.parseDouble(Precio);
+       LocalTime horViaje ;
+       try{
+                horViaje = LocalTime.parse(HoraViaje);
+            }catch(DateTimeParseException e){
+                JOptionPane.showMessageDialog(null, "Error: El formato de Hora debe ser hh:mm");
+                return;
+        }
+       int Asien;
+       double Prec;
+       try{
+                Asien = Integer.parseInt(Asiento);
+                Prec =  Double.parseDouble(Precio); 
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Error: El formato de Hora debe ser aaaa-mm-dd");
+                return;
+        }
+       
        
        boolean resultado;
        if(pasaje == null){

@@ -94,7 +94,7 @@ public class RutaData {
     //Buscar rutas por Destino     
     public Ruta buscarRutaPorDestino(String destino) {
         Ruta rutas = null;
-        String sql = "SELECT ID_Ruta, Origen, Destino, Duracion_Estimada, Estado FROM Ruta WHERE Destino = ? AND Estado = 1";
+        String sql = "SELECT ID_Ruta, Origen, Destino, Duracion_Estimada, Estado FROM Ruta WHERE Destino = ?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);

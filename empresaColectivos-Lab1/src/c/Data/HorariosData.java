@@ -62,7 +62,7 @@ public class HorariosData {
 
         try {
 
-            String sql = "SELECT * FROM Horario WHERE ID_Ruta = ? AND Estado = 1";
+            String sql = "SELECT * FROM Horario WHERE ID_Ruta = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(2, ID_Ruta);
             ResultSet rs = ps.executeQuery();

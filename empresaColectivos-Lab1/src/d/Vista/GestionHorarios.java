@@ -6,6 +6,7 @@ import c.Data.HorariosData;
 import c.Data.RutaData;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -291,8 +292,8 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
             return;
         }
 
-        String horaSalida = txtHoraSalida.getText().trim();
-        String horaLlegada = txtHoraLlegada.getText().trim();
+        String horaSalida = txtHoraSalida.getText();
+        String horaLlegada = txtHoraLlegada.getText();
         Ruta ruta = (Ruta)ComboBoxRuta.getSelectedItem();
         boolean estado = Estado1.isSelected();
 
@@ -301,8 +302,15 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
             return;
         }
         
-        LocalTime horSalida = LocalTime.parse(horaSalida);
-        LocalTime horLlegada = LocalTime.parse(horaLlegada);
+        LocalTime horSalida; 
+        LocalTime horLlegada;
+        try{
+                horSalida = LocalTime.parse(horaSalida);
+                horLlegada = LocalTime.parse(horaLlegada);
+            }catch(DateTimeParseException e){
+                JOptionPane.showMessageDialog(null, "Error: El formato de fecha debe ser aaaa-mm-dd");
+                return;
+        }
 
         Horario horario = new Horario(ruta, horSalida, horLlegada, estado);
         horario.setID_Horario(horarioSeleccionada.getID_Horario());

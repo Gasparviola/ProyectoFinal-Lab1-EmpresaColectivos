@@ -68,7 +68,7 @@ public class PasajerosData {
     
     public Pasajero buscarPasajero(int ID_Pasajero) {
         Pasajero pasajeros = null;
-        String sql = "SELECT ID_Pasajero, Nombre, Apellido, DNI, Correo, Telefono, Estado FROM Pasajero WHERE ID_Pasajero = ? AND Estado = 1";
+        String sql = "SELECT ID_Pasajero, Nombre, Apellido, DNI, Correo, Telefono, Estado FROM Pasajero WHERE ID_Pasajero = ?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -98,7 +98,7 @@ public class PasajerosData {
     
      public Pasajero buscarPasajeroPorNombre(String nombre) {
         Pasajero pasajeros = null;
-        String sql = "SELECT ID_Pasajero, Nombre, Apellido, DNI, Correo, Teléfono, Estado FROM Pasajero WHERE Nombre = ? AND Estado = 1";
+        String sql = "SELECT ID_Pasajero, Nombre, Apellido, DNI, Correo, Teléfono, Estado FROM Pasajero WHERE Nombre = ?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
