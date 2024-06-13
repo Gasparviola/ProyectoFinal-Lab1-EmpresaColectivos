@@ -67,7 +67,6 @@ public class GestionRutas extends javax.swing.JInternalFrame {
         Limpiarbtn = new javax.swing.JButton();
         Estado1 = new javax.swing.JCheckBox();
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -232,7 +231,7 @@ public class GestionRutas extends javax.swing.JInternalFrame {
         setPasajero(true);
         Ruta rutaSeleccionada = (Ruta) RutaComboBox.getSelectedItem();
         if (rutaSeleccionada != null) {
-            txtOrigen.setText(rutaSeleccionada.getDestino());
+            txtOrigen.setText(rutaSeleccionada.getOrigen());
             txtDestino.setText(rutaSeleccionada.getDestino());
             txtDuracion.setText(rutaSeleccionada.getDuracion_Estimada().toString());
             Estado1.setSelected(rutaSeleccionada.isEstado());

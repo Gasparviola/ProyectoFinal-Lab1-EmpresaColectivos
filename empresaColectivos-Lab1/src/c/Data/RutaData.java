@@ -136,11 +136,11 @@ public class RutaData {
                 rutas.setEstado(rs.getBoolean("Estado"));                           
                 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el pasajero");
+                JOptionPane.showMessageDialog(null, "No existe la Ruta");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pasajero " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ruta " + ex.getMessage());
         }
         return rutas;
     }

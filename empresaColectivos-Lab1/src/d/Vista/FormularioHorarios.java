@@ -9,10 +9,7 @@ import b.Entidades.Ruta;
 import c.Data.HorariosData;
 import c.Data.RutaData;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -70,7 +67,6 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
 
         jScrollPane1.setViewportView(jTextPane1);
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -236,12 +232,13 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
     private void GuardarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarBTNActionPerformed
         // TODO add your handling code here:
         String Id_horario = jTIDhorario.getText();
+        String rutaAsignar =jCrutaAsignar.getSelectedItem().toString();
         String horaLlegada = txtHoraLlegada.getText();
         String horaSalida = txtHoraSalida.getText();
         boolean estado = Estado1.isSelected();
        System.out.println(estado);
        
-       if(Id_horario.isBlank() || horaLlegada.isBlank() || horaSalida.isBlank()){           
+       if(Id_horario.isBlank() || rutaAsignar.isBlank() || horaLlegada.isBlank() || horaSalida.isBlank()){           
            JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos" );
            return;
        }
@@ -268,9 +265,9 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
        
        //imprimir resultado
         if (resultado) {
-            JOptionPane.showMessageDialog(this, "Colectivo guardado o modificado");
+            JOptionPane.showMessageDialog(this, "Horario guardado o modificado");
         }else{
-            JOptionPane.showMessageDialog(this, "No se pudo guardar el colectivo");
+            JOptionPane.showMessageDialog(this, "No se pudo guardar el horario");
         }
     }//GEN-LAST:event_GuardarBTNActionPerformed
 
@@ -292,8 +289,15 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
     private void BuscarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarBTNActionPerformed
         // TODO add your handling code here:
         //Validar ID_Horario
-        int horario;        
-        horario = Integer.parseInt(jTIDhorario.getText());                                      
+        int horario;     
+         try{
+           horario = Integer.parseInt(jTIDhorario.getText());           
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Codigo de Horario Incorrecto" );
+            return;
+        }
+        
+                                          
         Horario hora = horaData.buscarHorario(horario);
         if(hora == null){
             jTIDhorario.setText("");
@@ -304,7 +308,7 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Horario no encontrado" );
         }else{
             jTIDhorario.setText(Integer.toString(hora.getID_Horario()));
-            jCrutaAsignar.setSelectedItem(hora.getRuta());//no selecciona el combobox
+            jCrutaAsignar.setSelectedItem(hora.debugToString());//no selecciona el combobox
             txtHoraLlegada.setText(hora.getHora_Llegada().toString());
             txtHoraSalida.setText(hora.getHora_Salida().toString());
             Estado1.setSelected(hora.isEstado());           

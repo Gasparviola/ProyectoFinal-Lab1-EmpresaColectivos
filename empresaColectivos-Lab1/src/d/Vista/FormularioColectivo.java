@@ -55,7 +55,6 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtMarca = new javax.swing.JTextField();
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);

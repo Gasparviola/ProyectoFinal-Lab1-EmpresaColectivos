@@ -291,9 +291,9 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
            resultado=false;
         }
         if (resultado) {
-            JOptionPane.showMessageDialog(this, "Colectivo modificado.");
+            JOptionPane.showMessageDialog(this, "Horario modificado.");
         }else{
-            JOptionPane.showMessageDialog(this, "No se pudo modificar el colectivo");
+            JOptionPane.showMessageDialog(this, "No se pudo modificar el horario");
         }
         
     }//GEN-LAST:event_EditarbtnActionPerformed
@@ -322,11 +322,11 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
         //buscar colectivo
         Horario horarioSeleccionado = (Horario) HorarioComboBox.getSelectedItem();   
         if(horarioSeleccionado==null){
-            JOptionPane.showMessageDialog(null, "No se encontro el colectivo vinculado a la matricula");
+            JOptionPane.showMessageDialog(null, "No se encontro el horario");
             return;
         }else{
             if(horarioSeleccionado.isEstado()==false){
-                JOptionPane.showMessageDialog(null, "El colectivo esta dado de baja");
+                JOptionPane.showMessageDialog(null, "El horario esta dado de baja");
                 return;
             }
         }
@@ -337,10 +337,10 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
             txtHoraLlegada.setText("");
             txtHoraSalida.setText("");
             Estado1.setSelected(false);
-            JOptionPane.showMessageDialog(this, "Colectivo dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Horario dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
         } else {
             // Por alguna razon no se pudo eliminar
-            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al horario.", "Error", JOptionPane.ERROR_MESSAGE);
         } 
     }//GEN-LAST:event_EliminarbtnActionPerformed
 

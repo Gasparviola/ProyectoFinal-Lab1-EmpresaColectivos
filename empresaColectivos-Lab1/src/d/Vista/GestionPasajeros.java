@@ -76,7 +76,6 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
         Estado1 = new javax.swing.JCheckBox();
         Limpiarbtn = new javax.swing.JButton();
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -227,11 +226,12 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
                     .addComponent(Estado1)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Editarbtn)
-                    .addComponent(Salirbtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Limpiarbtn)
-                    .addComponent(Eliminarbtn))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Editarbtn)
+                        .addComponent(Salirbtn)
+                        .addComponent(Eliminarbtn)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 

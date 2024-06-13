@@ -82,6 +82,9 @@ public class GestionVentas extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
 
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameActivated(evt);

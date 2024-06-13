@@ -2,8 +2,6 @@ package d.Vista;
 
 import b.Entidades.Pasajero;
 import c.Data.PasajerosData;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 public class FormularioPasajeros extends javax.swing.JInternalFrame {
@@ -51,7 +49,6 @@ public class FormularioPasajeros extends javax.swing.JInternalFrame {
         txtCorreo = new javax.swing.JTextField();
         Correo = new javax.swing.JLabel();
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);

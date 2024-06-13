@@ -54,7 +54,6 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
         Modificarbtn = new javax.swing.JButton();
         Salirbtn = new javax.swing.JButton();
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);

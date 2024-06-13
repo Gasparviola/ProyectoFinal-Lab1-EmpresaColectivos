@@ -58,7 +58,6 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jTmarca = new javax.swing.JTextField();
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
