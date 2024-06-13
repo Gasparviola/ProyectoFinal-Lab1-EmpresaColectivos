@@ -324,6 +324,7 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
            pasaj.setApellido(apellido);
            pasaj.setNombre(nombre);
            pasaj.setTelefono(telefono);
+           pasaj.setCorreo(correo);
            pasaj.setEstado(estado);
            pasajeroData.modificarPasajero(pasaj);
            resultado=true;
@@ -332,7 +333,7 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
            resultado=false;
         }
         if (resultado) {
-            JOptionPane.showMessageDialog(this, "pasajero modificado.");
+            JOptionPane.showMessageDialog(this, "Pasajero modificado.");
         }else{
             JOptionPane.showMessageDialog(this, "No se pudo modificar el pasajero");
         }

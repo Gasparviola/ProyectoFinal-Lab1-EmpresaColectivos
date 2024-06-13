@@ -292,7 +292,7 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
         }
 
         String horaSalida = txtHoraSalida.getText().trim();
-        String horaLlegada = txtHoraSalida.getText().trim();
+        String horaLlegada = txtHoraLlegada.getText().trim();
         Ruta ruta = (Ruta)ComboBoxRuta.getSelectedItem();
         boolean estado = Estado1.isSelected();
 

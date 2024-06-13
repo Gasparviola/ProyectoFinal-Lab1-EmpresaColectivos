@@ -320,11 +320,7 @@ public class FormularioHorarios extends javax.swing.JInternalFrame {
         horario = Integer.parseInt(jTIDhorario.getText());                                      
         Horario hora = horaData.buscarHorario(horario);
         if(hora == null){
-            jTIDhorario.setText("");
-            jCmodificarRuta.setSelectedItem(false);
-            txtHoraLlegada.setText("");
-            txtHoraSalida.setText("");
-            Estado1.setSelected(false);
+            limpiar();
             JOptionPane.showMessageDialog(null, "Horario no encontrado" );
         }else{
             jTIDhorario.setText(Integer.toString(hora.getID_Horario()));

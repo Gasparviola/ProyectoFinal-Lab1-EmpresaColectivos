@@ -50,8 +50,6 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
         Limpiarbtn = new javax.swing.JButton();
         Buscarbtn = new javax.swing.JButton();
         Registrarbtn = new javax.swing.JButton();
-        Eliminarbtn = new javax.swing.JButton();
-        Modificarbtn = new javax.swing.JButton();
         Salirbtn = new javax.swing.JButton();
 
         setIconifiable(true);
@@ -91,15 +89,6 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
             }
         });
 
-        Eliminarbtn.setText("Eliminar");
-        Eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarbtnActionPerformed(evt);
-            }
-        });
-
-        Modificarbtn.setText("Modificar");
-
         Salirbtn.setText("Salir");
         Salirbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +101,7 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -120,12 +109,9 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
                         .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Limpiarbtn)
-                        .addGap(34, 34, 34)
+                        .addGap(73, 73, 73)
                         .addComponent(Registrarbtn)
-                        .addGap(39, 39, 39)
-                        .addComponent(Modificarbtn)
-                        .addGap(35, 35, 35)
-                        .addComponent(Eliminarbtn))
+                        .addGap(77, 77, 77))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(6, 6, 6)
@@ -142,8 +128,8 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
                                 .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Salirbtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Buscarbtn, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(Buscarbtn)
+                    .addComponent(Salirbtn))
                 .addGap(53, 53, 53))
             .addGroup(layout.createSequentialGroup()
                 .addGap(234, 234, 234)
@@ -176,8 +162,6 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Limpiarbtn)
                             .addComponent(Registrarbtn)
-                            .addComponent(Modificarbtn)
-                            .addComponent(Eliminarbtn)
                             .addComponent(Salirbtn)))
                     .addComponent(Estado1))
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -263,46 +247,11 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_RegistrarbtnActionPerformed
 
-    private void EliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarbtnActionPerformed
-        // TODO add your handling code here:
-        
-        //Validar matricula
-        String origen;      
-            
-        origen = txtOrigen.getText();        
-        
-        //buscar colectivo
-        Ruta rut = rutaData.buscarRutaPorOrigen(origen);
-        if(rut==null){
-            JOptionPane.showMessageDialog(null, "No se encontro la ruta vinculado al origen");
-            return;
-        }else{
-            if(rut.isEstado()==false){
-                JOptionPane.showMessageDialog(null, "La ruta esta dada de baja");
-                return;
-            }
-        }
-        
-        // Eliminar rutas y limpiar campos (excepto origen)
-        if (rutaData.eliminarRuta(rut.getID_Ruta())){           
-            txtDestino.setText("");
-            txtDuracion.setText("");
-            Estado1.setSelected(false);
-            JOptionPane.showMessageDialog(this, "Ruta dada de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            // Por alguna razon no se pudo eliminar
-            JOptionPane.showMessageDialog(this, "No se pudo dar de baja la ruta.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_EliminarbtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscarbtn;
-    private javax.swing.JButton Eliminarbtn;
     private javax.swing.JCheckBox Estado1;
     private javax.swing.JButton Limpiarbtn;
-    private javax.swing.JButton Modificarbtn;
     private javax.swing.JButton Registrarbtn;
     private javax.swing.JButton Salirbtn;
     private javax.swing.JLabel jLabel1;

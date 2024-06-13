@@ -17,7 +17,9 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -377,7 +379,7 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
 
     private void ComprarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprarbtnActionPerformed
         // TODO add your handling code here:
-        String nroPasaje =(jTNroPasaje.getText());
+        String nroPasaje = jTNroPasaje.getText();
         String Dni = DniTxt.getText();
         String Datos = DatosPersona.getText();
         String HoraViaje = jTHoraViaje.getText();
@@ -397,17 +399,18 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
        Pasaje pasaje = pasajeData.buscarPasaje(nroPasajes);
        Pasajero pasajero = pasajeroData.buscarPasajeroPorDni(Dni);
        Ruta ruta = (Ruta) ConboRuta.getSelectedItem();
-       Colectivo colectivo = (Colectivo) jCColectivo.getSelectedItem();
-       
+       Colectivo colectivo = (Colectivo) jCColectivo.getSelectedItem();      
        LocalTime horViaje = LocalTime.parse(HoraViaje);
        int Asien = Integer.parseInt(Asiento);
        double Prec = Double.parseDouble(Precio);
+       
        boolean resultado;
        if(pasaje == null){
-           pasaje = new Pasaje(pasajero,ruta,colectivo,horViaje,fechViaje,Asien,Prec);
+           pasaje = new Pasaje(nroPasajes, pasajero, colectivo, ruta, fechViaje, horViaje, Asien, Prec);
            pasajeData.guardarPasaje(pasaje);           
            resultado=true;
        }else{
+           pasaje.setID_Pasaje(nroPasajes);          
            pasaje.setPasajero(pasajero);
            pasaje.setColectivo(colectivo);
            pasaje.setRuta(ruta);
