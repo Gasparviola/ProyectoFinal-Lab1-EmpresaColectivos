@@ -249,8 +249,36 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
         HorarioComboBox.setSelectedIndex(-1); 
     }//GEN-LAST:event_formInternalFrameActivated
 
-    private void HorarioComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HorarioComboBoxActionPerformed
-        setHorario(false);
+    private void EditarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarbtnActionPerformed
+        // TODO add your handling code here:
+        Horario horario = (Horario)HorarioComboBox.getSelectedItem();
+        Ruta ruta = (Ruta)RutaAsigComboBox.getSelectedItem();
+        boolean estado = Estado1.isSelected();
+        System.out.println(estado);
+        
+        Horario hora = horaData.buscarHorario(horario.getID_Horario());
+        boolean resultado;
+        if(hora != null){
+           hora.setRuta(ruta);
+           hora.setHora_Llegada(horario.getHora_Llegada());
+           hora.setHora_Salida(horario.getHora_Salida());
+           hora.setEstado(estado);
+           horaData.modificarHorario(horario);
+           resultado=true;
+        }else{
+           System.out.println("No existe el colectivo");
+           resultado=false;
+        }
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "Horario modificado.");
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo modificar el horario");
+        }
+        
+    }//GEN-LAST:event_EditarbtnActionPerformed
+
+    private void RutaAsigComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RutaAsigComboBoxActionPerformed
+        // TODO add your handling code here:
         Horario horarioSeleccionado = (Horario) HorarioComboBox.getSelectedItem();
         if (horarioSeleccionado != null) {
 //            ComboBoxRuta.setSelectedItem(horarioSeleccionado.getRuta());
@@ -321,11 +349,11 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
         //buscar colectivo
         Horario horarioSeleccionado = (Horario) HorarioComboBox.getSelectedItem();   
         if(horarioSeleccionado==null){
-            JOptionPane.showMessageDialog(null, "No se encontro el colectivo vinculado a la matricula");
+            JOptionPane.showMessageDialog(null, "No se encontro el horario");
             return;
         }else{
             if(horarioSeleccionado.isEstado()==false){
-                JOptionPane.showMessageDialog(null, "El colectivo esta dado de baja");
+                JOptionPane.showMessageDialog(null, "El horario esta dado de baja");
                 return;
             }
         }
@@ -336,10 +364,10 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
             txtHoraLlegada.setText("");
             txtHoraSalida.setText("");
             Estado1.setSelected(false);
-            JOptionPane.showMessageDialog(this, "Colectivo dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Horario dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
         } else {
             // Por alguna razon no se pudo eliminar
-            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al horario.", "Error", JOptionPane.ERROR_MESSAGE);
         } 
     }//GEN-LAST:event_EliminarbtnActionPerformed
 

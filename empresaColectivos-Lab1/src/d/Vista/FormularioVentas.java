@@ -85,7 +85,6 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -354,9 +353,9 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
        
        //imprimir resultado
         if (resultado) {
-            JOptionPane.showMessageDialog(this, "Colectivo guardado o modificado");
+            JOptionPane.showMessageDialog(this, "Pasaje guardado o modificado");
         }else{
-            JOptionPane.showMessageDialog(this, "No se pudo guardar el colectivo");
+            JOptionPane.showMessageDialog(this, "No se pudo guardar el pasaje");
         }
     }//GEN-LAST:event_ComprarbtnActionPerformed
 
