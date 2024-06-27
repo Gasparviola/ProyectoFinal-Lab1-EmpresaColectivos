@@ -395,13 +395,13 @@ public class GestionHorarios extends javax.swing.JInternalFrame {
             limpiar();
             resultado=true;
         }else{
-            System.out.println("No existe el pasajero");
+            System.out.println("No existe el Horario");
             resultado=false;
         }
         if (resultado) {
-            JOptionPane.showMessageDialog(this, "Pasajero modificado.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Horario modificado.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(this, "No se pudo modificar el Pasajero.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo modificar el Horario.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_EditarbtnActionPerformed
 
