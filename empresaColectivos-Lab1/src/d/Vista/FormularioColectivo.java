@@ -28,6 +28,14 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
             Estado1.setSelected(false);
     }
     
+    public static boolean soloLetra(String nombre) {
+        if (nombre == null || nombre.length() > 15) {
+            return false;
+        }
+        String regex = "^^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+( [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$";
+        return nombre.matches(regex);
+    }
+    
     
     
     /**
@@ -40,20 +48,21 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         titleMatricula = new javax.swing.JLabel();
         txtMatricula = new javax.swing.JTextField();
+        Buscarbtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtMarca = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
-        txtCapacidad = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        txtCapacidad = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         Estado1 = new javax.swing.JCheckBox();
-        Buscarbtn = new javax.swing.JButton();
         Limpiarbtn = new javax.swing.JButton();
         Registrarbtn = new javax.swing.JButton();
         Salirbtn = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        txtMarca = new javax.swing.JTextField();
 
         setIconifiable(true);
         setMaximizable(true);
@@ -61,10 +70,23 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
         setTitle("Formulario colectivo");
 
         jLabel1.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
-        jLabel1.setText("Colectivo");
+        jLabel1.setText("Formulario Colectivo");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         titleMatricula.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         titleMatricula.setText("Matricula:");
+
+        Buscarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        Buscarbtn.setText("Comprobar");
+        Buscarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarbtnActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel2.setText("Marca:");
 
         jLabel3.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         jLabel3.setText("Modelo:");
@@ -77,13 +99,60 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
 
         Estado1.setText("jCheckBox1");
 
-        Buscarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        Buscarbtn.setText("Buscar");
-        Buscarbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarbtnActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titleMatricula)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Estado1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCapacidad)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Buscarbtn))
+                            .addComponent(txtMarca)
+                            .addComponent(txtModelo))
+                        .addGap(34, 34, 34))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleMatricula)
+                    .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscarbtn))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(Estado1))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
 
         Limpiarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         Limpiarbtn.setText("Limpiar");
@@ -109,93 +178,43 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jLabel2.setText("Marca:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(titleMatricula)
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMatricula)
-                            .addComponent(txtMarca)
-                            .addComponent(txtModelo))
-                        .addGap(18, 18, 18)
-                        .addComponent(Buscarbtn)
-                        .addGap(49, 49, 49))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Estado1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCapacidad)
-                                .addGap(117, 117, 117))))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(jLabel1)
-                .addGap(0, 218, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addContainerGap()
                         .addComponent(Limpiarbtn)
                         .addGap(18, 18, 18)
-                        .addComponent(Registrarbtn)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Salirbtn)
-                .addGap(29, 29, 29))
+                        .addComponent(Registrarbtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Salirbtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(170, 170, 170)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 4, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(titleMatricula)
-                            .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Buscarbtn))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Estado1)
-                            .addComponent(jLabel5))
-                        .addContainerGap(87, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Limpiarbtn)
-                            .addComponent(Registrarbtn)
-                            .addComponent(Salirbtn))
-                        .addGap(22, 22, 22))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Limpiarbtn)
+                    .addComponent(Registrarbtn)
+                    .addComponent(Salirbtn))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -207,23 +226,24 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
         String matricula;      
             
         matricula = txtMatricula.getText();
+        if (matricula.length() > 7) {
+            JOptionPane.showMessageDialog(this, "Matricula no se puede guardar si pasa de los 7 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            System.out.println("El string es válido: " + matricula);
+        }
+        if(matricula.isBlank()){           
+           JOptionPane.showMessageDialog(this, "Por favor ingrese una Matricula.", "Comprobar", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
                                                
         Colectivo cole = coleData.buscarColectivoPorMatricula(matricula);
-        if(cole == null){
-            txtMatricula.setText("");
-            txtMarca.setText("");
-            txtModelo.setText("");
-            txtCapacidad.setText("");
-            Estado1.setSelected(false);
-            JOptionPane.showMessageDialog(null, "Colectivo no encontrado" );
+        if(cole == null ){
+            JOptionPane.showMessageDialog(this, "Se puede ingresar la Matricula.", "Comprobar", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            txtMatricula.setText(cole.getMatricula());
-            txtMarca.setText(cole.getMarca());
-            txtModelo.setText(cole.getModelo());
-            txtCapacidad.setText(Integer.toString(cole.getCapacidad()));
-            Estado1.setSelected(cole.isEstado());           
+            JOptionPane.showMessageDialog(this, "No se puede ingresar la misma Matricula.", "Error", JOptionPane.WARNING_MESSAGE); 
+            limpiar();
         }
-
     }//GEN-LAST:event_BuscarbtnActionPerformed
 
     private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
@@ -233,9 +253,18 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
 
     private void RegistrarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarbtnActionPerformed
         // TODO add your handling code here:
-
         String matricula = txtMatricula.getText();
+        if (matricula.length() > 7) {
+            JOptionPane.showMessageDialog(this, "Matricula no se puede guardar si pasa de los 7 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            System.out.println("El string es válido: " + matricula);
+        }
         String marca = txtMarca.getText();
+        if (soloLetra(marca)==false) {
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras en la Marca.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtMarca.setText("");
+            return;
+        }
         String modelo = txtModelo.getText();
         String capacidad = txtCapacidad.getText();
         boolean estado = Estado1.isSelected();
@@ -249,32 +278,17 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
        try{
            capac= Integer.parseInt(capacidad);
        }catch(NumberFormatException e){
-           JOptionPane.showMessageDialog(null, "Erro: Ingrese un numero por favor.");
+           JOptionPane.showMessageDialog(this, "Solo se puede ingresar numeros", "Error", JOptionPane.ERROR_MESSAGE);
+           txtCapacidad.setText("");
            return;
        }
-       Colectivo cole = coleData.buscarColectivoPorMatricula(matricula);
-       
-       boolean resultado;
-       if(cole == null){
-           cole = new Colectivo(matricula,marca,modelo,capac,estado);
-           coleData.añadirColectivo(cole);           
-           resultado=true;
-       }else{
-           cole.setMatricula(matricula);
-           cole.setMarca(marca);
-           cole.setModelo(modelo);
-           cole.setCapacidad(capac);
-           cole.setEstado(estado);
-           coleData.modificarColectivo(cole);
-           resultado=true;
-       }
-       
-       //imprimir resultado
-        if (resultado) {
-            JOptionPane.showMessageDialog(this, "Colectivo guardado o modificado");
-        }else{
-            JOptionPane.showMessageDialog(this, "No se pudo guardar el colectivo");
+       Colectivo cole = new Colectivo(matricula, marca, modelo, capac, estado);
+        if (coleData.añadirColectivo(cole)) {
+            JOptionPane.showMessageDialog(this, "Colectivo guardado.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo guardar el Colectivo.\nQuizás ya haya un Colectivo guardado con esta matricula.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        limpiar(); 
     }//GEN-LAST:event_RegistrarbtnActionPerformed
 
     private void SalirbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirbtnActionPerformed
@@ -294,6 +308,7 @@ public class FormularioColectivo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel titleMatricula;
     private javax.swing.JTextField txtCapacidad;
     private javax.swing.JTextField txtMarca;

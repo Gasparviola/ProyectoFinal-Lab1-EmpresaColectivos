@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package d.Vista;
 
 import b.Entidades.Pasaje;
@@ -9,12 +6,20 @@ import b.Entidades.Pasajero;
 import c.Data.PasajerosData;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author El Notaloko 2.1
  */
 public class GestionPasajeros extends javax.swing.JInternalFrame {
+    
+    private DefaultTableModel tablaCol = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int fil, int col) {
+            return false;
+        }
+    };
 
      PasajerosData pasajeroData;
     
@@ -24,6 +29,8 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
     public GestionPasajeros(PasajerosData pasajeroData) {
         initComponents();
         this.pasajeroData = pasajeroData;
+        this.tablaCol = (DefaultTableModel) jtTabla.getModel();
+        adminConsu();
     }
 
     
@@ -36,13 +43,87 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
             Estado1.setSelected(false);
     }
     
+    private void adminConsu(){
+        tablaCol.setRowCount(0);
+        List<Pasajero> pasajero = pasajeroData.listarPasajeros();
+        for(Pasajero pasa : pasajero){
+        tablaCol.addRow(new Object[]{pasa.getNombre(),pasa.getApellido(),pasa.getDNI(),pasa.getCorreo(),pasa.getTelefono(),pasa.isEstado()});
+        }
+        jtTabla.setModel(tablaCol);
+    }
+    
+    public void ActualizarTableRow(Pasajero pasajero) {
+    DefaultTableModel model = (DefaultTableModel) jtTabla.getModel();
+    // Busca la fila del colectivo por su matrícula
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 2).equals(pasajero.getDNI())) {
+                model.setValueAt(pasajero.getNombre(), i, 0);
+                model.setValueAt(pasajero.getApellido(), i, 1);
+                model.setValueAt(pasajero.getCorreo(), i, 3);
+                model.setValueAt(pasajero.getTelefono(), i, 4); 
+                model.setValueAt(pasajero.isEstado(), i, 5);
+                return;
+            }
+        }
+    }
+    
+    public void ActualizarTableRowEstado(String dni, boolean estado) {
+    DefaultTableModel model = (DefaultTableModel) jtTabla.getModel();
+    // Busca la fila del colectivo por su matrícula y actualiza el estado
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 2).equals(dni)) {
+                model.setValueAt(estado, i, 5);
+                return;
+            }
+        }
+    }
+    
     private void setPasajero(boolean iPasaj) {
         txtDNI.setEnabled(iPasaj);
-        txtApellido.setEnabled(iPasaj);
-        txtNombre.setEnabled(iPasaj);
-        txtTelefono.setEnabled(iPasaj);
-        txtCorreo.setEditable(iPasaj);
-        Estado1.setEnabled(iPasaj);
+//        txtApellido.setEnabled(iPasaj);
+//        txtNombre.setEnabled(iPasaj);
+//        txtTelefono.setEnabled(iPasaj);
+//        txtCorreo.setEditable(iPasaj);
+//        Estado1.setEnabled(iPasaj);
+    }
+    
+    public static boolean esDNIValido(String dni) {
+        if (dni == null || dni.length() > 8) {
+            return false;
+        }
+        String regex = "\\d{1,8}";
+        return dni.matches(regex);
+    }
+    public static boolean soloLetraNombre(String nombre) {
+        if (nombre == null || nombre.length() > 15) {
+            return false;
+        }
+        String regex = "^^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+( [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$";
+        return nombre.matches(regex);
+    }
+    
+    public static boolean soloLetraApellido(String apellido) {
+        if (apellido == null || apellido.length() > 30) {
+            return false;
+        }
+        String regex = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+( [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$";
+        return apellido.matches(regex);
+    }
+    
+    public static boolean esNumeroValido(String telefono) {
+        if (telefono == null || telefono.length() > 30) {
+            return false;
+        }
+        String regex = "\\d{1,10}";
+        return telefono.matches(regex);
+    }
+    public static boolean VerificacionMail(String correo) {
+        if (correo == null) {
+            return false;
+        }
+        
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}$";//aknsdikas@gmail.com
+        return correo.matches(regex);
     }
     
     
@@ -57,69 +138,35 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         Titulo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        PasajerosComboBox = new javax.swing.JComboBox<>();
+        Editarbtn = new javax.swing.JButton();
+        Eliminarbtn = new javax.swing.JButton();
+        Salirbtn = new javax.swing.JButton();
+        Limpiarbtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtTabla = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        txtNombre = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        Estado1 = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtDNI = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
-        txtCorreo = new javax.swing.JTextField();
-        Editarbtn = new javax.swing.JButton();
-        Eliminarbtn = new javax.swing.JButton();
-        Salirbtn = new javax.swing.JButton();
-        Estado1 = new javax.swing.JCheckBox();
-        Limpiarbtn = new javax.swing.JButton();
+        Actualizar = new javax.swing.JButton();
 
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("GestionPasajeros");
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameActivated(evt);
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
+        setTitle("Gestion pasajeros");
 
         Titulo.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
         Titulo.setText("Gestion Pasajeros");
-
-        jLabel1.setText("Pasajero:");
-
-        PasajerosComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasajerosComboBoxActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("DNI:");
-
-        jLabel3.setText("Apellido:");
-
-        jLabel4.setText("Nombre:");
-
-        jLabel5.setText("Telefono:");
-
-        jLabel6.setText("Correo:");
-
-        jLabel7.setText("Estado:");
 
         Editarbtn.setText("Editar");
         Editarbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -149,86 +196,178 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jtTabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Apellido", "Dni", "Correo", "Telefono", "Estado"
+            }
+        ));
+        jtTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtTablaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtTabla);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel2.setText("DNI:");
+
+        jLabel3.setText("Apellido:");
+
+        jLabel4.setText("Nombre:");
+
+        jLabel5.setText("Telefono:");
+
+        jLabel6.setText("Correo:");
+
+        jLabel7.setText("Estado:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(46, 46, 46)
+                        .addComponent(txtDNI))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(25, 25, 25)
+                        .addComponent(txtApellido))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(23, 23, 23)
+                        .addComponent(txtNombre))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTelefono))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(Estado1)
+                                .addGap(0, 462, Short.MAX_VALUE))
+                            .addComponent(txtCorreo))))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(Estado1))
+                .addGap(0, 24, Short.MAX_VALUE))
+        );
+
+        Actualizar.setText("Actualizar tabla");
+        Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1))
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PasajerosComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Limpiarbtn)
-                        .addGap(33, 33, 33)
-                        .addComponent(Eliminarbtn)
-                        .addGap(43, 43, 43)
-                        .addComponent(Editarbtn)
+                        .addGap(188, 188, 188)
+                        .addComponent(Titulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Salirbtn))
+                        .addComponent(Actualizar))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Estado1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtApellido)
-                    .addComponent(txtNombre)
-                    .addComponent(txtTelefono)
-                    .addComponent(txtCorreo)
-                    .addComponent(txtDNI))
-                .addGap(58, 58, 58))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(194, Short.MAX_VALUE)
-                .addComponent(Titulo)
-                .addGap(184, 184, 184))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Limpiarbtn)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Eliminarbtn)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Editarbtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Salirbtn))
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(Titulo)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(PasajerosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Estado1)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Titulo)
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Actualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Limpiarbtn)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Editarbtn)
-                        .addComponent(Salirbtn)
-                        .addComponent(Eliminarbtn)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(Eliminarbtn)
+                    .addComponent(Editarbtn)
+                    .addComponent(Salirbtn))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -244,31 +383,6 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_LimpiarbtnActionPerformed
 
-    private void PasajerosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasajerosComboBoxActionPerformed
-        // TODO add your handling code here:
-        
-        setPasajero(true);
-        Pasajero pasajeroSeleccionado = (Pasajero) PasajerosComboBox.getSelectedItem();
-        if (pasajeroSeleccionado != null) {
-            txtDNI.setText(pasajeroSeleccionado.getDNI());
-            txtApellido.setText(pasajeroSeleccionado.getApellido());
-            txtNombre.setText(pasajeroSeleccionado.getNombre());
-            txtTelefono.setText(pasajeroSeleccionado.getTelefono());
-            txtCorreo.setText(pasajeroSeleccionado.getCorreo());
-            Estado1.setSelected(pasajeroSeleccionado.isEstado());
-        } else {
-            limpiar();
-            Editarbtn.setEnabled(true);
-            Editarbtn.setEnabled(true);
-            if (PasajerosComboBox.getItemCount() == 0) {
-                PasajerosComboBox.setEnabled(false);
-            } else {
-                PasajerosComboBox.setEnabled(true);
-            }
-        }
-        
-    }//GEN-LAST:event_PasajerosComboBoxActionPerformed
-
     private void EliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarbtnActionPerformed
         // TODO add your handling code here:
         
@@ -279,25 +393,22 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
         //buscar Pasajero
         Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(DNI);
         if(pasaj==null){
-            JOptionPane.showMessageDialog(null, "No se encontro el pasajero vinculado al colectivo");
+            JOptionPane.showMessageDialog(this, "No se encontro el Pasajero vinculado al colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }else{
             if(pasaj.isEstado()==false){
-                JOptionPane.showMessageDialog(null, "El pasajero esta dado de baja");
+                JOptionPane.showMessageDialog(null, "El Pasajero esta dado de baja");
                 return;
             }
         }
         // Eliminar pasajeros y limpiar campos (excepto DNI)
         if (pasajeroData.eliminarPasajero(pasaj.getID_Pasajero())){
-            txtDNI.setText("");
-            txtApellido.setText("");
-            txtNombre.setText("");
-            txtTelefono.setText("");
-            Estado1.setSelected(false);
+            ActualizarTableRowEstado(DNI,false);
+            limpiar();
             JOptionPane.showMessageDialog(this, "Pasajero dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
         } else {
             // Por alguna razon no se pudo eliminar
-            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al pasajero.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al Pasajero.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_EliminarbtnActionPerformed
@@ -305,65 +416,113 @@ public class GestionPasajeros extends javax.swing.JInternalFrame {
     private void EditarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarbtnActionPerformed
         // TODO add your handling code here:
         
-        String DNI = txtDNI.getText();
+        String dni = txtDNI.getText();
+        if (esDNIValido(dni)==false) {
+            JOptionPane.showMessageDialog(this, "Ingrese un DNI correcto.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtDNI.setText("");
+            return;
+        }
         String apellido = txtApellido.getText();
+        if (soloLetraApellido(apellido)==false) {
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras en el apellido.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtApellido.setText("");
+            return;
+        }
         String nombre = txtNombre.getText();
+        if (soloLetraNombre(nombre)==false) {
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras en el nombre.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNombre.setText("");
+            return;
+        }
         String telefono = txtTelefono.getText();
+        if (esNumeroValido(telefono)==false) {
+            JOptionPane.showMessageDialog(this, "Ingrese un numero correcto.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtTelefono.setText("");
+            return;
+        }
         String correo = txtCorreo.getText();
+        if (VerificacionMail(correo)==false) {
+            JOptionPane.showMessageDialog(this, "Ingrese un correo valido.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtCorreo.setText("");
+            return;
+        }
         boolean estado = Estado1.isSelected();
         System.out.println(estado);
 
-        Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(DNI);
+        Pasajero pasaj = pasajeroData.buscarPasajeroPorDni(dni);
+        
         boolean resultado;
         if(pasaj != null){
-           pasaj.setDNI(DNI);
+           pasaj.setDNI(dni);
            pasaj.setApellido(apellido);
            pasaj.setNombre(nombre);
            pasaj.setTelefono(telefono);
            pasaj.setCorreo(correo);
            pasaj.setEstado(estado);
            pasajeroData.modificarPasajero(pasaj);
+           ActualizarTableRow(pasaj);
+           limpiar();
            resultado=true;
         }else{
            System.out.println("No existe el pasajero");
            resultado=false;
         }
         if (resultado) {
-            JOptionPane.showMessageDialog(this, "Pasajero modificado.");
+            JOptionPane.showMessageDialog(this, "Pasajero modificado.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(this, "No se pudo modificar el pasajero");
+            JOptionPane.showMessageDialog(this, "No se pudo modificar el pasajero.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_EditarbtnActionPerformed
 
-    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+    private void jtTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaMouseClicked
         // TODO add your handling code here:
-        
-        PasajerosComboBox.removeAllItems();
-        List<Pasajero> listaPasajero = pasajeroData.listarPasajeros();
-        for (Pasajero pasaj : listaPasajero) {
-            PasajerosComboBox.addItem(pasaj);
-        }
-        PasajerosComboBox.setSelectedIndex(-1);
-        
-    }//GEN-LAST:event_formInternalFrameActivated
+        setPasajero(true);
+        int fila =jtTabla.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "no hay ninguna fila");
+        } else {
+            String nombre = (String)jtTabla.getValueAt(fila, 0);
+            String apellido = (String)jtTabla.getValueAt(fila, 1);
+            String dni = (String)jtTabla.getValueAt(fila, 2);
+            String correo = (String)jtTabla.getValueAt(fila, 3);
+            String telefono = (String)jtTabla.getValueAt(fila, 4);
+            boolean estado = ((Boolean)jtTabla.getValueAt(fila, 5));
+            
+            txtNombre.setText(nombre);
+            txtApellido.setText(apellido);
+            txtDNI.setText(dni);
+            txtCorreo.setText(correo);
+            txtTelefono.setText(telefono);
+            Estado1.setSelected(estado);
+            txtDNI.setEnabled(false);
+        }       
+    }//GEN-LAST:event_jtTablaMouseClicked
+
+    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
+        // TODO add your handling code here:
+        adminConsu();
+    }//GEN-LAST:event_ActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Actualizar;
     private javax.swing.JButton Editarbtn;
     private javax.swing.JButton Eliminarbtn;
     private javax.swing.JCheckBox Estado1;
     private javax.swing.JButton Limpiarbtn;
-    private javax.swing.JComboBox<Pasajero> PasajerosComboBox;
     private javax.swing.JButton Salirbtn;
     private javax.swing.JLabel Titulo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtTabla;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDNI;

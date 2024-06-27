@@ -26,7 +26,6 @@ public class HorariosData {
             System.out.println("[añadirHorario] Error: El objeto Horario o su Ruta está nulo.");
             return false; 
         }
-    
         if (horario.getRuta().getID_Ruta() == 0) {
             System.out.println("[añadirHorario] Error: no se puede guardar. "
                 + "Horario tiene ruta dada de baja o no tiene ID_Ruta definido. "
@@ -50,7 +49,12 @@ public class HorariosData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Horario" + ex.getMessage());
+            if (ex.getErrorCode() == 1062) { // Informar datos repetidos
+                System.out.println("[BomberoData.guardarBombero] "
+                        + "Error: entrada duplicada para " + horario.debugToString());
+            } else {
+                ex.printStackTrace();
+            }
         }
         return resultado;
     }
@@ -119,12 +123,39 @@ public class HorariosData {
         return horarios;
     }
        
-    
+    public Horario buscarHorarioPorIdRuta(Ruta ruta) {
+        Horario horarios = null;
+        try {
+            String sql = "SELECT * FROM Horario WHERE ID_Ruta = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, ruta.getID_Ruta());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                horarios = new Horario();
+                horarios.setID_Horario(rs.getInt("ID_Horario"));
+                Ruta rut = rd.buscarRutasPorID(rs.getInt("ID_Ruta"));
+                horarios.setRuta(rut);
+                horarios.setHora_Salida(rs.getTime("Hora_Salida").toLocalTime());
+                horarios.setHora_Llegada(rs.getTime("Hora_Llegada").toLocalTime());
+                horarios.setEstado(rs.getBoolean("Estado"));
+                
+                System.out.println("Encontrado: " + horarios.debugToString());
+            } else {
+                System.out.println("No se ha encontrado horario con Hora_LLegada = " + ruta);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("[Horario.buscarHorario] "
+                    + "Error" + e.getErrorCode() + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+        return horarios;
+    }
     
     public Horario buscarHorarioPorHoraSalida(LocalTime Hora_Salida) {
         Horario horarios = null;
         try {
-            String sql = "SELECT * FROM Horario WHERE Horario.Hora_Salida = ?";
+            String sql = "SELECT * FROM Horario WHERE Hora_Salida = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setTime(1, Time.valueOf(Hora_Salida));
             ResultSet rs = ps.executeQuery();
@@ -149,8 +180,6 @@ public class HorariosData {
         }
         return horarios;
     }
-    
-         
     
     public Horario buscarHorario(int ID_Horario) {
         Horario horarios = null;
@@ -180,8 +209,6 @@ public class HorariosData {
         }
         return horarios;
     }
-    
-    
     
     
     public List<Horario> listarHorarios() {
@@ -236,14 +263,34 @@ public class HorariosData {
         return result;
     }
     
-    
-
-    public boolean eliminarHorario(int idHorario) {
+    public boolean eliminarHorarioPorID(int ID_Horario) {
         boolean result = true;
         try {
             String sql = "UPDATE Horario SET Estado=false WHERE ID_Horario=?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idHorario);
+            ps.setInt(1, ID_Horario);
+            int filas = ps.executeUpdate();
+            if (filas > 0) { 
+                System.out.println("Horario dado de baja");
+            } else { 
+                result = false;
+                System.out.println("No se pudo dar de baja al Horario");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            result = false;
+            System.out.println("[Error " + e.getErrorCode() + "]");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean eliminarHorario(Ruta ruta) {
+        boolean result = true;
+        try {
+            String sql = "UPDATE Horario SET Estado=false WHERE ID_Ruta=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, ruta.getID_Ruta());
             int filas = ps.executeUpdate();
             if (filas > 0) { 
                 System.out.println("Horario dado de baja");

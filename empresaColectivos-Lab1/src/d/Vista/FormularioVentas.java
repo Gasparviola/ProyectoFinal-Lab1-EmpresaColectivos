@@ -53,7 +53,6 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
     }
     
     private void limpiar(){
-            jTNroPasaje.setText("");
             Fecha.setCalendar(null);
             DniTxt.setText("");
             DatosPersona.setText("");
@@ -100,29 +99,29 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
         jComboBox4 = new javax.swing.JComboBox<>();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jtTabla = new javax.swing.JTable();
+        Comprarbtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        LimpiarBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        DatosPersona = new javax.swing.JTextField();
         Fecha = new com.toedter.calendar.JDateChooser();
         DniTxt = new javax.swing.JTextField();
+        jCColectivo = new javax.swing.JComboBox<>();
         Buscarbtn = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         ConboRuta = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jtTabla = new javax.swing.JTable();
-        Comprarbtn = new javax.swing.JButton();
-        DatosPersona = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jCColectivo = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
         jTHoraViaje = new javax.swing.JTextField();
         jTAsientos = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTPrecio = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTNroPasaje = new javax.swing.JTextField();
-        LimpiarBtn = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -135,7 +134,7 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle(" Gestion de Ventas");
+        setTitle("Formulario Ventas");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameActivated(evt);
@@ -155,32 +154,7 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
-        jLabel1.setText("Ventas");
-
-        jLabel3.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jLabel3.setText("Fecha:");
-
-        jLabel4.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jLabel4.setText("DNI:");
-
-        Buscarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        Buscarbtn.setText("Buscar");
-        Buscarbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarbtnActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jLabel2.setText("Ruta:");
-
-        ConboRuta.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jLabel5.setText("Hora de viaje:");
-
-        jLabel6.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jLabel6.setText("Asientos:");
+        jLabel1.setText("Formulario Ventas");
 
         jScrollPane3.setViewportView(jtTabla);
 
@@ -200,21 +174,6 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
             }
         });
 
-        jCColectivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCColectivoActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jLabel7.setText("Colectivo:");
-
-        jLabel8.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jLabel8.setText("Precio:");
-
-        jLabel9.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
-        jLabel9.setText("Nro Pasaje:");
-
         LimpiarBtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         LimpiarBtn.setText("Limpiar");
         LimpiarBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -223,126 +182,181 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel3.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel3.setText("Fecha:");
+
+        jLabel4.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel4.setText("DNI:");
+
+        jCColectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCColectivoActionPerformed(evt);
+            }
+        });
+
+        Buscarbtn.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        Buscarbtn.setText("Buscar");
+        Buscarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarbtnActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel7.setText("Colectivo:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(DatosPersona)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(DniTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Buscarbtn)))))
+                .addGap(22, 22, 22))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(jCColectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(DniTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Buscarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(DatosPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jCColectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel2.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel2.setText("Ruta:");
+
+        ConboRuta.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel5.setText("Hora de viaje:");
+
+        jLabel6.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel6.setText("Asientos:");
+
+        jLabel8.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        jLabel8.setText("Precio:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTAsientos)
+                    .addComponent(ConboRuta, 0, 278, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTHoraViaje, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                    .addComponent(jTPrecio))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(ConboRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTHoraViaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(Comprarbtn)
-                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 3, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(LimpiarBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(Comprarbtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(ConboRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(55, 55, 55))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTHoraViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(23, 23, 23))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel7)
-                        .addGap(29, 29, 29)
-                        .addComponent(jCColectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(64, 64, 64)
-                                    .addComponent(DniTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Buscarbtn)))
-                            .addComponent(DatosPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel3))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTNroPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(61, 61, 61)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton1)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(235, 235, 235))
+                .addGap(289, 289, 289))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jTNroPasaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(DniTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(Buscarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(DatosPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCColectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ConboRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(6, 6, 6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTHoraViaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LimpiarBtn)
                     .addComponent(Comprarbtn)
-                    .addComponent(jButton1)
-                    .addComponent(LimpiarBtn))
-                .addGap(13, 13, 13))
+                    .addComponent(jButton1))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -355,7 +369,7 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
         if(pasajero == null){
             DniTxt.setText("");
             DatosPersona.setText("");
-            JOptionPane.showMessageDialog(null, "Pasajero no encontrado" );
+            JOptionPane.showMessageDialog(this, "Pasajero no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             DniTxt.setText(pasajero.getDNI());
             DatosPersona.setText(pasajero.toString());
@@ -381,7 +395,7 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
 
     private void ComprarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprarbtnActionPerformed
         // TODO add your handling code here:
-        String nroPasaje = jTNroPasaje.getText();
+//        String nroPasaje = jTNroPasaje.getText();
         String Dni = DniTxt.getText();
         String Datos = DatosPersona.getText();
         String HoraViaje = jTHoraViaje.getText();
@@ -389,27 +403,18 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
         String Asiento = jTAsientos.getText();
         String Precio = jTPrecio.getText();
        
-       if(Dni.isBlank() || Datos.isBlank() || HoraViaje.isBlank() || Asiento.isBlank() || Precio.isBlank() || nroPasaje.isBlank() || FechaViaje == null){           
-           JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos" );
+       if(Dni.isBlank() || Datos.isBlank() || HoraViaje.isBlank() || Asiento.isBlank() || Precio.isBlank() || FechaViaje == null){           
+           JOptionPane.showMessageDialog(this, "Por favor rellene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
            return;
        }
-       
        LocalDate fechViaje;
        try{
                 fechViaje =  FechaViaje.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             }catch(DateTimeParseException e){
-                JOptionPane.showMessageDialog(null, "Error: El formato de Hora debe ser aaaa-mm-dd");
+                JOptionPane.showMessageDialog(this, "El formato de Fecha de viaje debe ser aaaa-mm-dd.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
         }
        
-       int nroPasajes;
-       try{
-                nroPasajes = Integer.parseInt(nroPasaje);
-            }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "Error: El formato de Hora debe ser aaaa-mm-dd");
-                return;
-        }
-       Pasaje pasaje = pasajeData.buscarPasaje(nroPasajes);
        Pasajero pasajero = pasajeroData.buscarPasajeroPorDni(Dni);
        Ruta ruta = (Ruta) ConboRuta.getSelectedItem();
        Colectivo colectivo = (Colectivo) jCColectivo.getSelectedItem();      
@@ -417,7 +422,7 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
        try{
                 horViaje = LocalTime.parse(HoraViaje);
             }catch(DateTimeParseException e){
-                JOptionPane.showMessageDialog(null, "Error: El formato de Hora debe ser hh:mm");
+                JOptionPane.showMessageDialog(this, "El formato de Hora de salida debe ser hh:mm.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
         }
        int Asien;
@@ -426,35 +431,16 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
                 Asien = Integer.parseInt(Asiento);
                 Prec =  Double.parseDouble(Precio); 
             }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "Error: El formato de Hora debe ser aaaa-mm-dd");
+                JOptionPane.showMessageDialog(this, "Ingrese un numero correcto.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
         }
-       
-       
-       boolean resultado;
-       if(pasaje == null){
-           pasaje = new Pasaje(nroPasajes, pasajero, colectivo, ruta, fechViaje, horViaje, Asien, Prec);
-           pasajeData.guardarPasaje(pasaje);           
-           resultado=true;
-       }else{
-           pasaje.setID_Pasaje(nroPasajes);          
-           pasaje.setPasajero(pasajero);
-           pasaje.setColectivo(colectivo);
-           pasaje.setRuta(ruta);
-           pasaje.setHora_Viaje(horViaje);
-           pasaje.setFecha_Viaje(fechViaje);
-           pasaje.setAsiento(Asien);
-           pasaje.setPrecio(Prec);
-           pasajeData.modificarPasaje(pasaje);
-           resultado=true;
-       }
-       
-       //imprimir resultado
-        if (resultado) {
-            JOptionPane.showMessageDialog(this, "Pasaje guardado o modificado");
+        Pasaje pasajes = new Pasaje(pasajero, ruta, colectivo, horViaje, fechViaje, Asien, Prec);
+        if (pasajeData.guardarPasaje(pasajes)) {
+            JOptionPane.showMessageDialog(this, "Pasaje guardado.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(this, "No se pudo guardar el pasaje");
+            JOptionPane.showMessageDialog(this, "No se pudo guardar el Pasaje.\nQuizás ya haya un Pasaje guardado con este Nro pasaje.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        limpiar();
     }//GEN-LAST:event_ComprarbtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -496,11 +482,11 @@ public class FormularioVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTAsientos;
     private javax.swing.JTextField jTHoraViaje;
-    private javax.swing.JTextField jTNroPasaje;
     private javax.swing.JTextField jTPrecio;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTable jtTabla;

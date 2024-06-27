@@ -15,8 +15,8 @@ public class RutaData {
         con = (Connection) Conexion.getConexion();
     }
 
-    public void añadirRuta(Ruta ruta) {
-
+    public boolean añadirRuta(Ruta ruta) {
+        boolean resultado = false;
         try {
             String sql = "INSERT INTO Ruta(ID_Ruta, Origen, Destino, Duracion_Estimada, Estado) VALUES (?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -29,12 +29,19 @@ public class RutaData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 ruta.setID_Ruta(rs.getInt("ID_Ruta"));
+                resultado = true;
                 JOptionPane.showMessageDialog(null, "Ruta añadida con exito.");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ruta" + ex.getMessage());
+            if (ex.getErrorCode() == 1062) { // Informar datos repetidos
+                System.out.println("[RutaData.guardarRuta] "
+                        + "Error: entrada duplicada para " + ruta.debugToString());
+            } else {
+                ex.printStackTrace();
+            }
         }
+        return resultado;
     }
 
     public List<Ruta> listarRutas() {
@@ -47,7 +54,6 @@ public class RutaData {
             Ruta Rutas;
             while (rs.next()) {
                 Rutas = new Ruta();
-
                 Rutas.setID_Ruta(rs.getInt("ID_Ruta"));
                 Rutas.setOrigen(rs.getString("Origen"));
                 Rutas.setDestino(rs.getString("Destino"));
@@ -82,7 +88,8 @@ public class RutaData {
                 rutas.setEstado(rs.getBoolean("Estado"));
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe la ruta");
+//                JOptionPane.showMessageDialog(null, "No existe la ruta");
+                System.out.println("No existe la ruta");
             }
             ps.close();
         } catch (SQLException ex) {

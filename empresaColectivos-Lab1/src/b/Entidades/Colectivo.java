@@ -85,7 +85,7 @@ public class Colectivo {
 
     @Override
     public String toString() {
-        return ID_Colectivo + " (Matricula=" + Matricula + ", Modelo=" + Modelo + ", Marca=" + Marca + ")";
+        return " "+ Matricula + " - " + Marca + " - " + Modelo + "";
     }
     
     

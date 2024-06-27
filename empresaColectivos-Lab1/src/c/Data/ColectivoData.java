@@ -19,8 +19,8 @@ public class ColectivoData {
         this.connection = Conexion.getConexion();
     }
 
-    public void añadirColectivo(Colectivo colectivo) {
-        
+    public boolean añadirColectivo(Colectivo colectivo) {
+        boolean resultado = false;
         try {
             String sql = "INSERT INTO Colectivo(ID_Colectivo, Matricula, Marca, Modelo, Capacidad, Estado) VALUES(?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -34,12 +34,23 @@ public class ColectivoData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {               
                 colectivo.setID_Colectivo(rs.getInt("ID_Colectivo"));
-                JOptionPane.showMessageDialog(null, "Colectivo añadido con exito.");
+                resultado = true;
+                System.out.println("Colectivo añadido con exito.");
+//                JOptionPane.showMessageDialog(null, "Colectivo añadido con exito.");
+            }else{
+                System.out.println("Colectivo no se a añadido");
+//                JOptionPane.showMessageDialog(null, "Colectivo no se a añadido.");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Colectivo" + ex.getMessage());
+            if (ex.getErrorCode() == 1062) { // Informar datos repetidos
+                System.out.println("[ColectivoData.guardarColectivo] "
+                        + "Error: entrada duplicada para " + colectivo.debugToString());
+            } else {
+                ex.printStackTrace();
+            }
         }
+        return resultado;
     }
     
     public Colectivo buscarColectivo(int ID_Colectivo) {
@@ -176,6 +187,12 @@ public class ColectivoData {
     }
     
     public boolean modificarColectivo(Colectivo colectivo) {
+        if (colectivo.getMarca() == null || !colectivo.isEstado()) {
+            System.out.println("[ColectivoData.modificarColectivo] Error: no se puede modificar. "
+                    + "Colectivo dado de baja o no tiene Matricula definida. "
+                    + colectivo.debugToString());
+            return false;
+        }
         boolean result = true;
         try {
             String sql = "UPDATE Colectivo SET  Matricula=?, Marca=?, Modelo=?, Capacidad=?, Estado=? WHERE ID_Colectivo=?";
@@ -203,25 +220,25 @@ public class ColectivoData {
     }
      
     public boolean eliminarColectivo(int idColectivo) {
-        boolean result = true;
+        boolean resultado = true;
         try {
             String sql = "UPDATE colectivo SET Estado=false WHERE ID_Colectivo=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, idColectivo);
             int filas = ps.executeUpdate();
             if (filas > 0) { 
+                resultado = true;
                 System.out.println("Colectivo dado de baja");
             } else { 
-                result = false;
                 System.out.println("No se pudo dar de baja al Colectivo");
             }
             ps.close();
         } catch (SQLException e) {
-            result = false;
+            resultado = false;
             System.out.println("[Error " + e.getErrorCode() + "]");
             e.printStackTrace();
         }
-        return result;
+        return resultado;
     }
     
 

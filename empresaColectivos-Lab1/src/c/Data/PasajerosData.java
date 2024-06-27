@@ -16,7 +16,8 @@ public class PasajerosData {
         con = (Connection) Conexion.getConexion();
     }
     
-    public void añadirPasajero(Pasajero pasajero) {
+    public boolean añadirPasajero(Pasajero pasajero) {
+        boolean resultado=false;
         try {
             String sql = "INSERT INTO Pasajero(ID_Pasajero, Nombre, Apellido, DNI, Correo, Telefono, Estado) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -31,12 +32,20 @@ public class PasajerosData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {               
                 pasajero.setID_Pasajero(rs.getInt("ID_Pasajero"));
-                JOptionPane.showMessageDialog(null, "Pasajero añadido con exito.");
+                resultado=true;
+                System.out.println("Pasajero añadido con exito.");
+//                JOptionPane.showMessageDialog(null, "Pasajero añadido con exito.");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pasajero" + ex.getMessage());
+            if (ex.getErrorCode() == 1062) { // Informar datos repetidos
+                System.out.println("[PasajeroData.guardarPasaje] "
+                        + "Error: entrada duplicada para " + pasajero.debugToString());
+            } else {
+                ex.printStackTrace();
+            }
         }
+        return resultado;
     }
     
     
@@ -113,10 +122,9 @@ public class PasajerosData {
                 pasajeros.setDNI(rs.getString("DNI"));
                 pasajeros.setCorreo(rs.getString("Correo"));
                 pasajeros.setTelefono(rs.getString("Telefono"));
-                pasajeros.setEstado(rs.getBoolean("Estado"));                              
-                
+                pasajeros.setEstado(rs.getBoolean("Estado"));                                 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el pasajero");
+                System.out.println("no existe pasajero");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -144,7 +152,8 @@ public class PasajerosData {
                 pasajeros.setTelefono(rs.getString("Telefono"));
                 pasajeros.setEstado(rs.getBoolean("Estado"));                              
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el pasajero");
+//                JOptionPane.showMessageDialog(null, "No existe el pasajero");
+                  System.out.println("No existe el pasajero");
             }
             ps.close();
         } catch (SQLException ex) {

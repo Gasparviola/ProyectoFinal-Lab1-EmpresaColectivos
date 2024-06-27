@@ -320,9 +320,9 @@ public class Main {
         System.out.println("");
         
         System.out.println("Eliminando Horario");
-        //Eliminar Horario
-        int horarioAEliminar = 2;
-        horarios.eliminarHorario(horarioAEliminar);
+//        //Eliminar Horario
+        int idHorarioEnconEliminado = 1;
+        horarios.eliminarHorarioPorID(idHorarioEnconEliminado);
         
         System.out.println("");
         

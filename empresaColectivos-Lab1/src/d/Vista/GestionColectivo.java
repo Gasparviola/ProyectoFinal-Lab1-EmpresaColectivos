@@ -4,13 +4,20 @@ import b.Entidades.Colectivo;
 import c.Data.ColectivoData;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Nahue
  */
 public class GestionColectivo extends javax.swing.JInternalFrame {
-
+    
+    private DefaultTableModel tablaCol = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int fil, int col) {
+            return false;
+        }
+    };
     private ColectivoData coleData;
     /**
      * Creates new form FormularioColectivo
@@ -18,16 +25,53 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
     public GestionColectivo(ColectivoData coleData) {
         initComponents();
         this.coleData= coleData;
+        this.tablaCol = (DefaultTableModel) jtTabla.getModel();
+//        armarCabecera();
+        adminConsu();
     }
 
     private void limpiar(){
-            jComboColectivo.setSelectedItem(-1);
             jTcapacidad.setText("");
             jTmarca.setText("");
             jTmodelo.setText("");
             jTmatricula.setText("");
             jCestado.setSelected(false);
     }
+
+    private void adminConsu(){
+        tablaCol.setRowCount(0);
+        List<Colectivo> colectivo = coleData.listarColectivos();
+        for(Colectivo cole : colectivo){
+        tablaCol.addRow(new Object[]{cole.getMatricula(),cole.getMarca(),cole.getModelo(),cole.getCapacidad(),cole.isEstado()});
+        }
+        jtTabla.setModel(tablaCol);
+    }
+    
+    public void ActualizarTableRow(Colectivo cole) {
+    DefaultTableModel model = (DefaultTableModel) jtTabla.getModel();
+    // Busca la fila del colectivo por su matrícula
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 0).equals(cole.getMatricula())) {
+                model.setValueAt(cole.getMarca(), i, 1);
+                model.setValueAt(cole.getModelo(), i, 2);
+                model.setValueAt(cole.getCapacidad(), i, 3);
+                model.setValueAt(cole.isEstado(), i, 4);
+                return;
+            }
+        }
+    }
+    
+    public void ActualizarTableRowEstado(String matricula, boolean estado) {
+    DefaultTableModel model = (DefaultTableModel) jtTabla.getModel();
+    // Busca la fila del colectivo por su matrícula y actualiza el estado
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 0).equals(matricula)) {
+                model.setValueAt(estado, i, 4);
+                return;
+            }
+        }
+    }
+
     
     private void setColectivo(boolean icol) {
         jTmatricula.setEnabled(icol);
@@ -37,52 +81,82 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
         jCestado.setEnabled(icol);         
     }
     
+    public static boolean soloLetra(String nombre) {
+        if (nombre == null || nombre.length() > 15) {
+            return false;
+        }
+        String regex = "^^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+( [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$";
+        return nombre.matches(regex);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtTabla = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jTmatricula = new javax.swing.JTextField();
+        jTmarca = new javax.swing.JTextField();
+        jTmodelo = new javax.swing.JTextField();
+        jTcapacidad = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboColectivo = new javax.swing.JComboBox<>();
-        jTmatricula = new javax.swing.JTextField();
-        jTmodelo = new javax.swing.JTextField();
-        jTcapacidad = new javax.swing.JTextField();
+        jCestado = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
         jBeditar = new javax.swing.JButton();
         jBeliminar = new javax.swing.JButton();
         jBsalir = new javax.swing.JButton();
-        jCestado = new javax.swing.JCheckBox();
-        jLabel1 = new javax.swing.JLabel();
-        jTmarca = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        Actualizar = new javax.swing.JButton();
 
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Gestion Colectivo");
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameActivated(evt);
+
+        jLabel8.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
+        jLabel8.setText("Gestion Colectivo");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jtTabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Matricula", "Marca", "Modelo", "Capacidad", "Estado"
             }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+        ));
+        jtTabla.setToolTipText("");
+        jtTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtTablaMouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(jtTabla);
 
-        jLabel2.setText("Colectivo:");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
 
-        jLabel3.setText("Matricula:");
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel1.setText("Marca:");
 
         jLabel4.setText("Modelo:");
 
@@ -90,11 +164,55 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Estado:");
 
-        jComboColectivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboColectivoActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("Matricula:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jCestado)
+                        .addComponent(jTmodelo, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                        .addComponent(jTcapacidad)
+                        .addComponent(jTmarca))
+                    .addComponent(jTmatricula))
+                .addGap(29, 29, 29))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTmatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTmarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTmodelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTcapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jCestado))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jBeditar.setText("Editar");
         jBeditar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,228 +235,190 @@ public class GestionColectivo extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Marca:");
-
-        jLabel8.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
-        jLabel8.setText("Colectivo");
+        Actualizar.setText("Actualizar tabla");
+        Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(235, 235, 235))
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jBeditar))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jBeliminar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBsalir)
-                                .addGap(32, 32, 32))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(jComboColectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(55, Short.MAX_VALUE))))
+                        .addComponent(jBeditar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBeliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBsalir))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTmarca, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(48, 48, 48)
-                                .addComponent(jTmatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(58, 58, 58)
-                                    .addComponent(jTmodelo))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addGap(39, 39, 39))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel6)
-                                            .addGap(58, 58, 58)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jCestado)
-                                            .addGap(0, 341, Short.MAX_VALUE))
-                                        .addComponent(jTcapacidad)))))
-                        .addContainerGap())))
+                                .addComponent(jLabel8)
+                                .addGap(149, 149, 149)
+                                .addComponent(Actualizar))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboColectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTmatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTmarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTmodelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTcapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCestado, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Actualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBeditar)
                     .addComponent(jBeliminar)
                     .addComponent(jBsalir))
-                .addGap(28, 28, 28))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboColectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboColectivoActionPerformed
+    private void jtTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaMouseClicked
         // TODO add your handling code here:
         setColectivo(true);
-        Colectivo colectivoSeleccionado = (Colectivo) jComboColectivo.getSelectedItem();
-        if (colectivoSeleccionado != null) {
-            jTmatricula.setText(colectivoSeleccionado.getMatricula());
-            jTmarca.setText(colectivoSeleccionado.getMarca());
-            jTmodelo.setText(colectivoSeleccionado.getModelo());
-            jTcapacidad.setText(Integer.toString(colectivoSeleccionado.getCapacidad()));           
-            jCestado.setSelected(colectivoSeleccionado.isEstado());
-        } else {
-            limpiar();
-            jBeditar.setEnabled(true);
-            jBeliminar.setEnabled(true);
-            if (jComboColectivo.getItemCount() == 0) {
-                jComboColectivo.setEnabled(false);
-            } else {
-                jComboColectivo.setEnabled(true);
-            }
-        }                                       
-    }//GEN-LAST:event_jComboColectivoActionPerformed
+        int fila =jtTabla.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "no hay ninguna fila");
 
-    private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
-        // TODO add your handling code here:
-        //Validar matricula
-        String matricula;            
-        matricula = jTmatricula.getText();        
-        //buscar colectivo
-        Colectivo cole = coleData.buscarColectivoPorMatricula(matricula);
-        if(cole==null){
-            JOptionPane.showMessageDialog(null, "No se encontro el colectivo vinculado a la matricula");
-            return;
-        }else{
-            if(cole.isEstado()==false){
-                JOptionPane.showMessageDialog(null, "El colectivo esta dado de baja");
-                return;
-            }
-        }
-        // Eliminar colectivos y limpiar campos (excepto matricula)
-        if (coleData.eliminarColectivo(cole.getID_Colectivo())){           
-            jTmatricula.setText("");
-            jTmodelo.setText("");
-            jTcapacidad.setText("");
-            jCestado.setSelected(false);
-            JOptionPane.showMessageDialog(this, "Colectivo dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            // Por alguna razon no se pudo eliminar
-            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            String matricula = (String)jtTabla.getValueAt(fila, 0);
+            String marca = (String)jtTabla.getValueAt(fila, 1);
+            String modelo = (String)jtTabla.getValueAt(fila, 2);
+            int capacidad = (Integer)jtTabla.getValueAt(fila, 3);
+            boolean estado = ((Boolean)jtTabla.getValueAt(fila, 4));
+            jTmatricula.setText(matricula);
+            jTmarca.setText(marca);
+            jTmodelo.setText(modelo);
+            jTcapacidad.setText(String.valueOf(capacidad));          
+            jCestado.setSelected(estado);
+            jTmatricula.setEnabled(false);
         } 
-    }//GEN-LAST:event_jBeliminarActionPerformed
-
-    private void jBeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeditarActionPerformed
-        // TODO add your handling code here:
-
-        String matricula = jTmatricula.getText();
-        String marca = jTmarca.getText();
-        String modelo = jTmarca.getText();
-        int capacidad;
-        try{
-           capacidad= Integer.parseInt(jTcapacidad.getText());
-       }catch(NumberFormatException e){
-           JOptionPane.showMessageDialog(null, "Erro: Ingrese un numero por favor.");
-           return;
-       }
-        boolean estado = jCestado.isSelected();
-        System.out.println(estado);
-        
-        Colectivo cole = coleData.buscarColectivoPorMatricula(matricula);
-        boolean resultado;
-        if(cole != null){
-           cole.setMatricula(matricula);
-           cole.setMarca(marca);
-           cole.setModelo(modelo);
-           cole.setCapacidad(capacidad);
-           cole.setEstado(estado);
-           coleData.modificarColectivo(cole);
-           resultado=true;
-        }else{
-           System.out.println("No existe el colectivo");
-           resultado=false;
-        }
-        if (resultado) {
-            JOptionPane.showMessageDialog(this, "Colectivo modificado.");
-        }else{
-            JOptionPane.showMessageDialog(this, "No se pudo modificar el colectivo");
-        }
-        
-    }//GEN-LAST:event_jBeditarActionPerformed
+    }//GEN-LAST:event_jtTablaMouseClicked
 
     private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
         // TODO add your handling code here:
         this.hide();
     }//GEN-LAST:event_jBsalirActionPerformed
 
-    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+    private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
         // TODO add your handling code here:
-        jComboColectivo.removeAllItems();
-        List<Colectivo> colectivo = coleData.listarColectivos();
-        for (Colectivo colectivos : colectivo) {
-            jComboColectivo.addItem(colectivos);
+        //Validar matricula
+        String matricula;
+        matricula = jTmatricula.getText();
+        //buscar colectivo
+        Colectivo cole = coleData.buscarColectivoPorMatricula(matricula);
+        if(cole==null){
+            JOptionPane.showMessageDialog(this, "No se encontro el Colectivo vinculado a la Matricula.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }else{
+            if(cole.isEstado()==false){
+                JOptionPane.showMessageDialog(null, "El Colectivo esta dado de baja.");
+                return;
+            }
         }
-        jComboColectivo.setSelectedIndex(-1);
-    }//GEN-LAST:event_formInternalFrameActivated
+        // Eliminar colectivos y limpiar campos (excepto matricula)
+        if (coleData.eliminarColectivo(cole.getID_Colectivo())){
+            ActualizarTableRowEstado(matricula,false);
+            limpiar();
+            JOptionPane.showMessageDialog(this, "Colectivo dado de baja.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Por alguna razon no se pudo eliminar
+            JOptionPane.showMessageDialog(this, "No se pudo dar de baja al Colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBeliminarActionPerformed
+
+    private void jBeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeditarActionPerformed
+        // TODO add your handling code here:
+        String matricula = jTmatricula.getText();
+        if (matricula.length() > 7) {//revisar para que tenga 3 letras y 3 numeros
+            JOptionPane.showMessageDialog(this, "Matricula no se puede guardar si pasa de los 7 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            System.out.println("El string es válido: " + matricula);
+        }
+        String marca = jTmarca.getText();
+        if (soloLetra(marca)==false) {
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras en la marca.", "Error", JOptionPane.ERROR_MESSAGE);
+            jTmarca.setText("");
+            return;
+        }
+        String modelo = jTmodelo.getText();
+        int capacidad;
+        try{
+            capacidad= Integer.parseInt(jTcapacidad.getText());
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Solo se puede ingresar numeros.", "Error", JOptionPane.ERROR_MESSAGE);
+            jTcapacidad.setText("");
+            return;
+        }
+        boolean estado = jCestado.isSelected();
+        System.out.println(estado);
+
+        Colectivo cole = coleData.buscarColectivoPorMatricula(matricula);
+        boolean resultado;
+        if(cole != null){
+            cole.setMatricula(matricula);
+            cole.setMarca(marca);
+            cole.setModelo(modelo);
+            cole.setCapacidad(capacidad);
+            cole.setEstado(estado);
+            coleData.modificarColectivo(cole);
+            ActualizarTableRow(cole);
+            limpiar();
+            resultado=true;
+        }else{
+            System.out.println("No existe el colectivo");
+            resultado=false;
+        }
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "Colectivo modificado.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo modificar el colectivo.", "Error", JOptionPane.ERROR_MESSAGE);
+        }  
+    }//GEN-LAST:event_jBeditarActionPerformed
+
+    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
+        // TODO add your handling code here:
+        adminConsu();
+    }//GEN-LAST:event_ActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Actualizar;
     private javax.swing.JButton jBeditar;
     private javax.swing.JButton jBeliminar;
     private javax.swing.JButton jBsalir;
     private javax.swing.JCheckBox jCestado;
-    private javax.swing.JComboBox<Colectivo> jComboColectivo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTcapacidad;
     private javax.swing.JTextField jTmarca;
     private javax.swing.JTextField jTmatricula;
     private javax.swing.JTextField jTmodelo;
+    private javax.swing.JTable jtTabla;
     // End of variables declaration//GEN-END:variables
 }

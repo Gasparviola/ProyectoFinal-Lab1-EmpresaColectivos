@@ -5,6 +5,7 @@ import c.Data.HorariosData;
 import c.Data.PasajeData;
 import c.Data.PasajerosData;
 import c.Data.RutaData;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.beans.PropertyVetoException;
@@ -12,13 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JMenuItem;
 
 /**
  *
  * @author Nahue
  */
 public class Inicio_transpuntano extends javax.swing.JFrame {
-
+    
     JInternalFrame interFrame = null;
     FormularioColectivo formularioColectivo;
     GestionColectivo gestionColectivo;
@@ -30,8 +32,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
     FormularioHorarios formularioHorarios;
     GestionVentas gestionVentas;
     FormularioVentas formularioVentas;
-    
-    
+
     ColectivoData colectivoData;
     PasajerosData pasajeroData;
     RutaData rutaData;
@@ -40,6 +41,8 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
     
     public Inicio_transpuntano() {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
         this.colectivoData = new ColectivoData();
         this.pasajeroData = new PasajerosData();
         this.rutaData = new RutaData();
@@ -120,7 +123,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
                 g.drawImage(image,0,0,getWidth(),getHeight(),this);
             }
         };
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuItem = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMformularioColectivo = new javax.swing.JMenuItem();
         jMFormularioColectivo = new javax.swing.JMenuItem();
@@ -138,17 +141,22 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         jMGestionVenta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 940, Short.MAX_VALUE)
+            .addGap(0, 964, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 643, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
+
+        jMenuItem.setBackground(new java.awt.Color(0, 0, 0));
+        jMenuItem.setForeground(new java.awt.Color(0, 51, 51));
+        jMenuItem.setPreferredSize(new java.awt.Dimension(269, 30));
 
         jMenu1.setText("Colectivo");
 
@@ -168,7 +176,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         });
         jMenu1.add(jMFormularioColectivo);
 
-        jMenuBar1.add(jMenu1);
+        jMenuItem.add(jMenu1);
 
         jMenu2.setText("Pasajero");
 
@@ -188,7 +196,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         });
         jMenu2.add(jMGestionPasajero);
 
-        jMenuBar1.add(jMenu2);
+        jMenuItem.add(jMenu2);
 
         jMenu3.setText("Ruta");
 
@@ -208,7 +216,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         });
         jMenu3.add(jMGestionRuta);
 
-        jMenuBar1.add(jMenu3);
+        jMenuItem.add(jMenu3);
 
         jMenu4.setText("Horario");
 
@@ -228,7 +236,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         });
         jMenu4.add(jMGestionHorario);
 
-        jMenuBar1.add(jMenu4);
+        jMenuItem.add(jMenu4);
 
         jMenu5.setText("Pasaje");
 
@@ -248,9 +256,9 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         });
         jMenu5.add(jMGestionVenta);
 
-        jMenuBar1.add(jMenu5);
+        jMenuItem.add(jMenu5);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuItem);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -260,7 +268,9 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Escritorio)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -366,7 +376,7 @@ public class Inicio_transpuntano extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuItem;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMformularioColectivo;
     // End of variables declaration//GEN-END:variables

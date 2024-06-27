@@ -28,6 +28,22 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
             txtDuracion.setText("");          
             Estado1.setSelected(false);
     }
+     
+    public static boolean soloLetraOrigen(String nombre) {
+        if (nombre == null || nombre.length() > 15) {
+            return false;
+        }
+        String regex = "^^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+( [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$";
+        return nombre.matches(regex);
+    }
+    
+    public static boolean soloLetraDestino(String nombre) {
+        if (nombre == null || nombre.length() > 15) {
+            return false;
+        }
+        String regex = "^^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+( [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$";
+        return nombre.matches(regex);
+    }
     
     
     /**
@@ -40,6 +56,10 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        Limpiarbtn = new javax.swing.JButton();
+        Registrarbtn = new javax.swing.JButton();
+        Salirbtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -48,38 +68,19 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
         txtOrigen = new javax.swing.JTextField();
         txtDestino = new javax.swing.JTextField();
         txtDuracion = new javax.swing.JTextField();
-        Limpiarbtn = new javax.swing.JButton();
-        Buscarbtn = new javax.swing.JButton();
-        Registrarbtn = new javax.swing.JButton();
-        Salirbtn = new javax.swing.JButton();
 
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("FormularioRutas");
+        setTitle("Formulario rutas");
 
         jLabel1.setFont(new java.awt.Font("Ebrima", 1, 24)); // NOI18N
-        jLabel1.setText("Rutas ");
-
-        jLabel2.setText("Origen:");
-
-        jLabel3.setText("Destino:");
-
-        jLabel4.setText("Duracion:");
-
-        jLabel5.setText("Estado:");
+        jLabel1.setText("Formulario Rutas ");
 
         Limpiarbtn.setText("Limpiar");
         Limpiarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LimpiarbtnActionPerformed(evt);
-            }
-        });
-
-        Buscarbtn.setText("Buscar");
-        Buscarbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarbtnActionPerformed(evt);
             }
         });
 
@@ -97,102 +98,96 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel2.setText("Origen:");
+
+        jLabel3.setText("Destino:");
+
+        jLabel4.setText("Duracion:");
+
+        jLabel5.setText("Estado:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Estado1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtOrigen)
+                    .addComponent(txtDestino)
+                    .addComponent(txtDuracion))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(Estado1))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(Limpiarbtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                                .addComponent(Registrarbtn)
-                                .addGap(200, 200, 200))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtOrigen)
-                                    .addComponent(txtDestino)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Estado1)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtDuracion))))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Salirbtn)
-                    .addComponent(Buscarbtn))
-                .addGap(38, 38, 38))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(234, 234, 234)
+                        .addComponent(Limpiarbtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(Registrarbtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Salirbtn)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 194, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(190, 190, 190))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Buscarbtn))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(Estado1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Limpiarbtn)
                     .addComponent(Registrarbtn)
                     .addComponent(Salirbtn))
-                .addGap(26, 26, 26))
+                .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BuscarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarbtnActionPerformed
-        // TODO add your handling code here:
-        
-        //Validar Matricula
-        String origen;      
-            
-        origen = txtOrigen.getText();
-                                               
-        Ruta rut = rutaData.buscarRutaPorOrigen(origen);
-        if(rut == null){          
-            txtOrigen.setText("");
-            txtDestino.setText("");
-            txtDuracion.setText("");          
-            Estado1.setSelected(false);
-            JOptionPane.showMessageDialog(null, "Ruta no encontrada");
-        }else{
-            txtOrigen.setText(rut.getOrigen());
-            txtDestino.setText(rut.getDestino());
-            txtDuracion.setText(rut.getDuracion_Estimada().toString());                
-            Estado1.setSelected(rut.isEstado());           
-        }
-        
-    }//GEN-LAST:event_BuscarbtnActionPerformed
 
     private void SalirbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirbtnActionPerformed
         // TODO add your handling code here:
@@ -206,12 +201,21 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
 
     private void RegistrarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarbtnActionPerformed
         // TODO add your handling code here:
-        
            String origen =  txtOrigen.getText();
+           if (soloLetraOrigen(origen)==false) {
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras en el Origen.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtOrigen.setText("");
+            return;
+            }
            String destino =  txtDestino.getText();
-            String duracion = txtDuracion.getText();          
-            boolean estado = Estado1.isSelected();        
-            System.out.println(estado);
+           if (soloLetraDestino(destino)==false) {
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras en el Destino.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtDestino.setText("");
+            return;
+            }
+           String duracion = txtDuracion.getText();          
+           boolean estado = Estado1.isSelected();        
+           System.out.println(estado);
        
        if(origen.isBlank() || destino.isBlank() || duracion.isBlank()){           
            JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos" );
@@ -222,39 +226,20 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
        try{
                 durac =  LocalTime.parse(duracion);
             }catch(DateTimeParseException e){
-                JOptionPane.showMessageDialog(null, "Error: El formato de fecha debe ser aaaa-mm-dd");
+                JOptionPane.showMessageDialog(null, "Error: El formato de fecha debe ser hh-mm");
                 return;
         }
-       
-       Ruta rut = rutaData.buscarRutaPorOrigen(origen);
-       
-       boolean resultado;
-       if(rut == null){
-           rut = new Ruta(origen,destino,durac,estado);
-           rutaData.añadirRuta(rut);           
-           resultado=true;
-       }else{
-           rut.setOrigen(origen);
-           rut.setDestino(destino);
-           rut.setDuracion_Estimada(durac);
-           rut.setEstado(estado);
-           rutaData.modificaRuta(rut);
-           resultado=true;
-       }
-       
-       //imprimir resultado
-        if (resultado) {
-            JOptionPane.showMessageDialog(this, "Ruta guardada o modificada");
-        }else{
-            JOptionPane.showMessageDialog(this, "No se pudo guardar la ruta");
+       Ruta ruta = new Ruta( origen, destino, durac, estado);
+        if (rutaData.añadirRuta(ruta)) {
+            JOptionPane.showMessageDialog(this, "Ruta guardado.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo guardar la Ruta.\nQuizás ya haya una ruta guardado con ese origen.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
+        limpiar(); 
     }//GEN-LAST:event_RegistrarbtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Buscarbtn;
     private javax.swing.JCheckBox Estado1;
     private javax.swing.JButton Limpiarbtn;
     private javax.swing.JButton Registrarbtn;
@@ -264,6 +249,7 @@ public class FormularioRutas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtDestino;
     private javax.swing.JTextField txtDuracion;
     private javax.swing.JTextField txtOrigen;
